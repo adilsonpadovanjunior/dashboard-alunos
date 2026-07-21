@@ -1,5 +1,6 @@
 /* ============================================================
-   DASHBOARD DE ALUNOS — APLICAÇÃO PRINCIPAL
+   PAINEL DE GESTÃO ACADÊMICA
+   Aplicação principal
    ============================================================ */
 
 (function () {
@@ -8,29 +9,65 @@
     const F = window.DashboardFilters;
     const G = window.DashboardCharts;
 
+    // ---------------------------------------------------------
+    // Arquivos produzidos pelo Agente 5
+    // ---------------------------------------------------------
+
     const ARQUIVOS = {
-        indicadoresGerais: "data/indicadores_gerais.json",
-        indicadoresPorAno: "data/indicadores_por_ano.json",
-        alunos: "data/alunos.json",
-        alunosPorAno: "data/alunos_por_ano.json",
-        disciplinas: "data/disciplinas.json",
-        turmas: "data/turmas.json",
-        ranking: "data/ranking_geral.json",
-        metadados: "data/metadados.json"
+        indicadoresGerais:
+            "data/indicadores_gerais.json",
+
+        indicadoresPorAno:
+            "data/indicadores_por_ano.json",
+
+        indicadoresVinculo:
+            "data/indicadores_por_vinculo.json",
+
+        alunos:
+            "data/alunos.json",
+
+        alunosPorAno:
+            "data/alunos_por_ano.json",
+
+        disciplinas:
+            "data/disciplinas.json",
+
+        disciplinasHistoricas:
+            "data/disciplinas_historicas.json",
+
+        turmas:
+            "data/turmas.json",
+
+        turmasHistoricas:
+            "data/turmas_historicas.json",
+
+        ranking:
+            "data/ranking_geral.json",
+
+        monitoramento:
+            "data/monitoramento_permanencia.json",
+
+        metadados:
+            "data/metadados.json"
     };
 
     const estado = {
+        paginaAtual: "visao-geral",
+
         dados: {
             indicadoresGerais: [],
             indicadoresPorAno: [],
+            indicadoresVinculo: [],
             alunos: [],
             alunosPorAno: [],
             disciplinas: [],
+            disciplinasHistoricas: [],
             turmas: [],
+            turmasHistoricas: [],
             ranking: [],
+            monitoramento: [],
             metadados: {}
-        },
-        paginaAtual: "visao-geral"
+        }
     };
 
     const TITULOS_PAGINAS = {
@@ -38,12 +75,12 @@
         "alunos": "Alunos",
         "disciplinas": "Disciplinas",
         "turmas": "Turmas",
-        "rankings": "Rankings",
+        "rankings": "Destaques",
         "monitoramento": "Monitoramento"
     };
 
     // ---------------------------------------------------------
-    // Utilidades
+    // Elementos e utilidades
     // ---------------------------------------------------------
 
     function elemento(id) {
@@ -71,43 +108,26 @@
             return valor;
         }
 
-        if (valor && Array.isArray(valor.dados)) {
+        if (
+            valor &&
+            Array.isArray(valor.dados)
+        ) {
             return valor.dados;
-        }
-
-        if (valor && typeof valor === "object") {
-            return [valor];
         }
 
         return [];
     }
 
-    function media(dados, campo) {
-        const valores = dados
-            .map((item) => Number(item?.[campo]))
-            .filter(Number.isFinite);
-
-        if (!valores.length) {
-            return null;
-        }
-
-        return valores.reduce(
-            (soma, valor) => soma + valor,
-            0
-        ) / valores.length;
-    }
-
-    function somar(dados, campo) {
-        return dados.reduce((soma, item) => {
-            const valor = Number(item?.[campo]);
-            return soma + (Number.isFinite(valor) ? valor : 0);
-        }, 0);
-    }
-
-    function linhaVazia(colunas, mensagem = "Nenhum registro encontrado.") {
+    function linhaVazia(
+        colunas,
+        mensagem = "Nenhum registro encontrado."
+    ) {
         return `
             <tr>
-                <td colspan="${colunas}" class="empty-table">
+                <td
+                    colspan="${colunas}"
+                    class="empty-table"
+                >
                     ${F.escaparHTML(mensagem)}
                 </td>
             </tr>
@@ -124,11 +144,64 @@
         return `${conteudo.slice(0, limite - 1)}…`;
     }
 
+    function nomeAluno(aluno) {
+        return (
+            aluno.nome_aluno_final ||
+            aluno.nome_aluno ||
+            "Sem identificação"
+        );
+    }
+
+    function turmaAluno(aluno) {
+        return (
+            aluno.turma_atual ||
+            aluno.turma ||
+            "—"
+        );
+    }
+
+    function obterAnoReferencia() {
+        const metadados = estado.dados.metadados;
+
+        const anoMetadados = F.numero(
+            metadados.ano_referencia
+        );
+
+        if (anoMetadados !== null) {
+            return anoMetadados;
+        }
+
+        const anos = estado.dados.indicadoresPorAno
+            .map((item) => F.numero(item.ano))
+            .filter((valor) => valor !== null);
+
+        return anos.length
+            ? Math.max(...anos)
+            : null;
+    }
+
+    function valorAlunoNoPeriodo(
+        aluno,
+        campoAtual,
+        campoHistorico
+    ) {
+        const atual = F.numero(aluno?.[campoAtual]);
+
+        if (atual !== null) {
+            return atual;
+        }
+
+        return F.numero(aluno?.[campoHistorico]);
+    }
+
     // ---------------------------------------------------------
-    // Carregamento dos arquivos JSON
+    // Carregamento
     // ---------------------------------------------------------
 
-    async function carregarJSON(caminho, obrigatorio = true) {
+    async function carregarJSON(
+        caminho,
+        obrigatorio = true
+    ) {
         try {
             const resposta = await fetch(caminho, {
                 cache: "no-store"
@@ -142,11 +215,14 @@
 
             return await resposta.json();
         } catch (erro) {
-            console.error(`Erro ao carregar ${caminho}:`, erro);
+            console.warn(
+                `Não foi possível carregar ${caminho}:`,
+                erro
+            );
 
             if (obrigatorio) {
                 throw new Error(
-                    `Não foi possível carregar o arquivo ${caminho}.`
+                    `Arquivo obrigatório não encontrado: ${caminho}`
                 );
             }
 
@@ -159,25 +235,82 @@
         ocultar("errorState");
         ocultar("dashboardContent");
 
+        const resultados = await Promise.all([
+            carregarJSON(
+                ARQUIVOS.indicadoresGerais,
+                false
+            ),
+
+            carregarJSON(
+                ARQUIVOS.indicadoresPorAno,
+                true
+            ),
+
+            carregarJSON(
+                ARQUIVOS.indicadoresVinculo,
+                false
+            ),
+
+            carregarJSON(
+                ARQUIVOS.alunos,
+                true
+            ),
+
+            carregarJSON(
+                ARQUIVOS.alunosPorAno,
+                false
+            ),
+
+            carregarJSON(
+                ARQUIVOS.disciplinas,
+                true
+            ),
+
+            carregarJSON(
+                ARQUIVOS.disciplinasHistoricas,
+                false
+            ),
+
+            carregarJSON(
+                ARQUIVOS.turmas,
+                true
+            ),
+
+            carregarJSON(
+                ARQUIVOS.turmasHistoricas,
+                false
+            ),
+
+            carregarJSON(
+                ARQUIVOS.ranking,
+                false
+            ),
+
+            carregarJSON(
+                ARQUIVOS.monitoramento,
+                false
+            ),
+
+            carregarJSON(
+                ARQUIVOS.metadados,
+                false
+            )
+        ]);
+
         const [
             indicadoresGerais,
             indicadoresPorAno,
+            indicadoresVinculo,
             alunos,
             alunosPorAno,
             disciplinas,
+            disciplinasHistoricas,
             turmas,
+            turmasHistoricas,
             ranking,
+            monitoramento,
             metadados
-        ] = await Promise.all([
-            carregarJSON(ARQUIVOS.indicadoresGerais, false),
-            carregarJSON(ARQUIVOS.indicadoresPorAno),
-            carregarJSON(ARQUIVOS.alunos),
-            carregarJSON(ARQUIVOS.alunosPorAno, false),
-            carregarJSON(ARQUIVOS.disciplinas),
-            carregarJSON(ARQUIVOS.turmas),
-            carregarJSON(ARQUIVOS.ranking, false),
-            carregarJSON(ARQUIVOS.metadados, false)
-        ]);
+        ] = resultados;
 
         estado.dados.indicadoresGerais =
             garantirArray(indicadoresGerais);
@@ -185,17 +318,40 @@
         estado.dados.indicadoresPorAno =
             garantirArray(indicadoresPorAno);
 
-        estado.dados.alunos = garantirArray(alunos);
-        estado.dados.alunosPorAno = garantirArray(alunosPorAno);
-        estado.dados.disciplinas = garantirArray(disciplinas);
-        estado.dados.turmas = garantirArray(turmas);
+        estado.dados.indicadoresVinculo =
+            garantirArray(indicadoresVinculo);
 
-        estado.dados.ranking = garantirArray(ranking).length
-            ? garantirArray(ranking)
-            : [...estado.dados.alunos];
+        estado.dados.alunos =
+            garantirArray(alunos);
+
+        estado.dados.alunosPorAno =
+            garantirArray(alunosPorAno);
+
+        estado.dados.disciplinas =
+            garantirArray(disciplinas);
+
+        estado.dados.disciplinasHistoricas =
+            garantirArray(disciplinasHistoricas);
+
+        estado.dados.turmas =
+            garantirArray(turmas);
+
+        estado.dados.turmasHistoricas =
+            garantirArray(turmasHistoricas);
+
+        estado.dados.ranking =
+            garantirArray(ranking).length
+                ? garantirArray(ranking)
+                : [...estado.dados.alunos];
+
+        estado.dados.monitoramento =
+            garantirArray(monitoramento).length
+                ? garantirArray(monitoramento)
+                : [...estado.dados.alunos];
 
         estado.dados.metadados =
-            metadados && typeof metadados === "object"
+            metadados &&
+            typeof metadados === "object"
                 ? metadados
                 : {};
 
@@ -204,7 +360,7 @@
     }
 
     // ---------------------------------------------------------
-    // Filtros
+    // Preparação dos filtros
     // ---------------------------------------------------------
 
     function popularFiltros() {
@@ -213,18 +369,22 @@
                 estado.dados.indicadoresPorAno,
                 "ano"
             ),
+
             ...F.valoresUnicos(
                 estado.dados.alunosPorAno,
                 "ano"
             ),
+
             ...F.valoresUnicos(
-                estado.dados.turmas,
+                estado.dados.disciplinasHistoricas,
                 "ano"
             )
         ];
 
         const anosUnicos = [...new Set(
-            anos.map((valor) => F.texto(valor))
+            anos
+                .map((valor) => F.texto(valor))
+                .filter(Boolean)
         )].sort(F.compararValores);
 
         const turmas = [
@@ -232,10 +392,17 @@
                 estado.dados.alunosPorAno,
                 "turma"
             ),
+
             ...F.valoresUnicos(
                 estado.dados.alunos,
                 "turma_atual"
             ),
+
+            ...F.valoresUnicos(
+                estado.dados.turmasHistoricas,
+                "turma"
+            ),
+
             ...F.valoresUnicos(
                 estado.dados.turmas,
                 "turma"
@@ -248,8 +415,13 @@
                 .filter(Boolean)
         )].sort(F.compararValores);
 
+        const baseDisciplinas =
+            estado.dados.disciplinasHistoricas.length
+                ? estado.dados.disciplinasHistoricas
+                : estado.dados.disciplinas;
+
         const disciplinas = F.valoresUnicos(
-            estado.dados.disciplinas,
+            baseDisciplinas,
             "disciplina"
         );
 
@@ -270,7 +442,63 @@
             disciplinas,
             "Todas as disciplinas"
         );
+
+        /*
+         * A lista de vínculos já está definida diretamente
+         * no HTML. Garantimos apenas a seleção inicial.
+         */
+        const filtroVinculo =
+            elemento("filtroVinculo");
+
+        if (
+            filtroVinculo &&
+            !filtroVinculo.value
+        ) {
+            filtroVinculo.value = "ATIVOS";
+        }
     }
+
+    // ---------------------------------------------------------
+    // Seleção das bases de disciplinas e turmas
+    // ---------------------------------------------------------
+
+    function obterBaseDisciplinas(filtros) {
+        const anoReferencia = obterAnoReferencia();
+
+        const usandoAnoHistorico =
+            filtros.ano &&
+            Number(filtros.ano) !== anoReferencia;
+
+        if (
+            usandoAnoHistorico &&
+            estado.dados.disciplinasHistoricas.length
+        ) {
+            return estado.dados.disciplinasHistoricas;
+        }
+
+        return estado.dados.disciplinas;
+    }
+
+    function obterBaseTurmas(filtros) {
+        const anoReferencia = obterAnoReferencia();
+
+        const usandoAnoHistorico =
+            filtros.ano &&
+            Number(filtros.ano) !== anoReferencia;
+
+        if (
+            usandoAnoHistorico &&
+            estado.dados.turmasHistoricas.length
+        ) {
+            return estado.dados.turmasHistoricas;
+        }
+
+        return estado.dados.turmas;
+    }
+
+    // ---------------------------------------------------------
+    // Dados filtrados
+    // ---------------------------------------------------------
 
     function obterDadosFiltrados() {
         const filtros = F.obterFiltrosAtuais();
@@ -283,53 +511,58 @@
         let idsPermitidos = null;
 
         if (
-            filtros.ano &&
+            (filtros.ano || filtros.turma) &&
             estado.dados.alunosPorAno.length
         ) {
             idsPermitidos = new Set(
                 alunosPorAno
-                    .map((item) => F.texto(item.id_aluno_final))
+                    .map((item) =>
+                        F.texto(item.id_aluno_final)
+                    )
                     .filter(Boolean)
             );
         }
 
-        let alunos = F.filtrarAlunos(
+        const alunos = F.filtrarAlunos(
             estado.dados.alunos,
-            {
-                ...filtros,
-                ano: ""
-            }
+            filtros,
+            idsPermitidos
         );
 
-        if (idsPermitidos) {
-            alunos = alunos.filter((aluno) =>
-                idsPermitidos.has(
-                    F.texto(aluno.id_aluno_final)
-                )
-            );
-        }
-
         const disciplinas = F.filtrarDisciplinas(
-            estado.dados.disciplinas,
+            obterBaseDisciplinas(filtros),
             filtros
         );
 
         const turmas = F.filtrarTurmas(
-            estado.dados.turmas,
+            obterBaseTurmas(filtros),
             filtros
-        );
-
-        const anos = estado.dados.indicadoresPorAno.filter(
-            (item) =>
-                !filtros.ano ||
-                F.correspondeExatamente(item.ano, filtros.ano)
         );
 
         const ranking = F.filtrarRanking(
             estado.dados.ranking,
             filtros,
-            idsPermitidos ? [...idsPermitidos] : null
+            idsPermitidos
         );
+
+        const indicadoresPorAno =
+            estado.dados.indicadoresPorAno.filter(
+                (item) =>
+                    !filtros.ano ||
+                    F.correspondeExatamente(
+                        item.ano,
+                        filtros.ano
+                    )
+            );
+
+        const mapaAnual = new Map();
+
+        alunosPorAno.forEach((registro) => {
+            mapaAnual.set(
+                F.texto(registro.id_aluno_final),
+                registro
+            );
+        });
 
         return {
             filtros,
@@ -337,8 +570,72 @@
             alunosPorAno,
             disciplinas,
             turmas,
-            indicadoresPorAno: anos,
-            ranking
+            ranking,
+            indicadoresPorAno,
+            indicadoresVinculo:
+                estado.dados.indicadoresVinculo,
+            mapaAnual
+        };
+    }
+
+    function obterMetricasAluno(
+        aluno,
+        dadosFiltrados
+    ) {
+        const registroAnual =
+            dadosFiltrados.mapaAnual.get(
+                F.texto(aluno.id_aluno_final)
+            );
+
+        if (
+            dadosFiltrados.filtros.ano &&
+            registroAnual
+        ) {
+            return {
+                media: F.numero(
+                    registroAnual.media_notas
+                ),
+
+                frequencia: F.numero(
+                    registroAnual.frequencia_media
+                ),
+
+                classificacao:
+                    registroAnual.classificacao ||
+                    aluno.classificacao,
+
+                turma:
+                    registroAnual.turma ||
+                    turmaAluno(aluno),
+
+                serie:
+                    registroAnual.serie_numero ??
+                    aluno.serie_atual,
+
+                tendencia: aluno.tendencia
+            };
+        }
+
+        return {
+            media: valorAlunoNoPeriodo(
+                aluno,
+                "media_ano_referencia",
+                "media_historica"
+            ),
+
+            frequencia: valorAlunoNoPeriodo(
+                aluno,
+                "frequencia_ano_referencia",
+                "frequencia_media"
+            ),
+
+            classificacao:
+                aluno.classificacao ||
+                aluno.classificacao_historica,
+
+            turma: turmaAluno(aluno),
+            serie: aluno.serie_atual,
+            tendencia: aluno.tendencia
         };
     }
 
@@ -347,33 +644,75 @@
     // ---------------------------------------------------------
 
     function atualizarIndicadores(dados) {
-        const quantidadeAlunos = dados.alunos.length;
-
-        const mediaGeral = media(
-            dados.alunos,
-            "media_historica"
+        const alunosComMetricas = dados.alunos.map(
+            (aluno) => ({
+                aluno,
+                metricas: obterMetricasAluno(
+                    aluno,
+                    dados
+                )
+            })
         );
 
-        const frequenciaMedia = media(
-            dados.alunos,
-            "frequencia_media"
-        );
+        const medias = alunosComMetricas
+            .map((item) => item.metricas.media)
+            .filter((valor) => valor !== null);
 
-        const alunosAtencao = dados.alunos.filter((aluno) => {
-            const risco = F.normalizarTexto(aluno.nivel_risco);
-            const pontos = Number(aluno.pontos_risco);
+        const frequencias = alunosComMetricas
+            .map((item) => item.metricas.frequencia)
+            .filter((valor) => valor !== null);
 
-            return (
-                risco.includes("alto") ||
-                risco.includes("medio") ||
-                risco.includes("moderado") ||
-                (Number.isFinite(pontos) && pontos > 0)
-            );
-        }).length;
+        const mediaGeral = medias.length
+            ? medias.reduce(
+                (soma, valor) => soma + valor,
+                0
+            ) / medias.length
+            : null;
+
+        const frequenciaMedia = frequencias.length
+            ? frequencias.reduce(
+                (soma, valor) => soma + valor,
+                0
+            ) / frequencias.length
+            : null;
+
+        const atencao = alunosComMetricas.filter(
+            ({ aluno, metricas }) => {
+                const classificacao =
+                    F.normalizarTexto(
+                        metricas.classificacao
+                    );
+
+                const risco = F.normalizarTexto(
+                    aluno.nivel_risco
+                );
+
+                return (
+                    classificacao.includes("ATENCAO") ||
+                    classificacao.includes("CRITICO") ||
+                    risco.includes("ALTO") ||
+                    risco.includes("MEDIO")
+                );
+            }
+        ).length;
+
+        const evasao = dados.alunos.filter(
+            (aluno) =>
+                F.normalizarVinculo(
+                    aluno.situacao_vinculo
+                ) === "EVADIDO PROVAVEL"
+        ).length;
+
+        const formandos = dados.alunos.filter(
+            (aluno) =>
+                F.normalizarVinculo(
+                    aluno.situacao_vinculo
+                ) === "FORMANDO"
+        ).length;
 
         definirTexto(
             "kpiAlunos",
-            F.formatarInteiro(quantidadeAlunos)
+            F.formatarInteiro(dados.alunos.length)
         );
 
         definirTexto(
@@ -383,87 +722,393 @@
 
         definirTexto(
             "kpiFrequencia",
-            F.formatarPercentual(frequenciaMedia, 1)
+            F.formatarPercentual(
+                frequenciaMedia,
+                1
+            )
         );
 
         definirTexto(
             "kpiAtencao",
-            F.formatarInteiro(alunosAtencao)
+            F.formatarInteiro(atencao)
+        );
+
+        definirTexto(
+            "kpiEvasao",
+            F.formatarInteiro(evasao)
+        );
+
+        definirTexto(
+            "kpiFormandos",
+            F.formatarInteiro(formandos)
+        );
+
+        atualizarVariacoesAnuais(
+            dados,
+            mediaGeral,
+            frequenciaMedia
+        );
+    }
+
+    function atualizarVariacoesAnuais(
+        dados,
+        mediaAtual,
+        frequenciaAtual
+    ) {
+        const serie = [...estado.dados.indicadoresPorAno]
+            .filter((item) =>
+                F.numero(item.ano) !== null
+            )
+            .sort(
+                (a, b) =>
+                    F.numero(a.ano) -
+                    F.numero(b.ano)
+            );
+
+        if (serie.length < 2) {
+            definirTexto(
+                "kpiMediaVariacao",
+                "Sem comparação anual"
+            );
+
+            definirTexto(
+                "kpiFrequenciaVariacao",
+                "Sem comparação anual"
+            );
+
+            return;
+        }
+
+        const anoSelecionado = F.numero(
+            dados.filtros.ano
+        );
+
+        let indiceAtual = serie.length - 1;
+
+        if (anoSelecionado !== null) {
+            const localizado = serie.findIndex(
+                (item) =>
+                    F.numero(item.ano) ===
+                    anoSelecionado
+            );
+
+            if (localizado >= 0) {
+                indiceAtual = localizado;
+            }
+        }
+
+        if (indiceAtual === 0) {
+            definirTexto(
+                "kpiMediaVariacao",
+                "Primeiro ano da série"
+            );
+
+            definirTexto(
+                "kpiFrequenciaVariacao",
+                "Primeiro ano da série"
+            );
+
+            return;
+        }
+
+        const anterior = serie[indiceAtual - 1];
+
+        const mediaAnterior = F.numero(
+            anterior.media_geral
+        );
+
+        const frequenciaAnterior = F.numero(
+            anterior.frequencia_media
+        );
+
+        const variacaoMedia =
+            mediaAtual !== null &&
+            mediaAnterior !== null
+                ? mediaAtual - mediaAnterior
+                : null;
+
+        const variacaoFrequencia =
+            frequenciaAtual !== null &&
+            frequenciaAnterior !== null
+                ? frequenciaAtual -
+                  frequenciaAnterior
+                : null;
+
+        definirTexto(
+            "kpiMediaVariacao",
+            variacaoMedia === null
+                ? "Sem comparação anual"
+                : `${F.formatarVariacao(
+                    variacaoMedia,
+                    2
+                )} em relação ao ano anterior`
+        );
+
+        definirTexto(
+            "kpiFrequenciaVariacao",
+            variacaoFrequencia === null
+                ? "Sem comparação anual"
+                : `${F.formatarVariacao(
+                    variacaoFrequencia,
+                    1,
+                    " p.p."
+                )} em relação ao ano anterior`
         );
     }
 
     // ---------------------------------------------------------
-    // Tabela de alunos
+    // Alertas gerenciais
     // ---------------------------------------------------------
 
-    function renderizarTabelaAlunos(alunos) {
-        const corpo = elemento("tabelaAlunos");
+    function atualizarAlertas(dados) {
+        let baixaFrequencia = 0;
+        let queda = 0;
+        let semDados = 0;
+
+        dados.alunos.forEach((aluno) => {
+            const metricas = obterMetricasAluno(
+                aluno,
+                dados
+            );
+
+            if (
+                metricas.frequencia !== null &&
+                metricas.frequencia < 75
+            ) {
+                baixaFrequencia += 1;
+            }
+
+            if (
+                F.normalizarTexto(
+                    aluno.tendencia
+                ).includes("DECRESCENTE")
+            ) {
+                queda += 1;
+            }
+
+            if (
+                metricas.media === null &&
+                metricas.frequencia === null
+            ) {
+                semDados += 1;
+            }
+        });
+
+        const disciplinasCriticas =
+            dados.disciplinas.filter((item) => {
+                const media = F.numero(
+                    item.media_notas
+                );
+
+                const abaixo = F.numero(
+                    item.percentual_notas_abaixo_6
+                );
+
+                return (
+                    (media !== null && media < 6) ||
+                    (abaixo !== null && abaixo >= 40)
+                );
+            }).length;
+
+        definirTexto(
+            "alertaBaixaFrequencia",
+            F.formatarInteiro(baixaFrequencia)
+        );
+
+        definirTexto(
+            "alertaQuedaDesempenho",
+            F.formatarInteiro(queda)
+        );
+
+        definirTexto(
+            "alertaDisciplinasCriticas",
+            F.formatarInteiro(
+                disciplinasCriticas
+            )
+        );
+
+        definirTexto(
+            "alertaSemDados",
+            F.formatarInteiro(semDados)
+        );
+    }
+
+    // ---------------------------------------------------------
+    // Top 10 — atenção
+    // ---------------------------------------------------------
+
+    function calcularPrioridade(
+        aluno,
+        metricas
+    ) {
+        let pontuacao = F.numero(
+            aluno.pontos_risco,
+            0
+        );
+
+        const risco = F.normalizarTexto(
+            aluno.nivel_risco
+        );
+
+        const vinculo = F.normalizarVinculo(
+            aluno.situacao_vinculo
+        );
+
+        if (risco.includes("ALTO")) {
+            pontuacao += 5;
+        } else if (risco.includes("MEDIO")) {
+            pontuacao += 2;
+        }
+
+        if (
+            metricas.frequencia !== null &&
+            metricas.frequencia < 75
+        ) {
+            pontuacao +=
+                (75 - metricas.frequencia) / 5;
+        }
+
+        if (
+            metricas.media !== null &&
+            metricas.media < 6
+        ) {
+            pontuacao +=
+                (6 - metricas.media) * 2;
+        }
+
+        if (
+            F.normalizarTexto(
+                aluno.tendencia
+            ).includes("DECRESCENTE")
+        ) {
+            pontuacao += 2;
+        }
+
+        if (
+            vinculo === "EVADIDO PROVAVEL" ||
+            vinculo === "INATIVO PROVAVEL"
+        ) {
+            pontuacao += 4;
+        }
+
+        return pontuacao;
+    }
+
+    function renderizarAtencaoResumo(dados) {
+        const corpo = elemento(
+            "tabelaAtencaoResumo"
+        );
 
         if (!corpo) {
             return;
         }
 
-        definirTexto(
-            "totalAlunosTabela",
-            F.formatarInteiro(alunos.length)
-        );
+        const registros = dados.alunos
+            .map((aluno) => {
+                const metricas = obterMetricasAluno(
+                    aluno,
+                    dados
+                );
 
-        const ordenados = [...alunos].sort((a, b) =>
-            F.compararValores(
-                a.nome_aluno_final,
-                b.nome_aluno_final
+                return {
+                    aluno,
+                    metricas,
+                    prioridade: calcularPrioridade(
+                        aluno,
+                        metricas
+                    )
+                };
+            })
+            .filter((item) => {
+                const classificacao =
+                    F.normalizarTexto(
+                        item.metricas.classificacao
+                    );
+
+                const risco = F.normalizarTexto(
+                    item.aluno.nivel_risco
+                );
+
+                return (
+                    item.prioridade > 0 ||
+                    classificacao.includes("ATENCAO") ||
+                    classificacao.includes("CRITICO") ||
+                    risco.includes("ALTO")
+                );
+            })
+            .sort(
+                (a, b) =>
+                    b.prioridade - a.prioridade
             )
-        );
+            .slice(0, 10);
 
-        if (!ordenados.length) {
-            corpo.innerHTML = linhaVazia(7);
+        if (!registros.length) {
+            corpo.innerHTML = linhaVazia(
+                7,
+                "Nenhum caso prioritário na seleção atual."
+            );
+
             return;
         }
 
-        corpo.innerHTML = ordenados
-            .slice(0, 500)
-            .map((aluno) => `
+        corpo.innerHTML = registros
+            .map(({ aluno, metricas }) => `
                 <tr>
                     <td>
                         <strong>
                             ${F.escaparHTML(
-                                aluno.nome_aluno_final ||
-                                aluno.nome_aluno ||
-                                "Sem identificação"
+                                nomeAluno(aluno)
                             )}
                         </strong>
                     </td>
+
                     <td>
                         ${F.escaparHTML(
-                            aluno.turma_atual || "—"
+                            metricas.turma
                         )}
                     </td>
-                    <td>
-                        ${F.escaparHTML(
-                            aluno.serie_atual || "—"
-                        )}
-                    </td>
-                    <td>
+
+                    <td class="numeric-column">
                         ${F.formatarNumero(
-                            aluno.media_historica,
+                            metricas.media,
                             2
                         )}
                     </td>
-                    <td>
+
+                    <td class="numeric-column">
                         ${F.formatarPercentual(
-                            aluno.frequencia_media,
+                            metricas.frequencia,
                             1
                         )}
                     </td>
+
                     <td>
                         ${F.criarBadge(
-                            aluno.classificacao
+                            aluno.tendencia,
+                            "tendencia"
                         )}
                     </td>
+
                     <td>
                         ${F.criarBadge(
                             aluno.nivel_risco,
                             "risco"
+                        )}
+                    </td>
+
+                    <td
+                        title="${F.escaparHTML(
+                            aluno.motivos_risco ||
+                            aluno.motivo_situacao_vinculo ||
+                            ""
+                        )}"
+                    >
+                        ${F.escaparHTML(
+                            limitarTexto(
+                                aluno.motivos_risco ||
+                                aluno.motivo_situacao_vinculo ||
+                                "Necessita verificação"
+                            )
                         )}
                     </td>
                 </tr>
@@ -472,61 +1117,305 @@
     }
 
     // ---------------------------------------------------------
-    // Tabela de disciplinas
+    // Top 10 — destaques
     // ---------------------------------------------------------
 
-    function renderizarTabelaDisciplinas(disciplinas) {
-        const corpo = elemento("tabelaDisciplinas");
+    function renderizarDestaquesResumo(dados) {
+        const corpo = elemento(
+            "tabelaDestaquesResumo"
+        );
 
         if (!corpo) {
             return;
         }
 
-        const ordenadas = [...disciplinas].sort((a, b) =>
-            F.compararValores(a.disciplina, b.disciplina)
+        const registros = dados.ranking
+            .filter((aluno) => {
+                const elegivel =
+                    aluno.elegivel_ranking;
+
+                return (
+                    elegivel === undefined ||
+                    elegivel === null ||
+                    F.booleano(elegivel)
+                );
+            })
+            .map((aluno) => ({
+                aluno,
+
+                metricas: obterMetricasAluno(
+                    aluno,
+                    dados
+                )
+            }))
+            .filter(
+                (item) =>
+                    item.metricas.media !== null
+            )
+            .sort((a, b) => {
+                const indiceA = F.numero(
+                    a.aluno.indice_merito,
+                    0
+                );
+
+                const indiceB = F.numero(
+                    b.aluno.indice_merito,
+                    0
+                );
+
+                if (indiceA !== indiceB) {
+                    return indiceB - indiceA;
+                }
+
+                return (
+                    b.metricas.media -
+                    a.metricas.media
+                );
+            })
+            .slice(0, 10);
+
+        if (!registros.length) {
+            corpo.innerHTML = linhaVazia(
+                6,
+                "Nenhum aluno elegível para o ranking."
+            );
+
+            return;
+        }
+
+        corpo.innerHTML = registros
+            .map(({ aluno, metricas }, indice) => `
+                <tr>
+                    <td class="position-column">
+                        <strong>${indice + 1}º</strong>
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${F.escaparHTML(
+                                nomeAluno(aluno)
+                            )}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${F.escaparHTML(
+                            metricas.turma
+                        )}
+                    </td>
+
+                    <td class="numeric-column">
+                        ${F.formatarNumero(
+                            metricas.media,
+                            2
+                        )}
+                    </td>
+
+                    <td class="numeric-column">
+                        ${F.formatarPercentual(
+                            metricas.frequencia,
+                            1
+                        )}
+                    </td>
+
+                    <td>
+                        ${F.criarBadge(
+                            aluno.tendencia,
+                            "tendencia"
+                        )}
+                    </td>
+                </tr>
+            `)
+            .join("");
+    }
+
+    // ---------------------------------------------------------
+    // Tabela de alunos
+    // ---------------------------------------------------------
+
+    function renderizarTabelaAlunos(dados) {
+        const corpo = elemento("tabelaAlunos");
+
+        if (!corpo) {
+            return;
+        }
+
+        definirTexto(
+            "totalAlunosTabela",
+            F.formatarInteiro(dados.alunos.length)
         );
 
-        if (!ordenadas.length) {
+        const registros = [...dados.alunos]
+            .sort((a, b) =>
+                F.compararValores(
+                    nomeAluno(a),
+                    nomeAluno(b)
+                )
+            );
+
+        if (!registros.length) {
+            corpo.innerHTML = linhaVazia(8);
+            return;
+        }
+
+        corpo.innerHTML = registros
+            .slice(0, 500)
+            .map((aluno) => {
+                const metricas = obterMetricasAluno(
+                    aluno,
+                    dados
+                );
+
+                return `
+                    <tr>
+                        <td>
+                            <strong>
+                                ${F.escaparHTML(
+                                    nomeAluno(aluno)
+                                )}
+                            </strong>
+                        </td>
+
+                        <td>
+                            ${F.escaparHTML(
+                                metricas.turma
+                            )}
+                        </td>
+
+                        <td class="numeric-column">
+                            ${F.escaparHTML(
+                                metricas.serie ?? "—"
+                            )}
+                        </td>
+
+                        <td>
+                            ${F.criarBadge(
+                                aluno.situacao_vinculo,
+                                "vinculo"
+                            )}
+                        </td>
+
+                        <td class="numeric-column">
+                            ${F.formatarNumero(
+                                metricas.media,
+                                2
+                            )}
+                        </td>
+
+                        <td class="numeric-column">
+                            ${F.formatarPercentual(
+                                metricas.frequencia,
+                                1
+                            )}
+                        </td>
+
+                        <td>
+                            ${F.criarBadge(
+                                metricas.classificacao
+                            )}
+                        </td>
+
+                        <td>
+                            ${F.criarBadge(
+                                aluno.nivel_risco,
+                                "risco"
+                            )}
+                        </td>
+                    </tr>
+                `;
+            })
+            .join("");
+    }
+
+    // ---------------------------------------------------------
+    // Tabela de disciplinas
+    // ---------------------------------------------------------
+
+    function renderizarTabelaDisciplinas(
+        disciplinas
+    ) {
+        const corpo = elemento(
+            "tabelaDisciplinas"
+        );
+
+        if (!corpo) {
+            return;
+        }
+
+        const registros = [...disciplinas]
+            .sort((a, b) => {
+                const mediaA = F.numero(
+                    a.media_notas,
+                    Infinity
+                );
+
+                const mediaB = F.numero(
+                    b.media_notas,
+                    Infinity
+                );
+
+                if (mediaA !== mediaB) {
+                    return mediaA - mediaB;
+                }
+
+                return F.compararValores(
+                    a.disciplina,
+                    b.disciplina
+                );
+            });
+
+        if (!registros.length) {
             corpo.innerHTML = linhaVazia(7);
             return;
         }
 
-        corpo.innerHTML = ordenadas
+        corpo.innerHTML = registros
             .slice(0, 500)
             .map((item) => `
                 <tr>
                     <td>
                         <strong>
                             ${F.escaparHTML(
-                                item.disciplina || "Sem disciplina"
+                                item.disciplina ||
+                                "Sem disciplina"
                             )}
                         </strong>
                     </td>
-                    <td>${F.escaparHTML(item.ano || "—")}</td>
-                    <td>
+
+                    <td class="numeric-column">
+                        ${F.escaparHTML(
+                            item.ano ?? "—"
+                        )}
+                    </td>
+
+                    <td class="numeric-column">
                         ${F.formatarInteiro(
                             item.alunos_distintos
                         )}
                     </td>
-                    <td>
+
+                    <td class="numeric-column">
                         ${F.formatarNumero(
                             item.media_notas,
                             2
                         )}
                     </td>
-                    <td>
+
+                    <td class="numeric-column">
                         ${F.formatarPercentual(
                             item.frequencia_media,
                             1
                         )}
                     </td>
-                    <td>
+
+                    <td class="numeric-column">
                         ${F.formatarPercentual(
                             item.percentual_notas_abaixo_6,
                             1
                         )}
                     </td>
-                    <td>
+
+                    <td class="numeric-column">
                         ${F.formatarInteiro(
                             item.quantidade_notas
                         )}
@@ -547,62 +1436,78 @@
             return;
         }
 
-        const ordenadas = [...turmas].sort((a, b) => {
-            const comparacaoAno =
-                Number(b.ano) - Number(a.ano);
+        const registros = [...turmas]
+            .sort((a, b) => {
+                const anoA = F.numero(a.ano, 0);
+                const anoB = F.numero(b.ano, 0);
 
-            if (comparacaoAno) {
-                return comparacaoAno;
-            }
+                if (anoA !== anoB) {
+                    return anoB - anoA;
+                }
 
-            return F.compararValores(a.turma, b.turma);
-        });
+                return F.compararValores(
+                    a.turma,
+                    b.turma
+                );
+            });
 
-        if (!ordenadas.length) {
+        if (!registros.length) {
             corpo.innerHTML = linhaVazia(8);
             return;
         }
 
-        corpo.innerHTML = ordenadas
+        corpo.innerHTML = registros
             .slice(0, 500)
             .map((item) => `
                 <tr>
                     <td>
                         <strong>
                             ${F.escaparHTML(
-                                item.turma || "Sem turma"
+                                item.turma ||
+                                "Sem turma"
                             )}
                         </strong>
                     </td>
-                    <td>${F.escaparHTML(item.ano || "—")}</td>
-                    <td>
+
+                    <td class="numeric-column">
                         ${F.escaparHTML(
-                            item.serie_numero || "—"
+                            item.ano ?? "—"
                         )}
                     </td>
-                    <td>
+
+                    <td class="numeric-column">
+                        ${F.escaparHTML(
+                            item.serie_numero ?? "—"
+                        )}
+                    </td>
+
+                    <td class="numeric-column">
                         ${F.formatarInteiro(
                             item.alunos_distintos
                         )}
                     </td>
-                    <td>
+
+                    <td class="numeric-column">
                         ${F.formatarNumero(
                             item.media_notas,
                             2
                         )}
                     </td>
-                    <td>
+
+                    <td class="numeric-column">
                         ${F.formatarPercentual(
                             item.frequencia_media,
                             1
                         )}
                     </td>
-                    <td>
+
+                    <td class="numeric-column">
                         ${F.formatarInteiro(
                             item.disciplinas_distintas
                         )}
                     </td>
-                    <td>
+
+                    <td class="numeric-column">
                         ${F.formatarNumero(
                             item.total_faltas_horas,
                             1
@@ -614,99 +1519,116 @@
     }
 
     // ---------------------------------------------------------
-    // Ranking
+    // Ranking completo
     // ---------------------------------------------------------
 
-    function renderizarRanking(ranking) {
+    function renderizarRanking(dados) {
         const corpo = elemento("tabelaRanking");
 
         if (!corpo) {
             return;
         }
 
-        const elegiveis = ranking.filter((aluno) => {
-            const valor = aluno.elegivel_ranking;
+        const registros = dados.ranking
+            .filter((aluno) => {
+                const elegivel =
+                    aluno.elegivel_ranking;
 
-            if (valor === undefined || valor === null) {
-                return true;
-            }
+                return (
+                    elegivel === undefined ||
+                    elegivel === null ||
+                    F.booleano(elegivel)
+                );
+            })
+            .sort((a, b) => {
+                const posicaoA = F.numero(
+                    a.posicao
+                );
 
-            return (
-                valor === true ||
-                valor === 1 ||
-                F.normalizarTexto(valor) === "true" ||
-                F.normalizarTexto(valor) === "sim"
-            );
-        });
+                const posicaoB = F.numero(
+                    b.posicao
+                );
 
-        const ordenados = [...elegiveis].sort((a, b) => {
-            const posicaoA = Number(a.posicao);
-            const posicaoB = Number(b.posicao);
+                if (
+                    posicaoA !== null &&
+                    posicaoB !== null
+                ) {
+                    return posicaoA - posicaoB;
+                }
 
-            if (
-                Number.isFinite(posicaoA) &&
-                Number.isFinite(posicaoB)
-            ) {
-                return posicaoA - posicaoB;
-            }
+                return (
+                    F.numero(
+                        b.indice_merito,
+                        0
+                    ) -
+                    F.numero(
+                        a.indice_merito,
+                        0
+                    )
+                );
+            });
 
-            return (
-                Number(b.indice_merito || 0) -
-                Number(a.indice_merito || 0)
-            );
-        });
-
-        if (!ordenados.length) {
+        if (!registros.length) {
             corpo.innerHTML = linhaVazia(7);
             return;
         }
 
-        corpo.innerHTML = ordenados
-            .slice(0, 100)
+        corpo.innerHTML = registros
+            .slice(0, 200)
             .map((aluno, indice) => {
+                const metricas = obterMetricasAluno(
+                    aluno,
+                    dados
+                );
+
                 const posicao =
-                    Number(aluno.posicao) || indice + 1;
+                    F.numero(aluno.posicao) ??
+                    indice + 1;
 
                 return `
                     <tr>
-                        <td>
+                        <td class="position-column">
                             <strong>${posicao}º</strong>
                         </td>
+
                         <td>
                             <strong>
                                 ${F.escaparHTML(
-                                    aluno.nome_aluno_final ||
-                                    aluno.nome_aluno ||
-                                    "Sem identificação"
+                                    nomeAluno(aluno)
                                 )}
                             </strong>
                         </td>
+
                         <td>
                             ${F.escaparHTML(
-                                aluno.turma_atual || "—"
+                                metricas.turma
                             )}
                         </td>
-                        <td>
+
+                        <td class="numeric-column">
                             ${F.formatarNumero(
-                                aluno.media_historica,
+                                metricas.media,
                                 2
                             )}
                         </td>
-                        <td>
+
+                        <td class="numeric-column">
                             ${F.formatarPercentual(
-                                aluno.frequencia_media,
+                                metricas.frequencia,
                                 1
                             )}
                         </td>
-                        <td>
+
+                        <td class="numeric-column">
                             ${F.formatarNumero(
                                 aluno.indice_merito,
                                 2
                             )}
                         </td>
+
                         <td>
                             ${F.criarBadge(
-                                aluno.classificacao
+                                metricas.classificacao
                             )}
                         </td>
                     </tr>
@@ -719,158 +1641,191 @@
     // Monitoramento
     // ---------------------------------------------------------
 
-    function renderizarMonitoramento(alunos) {
-        const riscoAlto = alunos.filter((aluno) => {
-            const risco = F.normalizarTexto(aluno.nivel_risco);
+    function renderizarMonitoramento(dados) {
+        let riscoAlto = 0;
+        let baixaFrequencia = 0;
+        let queda = 0;
+        let semDados = 0;
+        let evasao = 0;
 
-            return (
-                risco.includes("alto") ||
-                risco.includes("critico")
+        const registros = dados.alunos
+            .map((aluno) => {
+                const metricas = obterMetricasAluno(
+                    aluno,
+                    dados
+                );
+
+                const prioridade =
+                    calcularPrioridade(
+                        aluno,
+                        metricas
+                    );
+
+                const risco = F.normalizarTexto(
+                    aluno.nivel_risco
+                );
+
+                const vinculo = F.normalizarVinculo(
+                    aluno.situacao_vinculo
+                );
+
+                if (risco.includes("ALTO")) {
+                    riscoAlto += 1;
+                }
+
+                if (
+                    metricas.frequencia !== null &&
+                    metricas.frequencia < 75
+                ) {
+                    baixaFrequencia += 1;
+                }
+
+                if (
+                    F.normalizarTexto(
+                        aluno.tendencia
+                    ).includes("DECRESCENTE")
+                ) {
+                    queda += 1;
+                }
+
+                if (
+                    metricas.media === null &&
+                    metricas.frequencia === null
+                ) {
+                    semDados += 1;
+                }
+
+                if (
+                    vinculo === "EVADIDO PROVAVEL"
+                ) {
+                    evasao += 1;
+                }
+
+                return {
+                    aluno,
+                    metricas,
+                    prioridade
+                };
+            })
+            .filter(
+                (item) =>
+                    item.prioridade > 0 ||
+                    item.metricas.media === null
+            )
+            .sort(
+                (a, b) =>
+                    b.prioridade -
+                    a.prioridade
             );
-        });
-
-        const baixaFrequencia = alunos.filter((aluno) => {
-            const valor = Number(aluno.frequencia_media);
-            return Number.isFinite(valor) && valor < 75;
-        });
-
-        const queda = alunos.filter((aluno) => {
-            const tendencia = F.normalizarTexto(aluno.tendencia);
-            const variacao = Number(aluno.variacao_media);
-
-            return (
-                tendencia.includes("queda") ||
-                (Number.isFinite(variacao) && variacao < -0.5)
-            );
-        });
-
-        const semDados = alunos.filter((aluno) => {
-            const mediaAluno = Number(aluno.media_historica);
-            const quantidade = Number(aluno.quantidade_notas);
-
-            return (
-                !Number.isFinite(mediaAluno) ||
-                !Number.isFinite(quantidade) ||
-                quantidade === 0
-            );
-        });
 
         definirTexto(
             "monitorRiscoAlto",
-            F.formatarInteiro(riscoAlto.length)
+            F.formatarInteiro(riscoAlto)
         );
 
         definirTexto(
             "monitorBaixaFrequencia",
-            F.formatarInteiro(baixaFrequencia.length)
+            F.formatarInteiro(baixaFrequencia)
         );
 
         definirTexto(
             "monitorQueda",
-            F.formatarInteiro(queda.length)
+            F.formatarInteiro(queda)
         );
 
         definirTexto(
             "monitorSemDados",
-            F.formatarInteiro(semDados.length)
+            F.formatarInteiro(semDados)
         );
 
-        const corpo = elemento("tabelaMonitoramento");
+        definirTexto(
+            "monitorEvasao",
+            F.formatarInteiro(evasao)
+        );
+
+        const corpo = elemento(
+            "tabelaMonitoramento"
+        );
 
         if (!corpo) {
             return;
         }
 
-        const monitorados = alunos
-            .filter((aluno) => {
-                const risco = F.normalizarTexto(
-                    aluno.nivel_risco
-                );
-
-                const frequencia = Number(
-                    aluno.frequencia_media
-                );
-
-                const variacao = Number(
-                    aluno.variacao_media
-                );
-
-                return (
-                    risco.includes("alto") ||
-                    risco.includes("medio") ||
-                    risco.includes("moderado") ||
-                    (
-                        Number.isFinite(frequencia) &&
-                        frequencia < 75
-                    ) ||
-                    (
-                        Number.isFinite(variacao) &&
-                        variacao < -0.5
-                    )
-                );
-            })
-            .sort(
-                (a, b) =>
-                    Number(b.pontos_risco || 0) -
-                    Number(a.pontos_risco || 0)
-            );
-
-        if (!monitorados.length) {
+        if (!registros.length) {
             corpo.innerHTML = linhaVazia(
-                7,
-                "Nenhum aluno em situação de atenção."
+                8,
+                "Nenhum caso de atenção na seleção atual."
             );
+
             return;
         }
 
-        corpo.innerHTML = monitorados
-            .slice(0, 200)
-            .map((aluno) => `
+        corpo.innerHTML = registros
+            .slice(0, 300)
+            .map(({ aluno, metricas }) => `
                 <tr>
                     <td>
                         <strong>
                             ${F.escaparHTML(
-                                aluno.nome_aluno_final ||
-                                aluno.nome_aluno ||
-                                "Sem identificação"
+                                nomeAluno(aluno)
                             )}
                         </strong>
                     </td>
+
                     <td>
                         ${F.escaparHTML(
-                            aluno.turma_atual || "—"
+                            metricas.turma
                         )}
                     </td>
+
                     <td>
+                        ${F.criarBadge(
+                            aluno.situacao_vinculo,
+                            "vinculo"
+                        )}
+                    </td>
+
+                    <td class="numeric-column">
                         ${F.formatarNumero(
-                            aluno.media_historica,
+                            metricas.media,
                             2
                         )}
                     </td>
-                    <td>
+
+                    <td class="numeric-column">
                         ${F.formatarPercentual(
-                            aluno.frequencia_media,
+                            metricas.frequencia,
                             1
                         )}
                     </td>
+
                     <td>
-                        ${F.escaparHTML(
-                            aluno.tendencia || "—"
+                        ${F.criarBadge(
+                            aluno.tendencia,
+                            "tendencia"
                         )}
                     </td>
+
                     <td>
                         ${F.criarBadge(
                             aluno.nivel_risco,
                             "risco"
                         )}
                     </td>
-                    <td title="${F.escaparHTML(
-                        aluno.motivos_risco || ""
-                    )}">
+
+                    <td
+                        title="${F.escaparHTML(
+                            aluno.motivos_risco ||
+                            aluno.motivo_situacao_vinculo ||
+                            ""
+                        )}"
+                    >
                         ${F.escaparHTML(
                             limitarTexto(
                                 aluno.motivos_risco ||
-                                "Sem motivo informado"
+                                aluno.motivo_situacao_vinculo ||
+                                "Necessita verificação",
+                                90
                             )
                         )}
                     </td>
@@ -880,25 +1835,62 @@
     }
 
     // ---------------------------------------------------------
-    // Gráficos e atualização geral
+    // Gráficos
+    // ---------------------------------------------------------
+
+    function atualizarGraficos(dados) {
+        G.renderizarTodos({
+            indicadoresPorAno:
+                dados.indicadoresPorAno,
+
+            indicadoresVinculo:
+                dados.indicadoresVinculo,
+
+            alunos:
+                dados.alunos,
+
+            todosAlunos:
+                estado.dados.alunos,
+
+            disciplinas:
+                dados.disciplinas,
+
+            turmas:
+                dados.turmas
+        });
+    }
+
+    // ---------------------------------------------------------
+    // Atualização geral
     // ---------------------------------------------------------
 
     function atualizarDashboard() {
         const dados = obterDadosFiltrados();
 
-        atualizarIndicadores(dados);
-        renderizarTabelaAlunos(dados.alunos);
-        renderizarTabelaDisciplinas(dados.disciplinas);
-        renderizarTabelaTurmas(dados.turmas);
-        renderizarRanking(dados.ranking);
-        renderizarMonitoramento(dados.alunos);
+        definirTexto(
+            "rotuloPopulacao",
+            F.rotuloPopulacao(
+                dados.filtros.vinculo
+            )
+        );
 
-        G.renderizarTodos({
-            indicadoresPorAno: dados.indicadoresPorAno,
-            alunos: dados.alunos,
-            turmas: dados.turmas,
-            disciplinas: dados.disciplinas
-        });
+        atualizarIndicadores(dados);
+        atualizarAlertas(dados);
+
+        renderizarAtencaoResumo(dados);
+        renderizarDestaquesResumo(dados);
+
+        renderizarTabelaAlunos(dados);
+        renderizarTabelaDisciplinas(
+            dados.disciplinas
+        );
+        renderizarTabelaTurmas(
+            dados.turmas
+        );
+        renderizarRanking(dados);
+        renderizarMonitoramento(dados);
+
+        atualizarGraficos(dados);
     }
 
     // ---------------------------------------------------------
@@ -906,9 +1898,10 @@
     // ---------------------------------------------------------
 
     function abrirPagina(nomePagina) {
-        const pagina = TITULOS_PAGINAS[nomePagina]
-            ? nomePagina
-            : "visao-geral";
+        const pagina =
+            TITULOS_PAGINAS[nomePagina]
+                ? nomePagina
+                : "visao-geral";
 
         estado.paginaAtual = pagina;
 
@@ -918,7 +1911,9 @@
                 secao.classList.remove("active");
             });
 
-        elemento(`page-${pagina}`)?.classList.add("active");
+        elemento(
+            `page-${pagina}`
+        )?.classList.add("active");
 
         document
             .querySelectorAll(".nav-item")
@@ -934,30 +1929,42 @@
             TITULOS_PAGINAS[pagina]
         );
 
-        elemento("sidebar")?.classList.remove("open");
+        elemento("sidebar")?.classList.remove(
+            "open"
+        );
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
 
         setTimeout(() => {
-            window.dispatchEvent(new Event("resize"));
+            window.dispatchEvent(
+                new Event("resize")
+            );
         }, 100);
     }
 
     // ---------------------------------------------------------
-    // Metadados
+    // Atualização e metadados
     // ---------------------------------------------------------
 
     function exibirAtualizacao() {
-        const metadados = estado.dados.metadados;
+        const metadados =
+            estado.dados.metadados;
 
         const data =
-            metadados.data_atualizacao ||
             metadados.gerado_em ||
+            metadados.data_atualizacao ||
             metadados.data_processamento ||
             metadados.atualizado_em;
 
         definirTexto(
             "dataAtualizacao",
             data
-                ? `Atualizado em ${F.formatarData(data)}`
+                ? `Atualizado em ${F.formatarDataHora(
+                    data
+                )}`
                 : "Dados carregados"
         );
     }
@@ -970,20 +1977,43 @@
         document
             .querySelectorAll(".nav-item")
             .forEach((botao) => {
-                botao.addEventListener("click", () => {
-                    abrirPagina(botao.dataset.page);
-                });
+                botao.addEventListener(
+                    "click",
+                    () => {
+                        abrirPagina(
+                            botao.dataset.page
+                        );
+                    }
+                );
+            });
+
+        document
+            .querySelectorAll(
+                "[data-open-page]"
+            )
+            .forEach((botao) => {
+                botao.addEventListener(
+                    "click",
+                    () => {
+                        abrirPagina(
+                            botao.dataset.openPage
+                        );
+                    }
+                );
             });
 
         elemento("menuButton")?.addEventListener(
             "click",
             () => {
-                elemento("sidebar")?.classList.toggle("open");
+                elemento("sidebar")?.classList.toggle(
+                    "open"
+                );
             }
         );
 
         [
             "filtroAno",
+            "filtroVinculo",
             "filtroTurma",
             "filtroDisciplina"
         ].forEach((id) => {
@@ -993,12 +2023,14 @@
             );
         });
 
-        let temporizadorBusca;
+        let temporizadorBusca = null;
 
         elemento("filtroBusca")?.addEventListener(
             "input",
             () => {
-                clearTimeout(temporizadorBusca);
+                clearTimeout(
+                    temporizadorBusca
+                );
 
                 temporizadorBusca = setTimeout(
                     atualizarDashboard,
@@ -1014,6 +2046,26 @@
                 atualizarDashboard();
             }
         );
+
+        document.addEventListener(
+            "click",
+            (evento) => {
+                const sidebar =
+                    elemento("sidebar");
+
+                const botaoMenu =
+                    elemento("menuButton");
+
+                if (
+                    window.innerWidth <= 900 &&
+                    sidebar?.classList.contains("open") &&
+                    !sidebar.contains(evento.target) &&
+                    !botaoMenu?.contains(evento.target)
+                ) {
+                    sidebar.classList.remove("open");
+                }
+            }
+        );
     }
 
     // ---------------------------------------------------------
@@ -1022,9 +2074,15 @@
 
     async function iniciar() {
         try {
-            if (!F || !G) {
+            if (!F) {
                 throw new Error(
-                    "Os arquivos filters.js ou charts.js não foram carregados."
+                    "O arquivo filters.js não foi carregado."
+                );
+            }
+
+            if (!G) {
+                throw new Error(
+                    "O arquivo charts.js não foi carregado."
                 );
             }
 
@@ -1037,24 +2095,30 @@
             exibirAtualizacao();
             atualizarDashboard();
         } catch (erro) {
-            console.error("Erro ao iniciar o dashboard:", erro);
+            console.error(
+                "Erro ao iniciar o dashboard:",
+                erro
+            );
 
             ocultar("loadingState");
             ocultar("dashboardContent");
             mostrar("errorState");
 
-            const caixaErro = elemento("errorState");
+            const caixaErro =
+                elemento("errorState");
 
-            if (caixaErro) {
-                const paragrafo = caixaErro.querySelector("p");
+            const paragrafo =
+                caixaErro?.querySelector("p");
 
-                if (paragrafo) {
-                    paragrafo.textContent =
-                        `${erro.message} Verifique se os arquivos JSON estão na pasta data.`;
-                }
+            if (paragrafo) {
+                paragrafo.textContent =
+                    `${erro.message} Verifique os arquivos da pasta data.`;
             }
         }
     }
 
-    document.addEventListener("DOMContentLoaded", iniciar);
+    document.addEventListener(
+        "DOMContentLoaded",
+        iniciar
+    );
 })();
