@@ -15,7 +15,6 @@
 
     <title>Painel de Gestão Acadêmica</title>
 
-    <!-- Fonte -->
     <link
         rel="preconnect"
         href="https://fonts.googleapis.com"
@@ -28,14 +27,15 @@
     >
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet"
     >
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
 
-    <!-- Gráficos -->
     <script
         src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"
         defer
@@ -50,11 +50,17 @@
              MENU LATERAL
              ================================================== -->
 
-        <aside class="sidebar" id="sidebar">
+        <aside
+            class="sidebar"
+            id="sidebar"
+        >
 
             <div class="sidebar-brand">
 
-                <div class="brand-symbol" aria-hidden="true">
+                <div
+                    class="brand-symbol"
+                    aria-hidden="true"
+                >
                     PA
                 </div>
 
@@ -75,7 +81,13 @@
                     data-page="visao-geral"
                     type="button"
                 >
-                    <span class="nav-icon" aria-hidden="true">▦</span>
+                    <span
+                        class="nav-icon"
+                        aria-hidden="true"
+                    >
+                        ▦
+                    </span>
+
                     <span>Visão geral</span>
                 </button>
 
@@ -84,7 +96,13 @@
                     data-page="alunos"
                     type="button"
                 >
-                    <span class="nav-icon" aria-hidden="true">♙</span>
+                    <span
+                        class="nav-icon"
+                        aria-hidden="true"
+                    >
+                        ♙
+                    </span>
+
                     <span>Alunos</span>
                 </button>
 
@@ -93,7 +111,13 @@
                     data-page="disciplinas"
                     type="button"
                 >
-                    <span class="nav-icon" aria-hidden="true">▤</span>
+                    <span
+                        class="nav-icon"
+                        aria-hidden="true"
+                    >
+                        ▤
+                    </span>
+
                     <span>Disciplinas</span>
                 </button>
 
@@ -102,7 +126,13 @@
                     data-page="turmas"
                     type="button"
                 >
-                    <span class="nav-icon" aria-hidden="true">▦</span>
+                    <span
+                        class="nav-icon"
+                        aria-hidden="true"
+                    >
+                        ▦
+                    </span>
+
                     <span>Turmas</span>
                 </button>
 
@@ -111,7 +141,13 @@
                     data-page="rankings"
                     type="button"
                 >
-                    <span class="nav-icon" aria-hidden="true">★</span>
+                    <span
+                        class="nav-icon"
+                        aria-hidden="true"
+                    >
+                        ★
+                    </span>
+
                     <span>Destaques</span>
                 </button>
 
@@ -120,7 +156,13 @@
                     data-page="monitoramento"
                     type="button"
                 >
-                    <span class="nav-icon" aria-hidden="true">△</span>
+                    <span
+                        class="nav-icon"
+                        aria-hidden="true"
+                    >
+                        △
+                    </span>
+
                     <span>Monitoramento</span>
                 </button>
 
@@ -156,6 +198,7 @@
 
                     <div>
                         <h1 id="pageTitle">Visão geral</h1>
+
                         <p>
                             Informações para acompanhamento e tomada
                             de decisão
@@ -180,14 +223,16 @@
 
             <section
                 class="filter-panel"
-                aria-label="Filtros do dashboard"
+                aria-label="Filtros do painel"
             >
 
                 <div class="filter-group filter-year">
                     <label for="filtroAno">Ano</label>
 
                     <select id="filtroAno">
-                        <option value="">Todos os anos</option>
+                        <option value="">
+                            Todos os anos
+                        </option>
                     </select>
                 </div>
 
@@ -197,7 +242,11 @@
                     </label>
 
                     <select id="filtroVinculo">
-                        <option value="ATIVOS" selected>
+
+                        <option
+                            value="ATIVOS"
+                            selected
+                        >
                             Ativos e formandos
                         </option>
 
@@ -224,6 +273,7 @@
                         <option value="INATIVOS">
                             Inativos e evasão provável
                         </option>
+
                     </select>
                 </div>
 
@@ -231,7 +281,9 @@
                     <label for="filtroTurma">Turma</label>
 
                     <select id="filtroTurma">
-                        <option value="">Todas as turmas</option>
+                        <option value="">
+                            Todas as turmas
+                        </option>
                     </select>
                 </div>
 
@@ -244,6 +296,64 @@
                         <option value="">
                             Todas as disciplinas
                         </option>
+                    </select>
+                </div>
+
+                <div class="filter-group filter-performance">
+                    <label for="filtroDesempenho">
+                        Desempenho
+                    </label>
+
+                    <select id="filtroDesempenho">
+
+                        <option value="">
+                            Todos
+                        </option>
+
+                        <option value="DESTAQUE">
+                            Destaque
+                        </option>
+
+                        <option value="REGULAR">
+                            Regular
+                        </option>
+
+                        <option value="ATENCAO">
+                            Atenção
+                        </option>
+
+                        <option value="CRITICO">
+                            Crítico
+                        </option>
+
+                        <option value="SEM_DADOS">
+                            Sem dados
+                        </option>
+
+                    </select>
+                </div>
+
+                <div class="filter-group filter-risk">
+                    <label for="filtroRisco">Risco</label>
+
+                    <select id="filtroRisco">
+
+                        <option value="">
+                            Todos
+                        </option>
+
+                        <option value="BAIXO">
+                            Baixo
+                        </option>
+
+                        <option value="MEDIO">
+                            Médio
+                        </option>
+
+                        <option value="ALTO">
+                            Alto
+                        </option>
+
                     </select>
                 </div>
 
@@ -270,6 +380,33 @@
 
             </section>
 
+            <!-- Filtro aplicado por clique nos gráficos -->
+
+            <section
+                id="filtroRapidoAtivo"
+                class="active-filter-bar hidden"
+                aria-live="polite"
+            >
+
+                <div class="active-filter-content">
+                    <span>Filtro rápido aplicado:</span>
+
+                    <strong id="rotuloFiltroRapido">
+                        —
+                    </strong>
+                </div>
+
+                <button
+                    id="removerFiltroRapido"
+                    class="remove-active-filter"
+                    type="button"
+                    aria-label="Remover filtro rápido"
+                >
+                    Remover ×
+                </button>
+
+            </section>
+
             <!-- ==================================================
                  ESTADOS DE CARREGAMENTO
                  ================================================== -->
@@ -278,29 +415,43 @@
                 id="loadingState"
                 class="state-panel"
             >
+
                 <div class="loading-spinner"></div>
+
                 <h2>Carregando informações</h2>
-                <p>Aguarde enquanto os dados são preparados.</p>
+
+                <p>
+                    Aguarde enquanto os dados são preparados.
+                </p>
+
             </section>
 
             <section
                 id="errorState"
                 class="state-panel error-state hidden"
             >
+
                 <div class="state-icon">!</div>
-                <h2>Não foi possível carregar os dados</h2>
+
+                <h2>
+                    Não foi possível carregar os dados
+                </h2>
 
                 <p>
-                    Verifique se os arquivos JSON estão disponíveis
-                    na pasta data.
+                    Verifique se os arquivos JSON estão
+                    disponíveis na pasta data.
                 </p>
+
             </section>
 
             <!-- ==================================================
-                 ÁREA DO DASHBOARD
+                 DASHBOARD
                  ================================================== -->
 
-            <div id="dashboardContent" class="hidden">
+            <div
+                id="dashboardContent"
+                class="hidden"
+            >
 
                 <!-- ==============================================
                      VISÃO GERAL
@@ -312,220 +463,114 @@
                 >
 
                     <div class="section-heading">
+
                         <div>
                             <span class="section-eyebrow">
                                 Resumo gerencial
                             </span>
 
-                            <h2>Situação acadêmica do curso</h2>
+                            <h2>
+                                Situação acadêmica do curso
+                            </h2>
 
                             <p>
-                                Principais indicadores e prioridades
+                                Principais informações e prioridades
                                 de acompanhamento.
                             </p>
                         </div>
 
                         <div class="population-indicator">
                             <span>População atual</span>
+
                             <strong id="rotuloPopulacao">
                                 Ativos e formandos
                             </strong>
                         </div>
+
                     </div>
 
-                    <!-- Indicadores principais -->
+                    <!-- ==========================================
+                         PRIMEIRA LINHA — GRÁFICOS PRINCIPAIS
+                         ========================================== -->
 
-                    <div class="kpi-grid kpi-grid-manager">
+                    <div class="charts-grid charts-grid-primary">
 
-                        <article class="kpi-card kpi-primary">
-                            <div class="kpi-icon">A</div>
+                        <article
+                            class="panel chart-panel
+                                   chart-primary-panel"
+                        >
 
-                            <div class="kpi-content">
-                                <span class="kpi-label">
-                                    Alunos ativos
-                                </span>
+                            <div class="panel-header">
 
-                                <strong
-                                    class="kpi-value"
-                                    id="kpiAlunos"
-                                >
-                                    —
-                                </strong>
+                                <div>
+                                    <span class="panel-kicker">
+                                        Evolução
+                                    </span>
 
-                                <small id="kpiAlunosVariacao">
-                                    População acompanhada
-                                </small>
+                                    <h3>Evolução acadêmica</h3>
+
+                                    <p>
+                                        Média e frequência ao longo
+                                        dos anos.
+                                    </p>
+                                </div>
+
                             </div>
+
+                            <div class="chart-container chart-primary">
+                                <canvas id="chartEvolucao"></canvas>
+                            </div>
+
                         </article>
 
-                        <article class="kpi-card">
-                            <div class="kpi-icon">M</div>
+                        <article
+                            class="panel chart-panel
+                                   chart-primary-panel
+                                   chart-clickable"
+                        >
 
-                            <div class="kpi-content">
-                                <span class="kpi-label">
-                                    Média no período
+                            <div class="panel-header">
+
+                                <div>
+                                    <span class="panel-kicker">
+                                        Vínculos acadêmicos
+                                    </span>
+
+                                    <h3>Situação dos vínculos</h3>
+
+                                    <p>
+                                        Clique em uma categoria para
+                                        visualizar os alunos.
+                                    </p>
+                                </div>
+
+                                <span class="interaction-hint">
+                                    Interativo
                                 </span>
 
-                                <strong
-                                    class="kpi-value"
-                                    id="kpiMedia"
-                                >
-                                    —
-                                </strong>
-
-                                <small id="kpiMediaVariacao">
-                                    Comparação com o ano anterior
-                                </small>
                             </div>
-                        </article>
 
-                        <article class="kpi-card">
-                            <div class="kpi-icon">F</div>
-
-                            <div class="kpi-content">
-                                <span class="kpi-label">
-                                    Frequência média
-                                </span>
-
-                                <strong
-                                    class="kpi-value"
-                                    id="kpiFrequencia"
-                                >
-                                    —
-                                </strong>
-
-                                <small id="kpiFrequenciaVariacao">
-                                    Frequência no período
-                                </small>
+                            <div class="chart-container chart-primary">
+                                <canvas id="chartVinculos"></canvas>
                             </div>
-                        </article>
 
-                        <article class="kpi-card kpi-warning">
-                            <div class="kpi-icon">!</div>
-
-                            <div class="kpi-content">
-                                <span class="kpi-label">
-                                    Necessitam atenção
-                                </span>
-
-                                <strong
-                                    class="kpi-value"
-                                    id="kpiAtencao"
-                                >
-                                    —
-                                </strong>
-
-                                <small>
-                                    Atenção acadêmica ou frequência
-                                </small>
-                            </div>
-                        </article>
-
-                        <article class="kpi-card kpi-danger">
-                            <div class="kpi-icon">E</div>
-
-                            <div class="kpi-content">
-                                <span class="kpi-label">
-                                    Evasão provável
-                                </span>
-
-                                <strong
-                                    class="kpi-value"
-                                    id="kpiEvasao"
-                                >
-                                    —
-                                </strong>
-
-                                <small>
-                                    Casos para verificação
-                                </small>
-                            </div>
-                        </article>
-
-                        <article class="kpi-card kpi-success">
-                            <div class="kpi-icon">C</div>
-
-                            <div class="kpi-content">
-                                <span class="kpi-label">
-                                    Formandos
-                                </span>
-
-                                <strong
-                                    class="kpi-value"
-                                    id="kpiFormandos"
-                                >
-                                    —
-                                </strong>
-
-                                <small>
-                                    Alunos na série final
-                                </small>
-                            </div>
                         </article>
 
                     </div>
 
-                    <!-- Alertas gerenciais -->
-
-                    <div class="manager-alerts">
-
-                        <article class="manager-alert alert-danger">
-                            <span class="alert-icon">!</span>
-
-                            <div>
-                                <span>Frequência abaixo de 75%</span>
-
-                                <strong id="alertaBaixaFrequencia">
-                                    —
-                                </strong>
-                            </div>
-                        </article>
-
-                        <article class="manager-alert alert-warning">
-                            <span class="alert-icon">↓</span>
-
-                            <div>
-                                <span>Desempenho em queda</span>
-
-                                <strong id="alertaQuedaDesempenho">
-                                    —
-                                </strong>
-                            </div>
-                        </article>
-
-                        <article class="manager-alert alert-purple">
-                            <span class="alert-icon">D</span>
-
-                            <div>
-                                <span>Disciplinas críticas</span>
-
-                                <strong id="alertaDisciplinasCriticas">
-                                    —
-                                </strong>
-                            </div>
-                        </article>
-
-                        <article class="manager-alert alert-neutral">
-                            <span class="alert-icon">?</span>
-
-                            <div>
-                                <span>Casos sem dados suficientes</span>
-
-                                <strong id="alertaSemDados">
-                                    —
-                                </strong>
-                            </div>
-                        </article>
-
-                    </div>
-
-                    <!-- Tabelas prioritárias -->
+                    <!-- ==========================================
+                         SEGUNDA LINHA — TABELAS PRIORITÁRIAS
+                         ========================================== -->
 
                     <div class="management-grid">
 
-                        <article class="panel panel-attention">
+                        <article
+                            class="panel panel-attention
+                                   management-panel"
+                        >
 
                             <div class="panel-header">
+
                                 <div>
                                     <span class="panel-kicker">
                                         Prioridade
@@ -549,21 +594,32 @@
                                 >
                                     Ver todos
                                 </button>
+
                             </div>
 
-                            <div class="table-container">
-                                <table class="data-table compact-table">
+                            <div
+                                class="table-container
+                                       management-table-container"
+                            >
+
+                                <table
+                                    class="data-table compact-table
+                                           management-table"
+                                >
 
                                     <thead>
                                         <tr>
                                             <th>Aluno</th>
                                             <th>Turma</th>
+
                                             <th class="numeric-column">
                                                 Média
                                             </th>
+
                                             <th class="numeric-column">
                                                 Frequência
                                             </th>
+
                                             <th>Tendência</th>
                                             <th>Risco</th>
                                             <th>Motivo principal</th>
@@ -582,13 +638,18 @@
                                     </tbody>
 
                                 </table>
+
                             </div>
 
                         </article>
 
-                        <article class="panel panel-highlight">
+                        <article
+                            class="panel panel-highlight
+                                   management-panel"
+                        >
 
                             <div class="panel-header">
+
                                 <div>
                                     <span class="panel-kicker">
                                         Reconhecimento
@@ -609,24 +670,36 @@
                                 >
                                     Ver ranking
                                 </button>
+
                             </div>
 
-                            <div class="table-container">
-                                <table class="data-table compact-table">
+                            <div
+                                class="table-container
+                                       management-table-container"
+                            >
+
+                                <table
+                                    class="data-table compact-table
+                                           management-table"
+                                >
 
                                     <thead>
                                         <tr>
                                             <th class="position-column">
                                                 Pos.
                                             </th>
+
                                             <th>Aluno</th>
                                             <th>Turma</th>
+
                                             <th class="numeric-column">
                                                 Média
                                             </th>
+
                                             <th class="numeric-column">
                                                 Frequência
                                             </th>
+
                                             <th>Evolução</th>
                                         </tr>
                                     </thead>
@@ -643,83 +716,377 @@
                                     </tbody>
 
                                 </table>
+
                             </div>
 
                         </article>
 
                     </div>
 
-                    <!-- Gráficos gerenciais -->
+                    <!-- ==========================================
+                         TERCEIRA LINHA — INDICADORES NUMÉRICOS
+                         ========================================== -->
 
-                    <div class="charts-grid">
+                    <div class="section-divider-heading">
 
-                        <article class="panel chart-panel chart-wide">
+                        <div>
+                            <span class="section-eyebrow">
+                                Indicadores
+                            </span>
+
+                            <h3>Números da população analisada</h3>
+                        </div>
+
+                        <span>
+                            Clique em um indicador para detalhar
+                        </span>
+
+                    </div>
+
+                    <div class="kpi-grid kpi-grid-manager">
+
+                        <button
+                            class="kpi-card kpi-primary
+                                   interactive-card"
+                            type="button"
+                            data-card-filter="TODOS"
+                            data-target-page="alunos"
+                        >
+
+                            <div class="kpi-icon">A</div>
+
+                            <div class="kpi-content">
+                                <span class="kpi-label">
+                                    Alunos selecionados
+                                </span>
+
+                                <strong
+                                    class="kpi-value"
+                                    id="kpiAlunos"
+                                >
+                                    —
+                                </strong>
+
+                                <small id="kpiAlunosVariacao">
+                                    População acompanhada
+                                </small>
+                            </div>
+
+                        </button>
+
+                        <button
+                            class="kpi-card interactive-card"
+                            type="button"
+                            data-card-filter="DESEMPENHO"
+                            data-target-page="alunos"
+                        >
+
+                            <div class="kpi-icon">M</div>
+
+                            <div class="kpi-content">
+                                <span class="kpi-label">
+                                    Média no período
+                                </span>
+
+                                <strong
+                                    class="kpi-value"
+                                    id="kpiMedia"
+                                >
+                                    —
+                                </strong>
+
+                                <small id="kpiMediaVariacao">
+                                    Comparação com o ano anterior
+                                </small>
+                            </div>
+
+                        </button>
+
+                        <button
+                            class="kpi-card interactive-card"
+                            type="button"
+                            data-card-filter="FREQUENCIA"
+                            data-target-page="alunos"
+                        >
+
+                            <div class="kpi-icon">F</div>
+
+                            <div class="kpi-content">
+                                <span class="kpi-label">
+                                    Frequência média
+                                </span>
+
+                                <strong
+                                    class="kpi-value"
+                                    id="kpiFrequencia"
+                                >
+                                    —
+                                </strong>
+
+                                <small id="kpiFrequenciaVariacao">
+                                    Frequência no período
+                                </small>
+                            </div>
+
+                        </button>
+
+                        <button
+                            class="kpi-card kpi-warning
+                                   interactive-card"
+                            type="button"
+                            data-card-filter="ATENCAO"
+                            data-target-page="monitoramento"
+                        >
+
+                            <div class="kpi-icon">!</div>
+
+                            <div class="kpi-content">
+                                <span class="kpi-label">
+                                    Necessitam atenção
+                                </span>
+
+                                <strong
+                                    class="kpi-value"
+                                    id="kpiAtencao"
+                                >
+                                    —
+                                </strong>
+
+                                <small>
+                                    Atenção acadêmica ou frequência
+                                </small>
+                            </div>
+
+                        </button>
+
+                        <button
+                            class="kpi-card kpi-danger
+                                   interactive-card"
+                            type="button"
+                            data-card-filter="EVADIDO_PROVAVEL"
+                            data-target-page="monitoramento"
+                        >
+
+                            <div class="kpi-icon">E</div>
+
+                            <div class="kpi-content">
+                                <span class="kpi-label">
+                                    Evasão provável
+                                </span>
+
+                                <strong
+                                    class="kpi-value"
+                                    id="kpiEvasao"
+                                >
+                                    —
+                                </strong>
+
+                                <small>
+                                    Casos para verificação
+                                </small>
+                            </div>
+
+                        </button>
+
+                        <button
+                            class="kpi-card kpi-success
+                                   interactive-card"
+                            type="button"
+                            data-card-filter="FORMANDO"
+                            data-target-page="alunos"
+                        >
+
+                            <div class="kpi-icon">C</div>
+
+                            <div class="kpi-content">
+                                <span class="kpi-label">
+                                    Formandos
+                                </span>
+
+                                <strong
+                                    class="kpi-value"
+                                    id="kpiFormandos"
+                                >
+                                    —
+                                </strong>
+
+                                <small>
+                                    Alunos na série final
+                                </small>
+                            </div>
+
+                        </button>
+
+                    </div>
+
+                    <!-- Alertas clicáveis -->
+
+                    <div class="manager-alerts">
+
+                        <button
+                            class="manager-alert alert-danger
+                                   interactive-alert"
+                            type="button"
+                            data-card-filter="BAIXA_FREQUENCIA"
+                            data-target-page="monitoramento"
+                        >
+
+                            <span class="alert-icon">!</span>
+
+                            <div>
+                                <span>
+                                    Frequência abaixo de 75%
+                                </span>
+
+                                <strong id="alertaBaixaFrequencia">
+                                    —
+                                </strong>
+                            </div>
+
+                        </button>
+
+                        <button
+                            class="manager-alert alert-warning
+                                   interactive-alert"
+                            type="button"
+                            data-card-filter="DECRESCENTE"
+                            data-target-page="monitoramento"
+                        >
+
+                            <span class="alert-icon">↓</span>
+
+                            <div>
+                                <span>
+                                    Desempenho em queda
+                                </span>
+
+                                <strong id="alertaQuedaDesempenho">
+                                    —
+                                </strong>
+                            </div>
+
+                        </button>
+
+                        <button
+                            class="manager-alert alert-purple
+                                   interactive-alert"
+                            type="button"
+                            data-card-filter="DISCIPLINAS_CRITICAS"
+                            data-target-page="disciplinas"
+                        >
+
+                            <span class="alert-icon">D</span>
+
+                            <div>
+                                <span>
+                                    Disciplinas críticas
+                                </span>
+
+                                <strong id="alertaDisciplinasCriticas">
+                                    —
+                                </strong>
+                            </div>
+
+                        </button>
+
+                        <button
+                            class="manager-alert alert-neutral
+                                   interactive-alert"
+                            type="button"
+                            data-card-filter="SEM_DADOS"
+                            data-target-page="alunos"
+                        >
+
+                            <span class="alert-icon">?</span>
+
+                            <div>
+                                <span>
+                                    Casos sem dados suficientes
+                                </span>
+
+                                <strong id="alertaSemDados">
+                                    —
+                                </strong>
+                            </div>
+
+                        </button>
+
+                    </div>
+
+                    <!-- ==========================================
+                         ÚLTIMA LINHA — GRÁFICOS COMPLEMENTARES
+                         ========================================== -->
+
+                    <div class="charts-grid charts-grid-secondary">
+
+                        <article
+                            class="panel chart-panel
+                                   chart-secondary-panel
+                                   chart-clickable"
+                        >
+
                             <div class="panel-header">
+
                                 <div>
-                                    <h3>Evolução acadêmica</h3>
+                                    <span class="panel-kicker">
+                                        Desempenho
+                                    </span>
+
+                                    <h3>
+                                        Distribuição de desempenho
+                                    </h3>
 
                                     <p>
-                                        Média e frequência ao longo
-                                        dos anos.
+                                        Clique em uma faixa para
+                                        visualizar os alunos.
                                     </p>
                                 </div>
+
+                                <span class="interaction-hint">
+                                    Interativo
+                                </span>
+
                             </div>
 
-                            <div class="chart-container">
-                                <canvas id="chartEvolucao"></canvas>
-                            </div>
-                        </article>
-
-                        <article class="panel chart-panel">
-                            <div class="panel-header">
-                                <div>
-                                    <h3>Situação dos vínculos</h3>
-
-                                    <p>
-                                        Ativos, formandos, egressos
-                                        e casos de inatividade.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="chart-container">
-                                <canvas id="chartVinculos"></canvas>
-                            </div>
-                        </article>
-
-                        <article class="panel chart-panel">
-                            <div class="panel-header">
-                                <div>
-                                    <h3>Distribuição de desempenho</h3>
-
-                                    <p>
-                                        Alunos por faixa de resultado.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="chart-container">
+                            <div class="chart-container chart-secondary">
                                 <canvas id="chartDesempenho"></canvas>
                             </div>
+
                         </article>
 
-                        <article class="panel chart-panel chart-wide">
+                        <article
+                            class="panel chart-panel
+                                   chart-secondary-panel
+                                   chart-clickable"
+                        >
+
                             <div class="panel-header">
+
                                 <div>
+                                    <span class="panel-kicker">
+                                        Componentes curriculares
+                                    </span>
+
                                     <h3>
                                         Disciplinas que exigem atenção
                                     </h3>
 
                                     <p>
-                                        Menores médias da população
-                                        analisada.
+                                        Clique em uma disciplina para
+                                        abrir seus indicadores.
                                     </p>
                                 </div>
+
+                                <span class="interaction-hint">
+                                    Interativo
+                                </span>
+
                             </div>
 
-                            <div class="chart-container">
+                            <div class="chart-container chart-secondary">
                                 <canvas id="chartDisciplinas"></canvas>
                             </div>
+
                         </article>
 
                     </div>
@@ -735,9 +1102,10 @@
                     class="page-section"
                 >
 
-                    <article class="panel">
+                    <article class="panel detail-panel">
 
                         <div class="panel-header">
+
                             <div>
                                 <span class="panel-kicker">
                                     Consulta detalhada
@@ -746,18 +1114,27 @@
                                 <h2>Alunos</h2>
 
                                 <p>
-                                    Desempenho, frequência, vínculo e
-                                    situação acadêmica.
+                                    Desempenho, frequência, vínculo
+                                    e situação acadêmica.
                                 </p>
                             </div>
 
                             <div class="record-count">
-                                <strong id="totalAlunosTabela">0</strong>
+                                <strong id="totalAlunosTabela">
+                                    0
+                                </strong>
+
                                 <span>registros</span>
                             </div>
+
                         </div>
 
-                        <div class="table-container table-large">
+                        <div
+                            class="table-container
+                                   table-large
+                                   detail-table-container"
+                        >
+
                             <table class="data-table">
 
                                 <thead>
@@ -766,12 +1143,15 @@
                                         <th>Turma</th>
                                         <th>Série</th>
                                         <th>Vínculo</th>
+
                                         <th class="numeric-column">
                                             Média
                                         </th>
+
                                         <th class="numeric-column">
                                             Frequência
                                         </th>
+
                                         <th>Desempenho</th>
                                         <th>Risco</th>
                                     </tr>
@@ -789,6 +1169,7 @@
                                 </tbody>
 
                             </table>
+
                         </div>
 
                     </article>
@@ -804,9 +1185,10 @@
                     class="page-section"
                 >
 
-                    <article class="panel">
+                    <article class="panel detail-panel">
 
                         <div class="panel-header">
+
                             <div>
                                 <span class="panel-kicker">
                                     Análise acadêmica
@@ -819,29 +1201,41 @@
                                     componente curricular.
                                 </p>
                             </div>
+
                         </div>
 
-                        <div class="table-container table-large">
+                        <div
+                            class="table-container
+                                   table-large
+                                   detail-table-container"
+                        >
+
                             <table class="data-table">
 
                                 <thead>
                                     <tr>
                                         <th>Disciplina</th>
+
                                         <th class="numeric-column">
                                             Ano
                                         </th>
+
                                         <th class="numeric-column">
                                             Alunos
                                         </th>
+
                                         <th class="numeric-column">
                                             Média
                                         </th>
+
                                         <th class="numeric-column">
                                             Frequência
                                         </th>
+
                                         <th class="numeric-column">
                                             Notas abaixo de 6
                                         </th>
+
                                         <th class="numeric-column">
                                             Notas válidas
                                         </th>
@@ -860,6 +1254,7 @@
                                 </tbody>
 
                             </table>
+
                         </div>
 
                     </article>
@@ -875,9 +1270,10 @@
                     class="page-section"
                 >
 
-                    <article class="panel">
+                    <article class="panel detail-panel">
 
                         <div class="panel-header">
+
                             <div>
                                 <span class="panel-kicker">
                                     Comparação
@@ -890,36 +1286,49 @@
                                     frequência entre turmas.
                                 </p>
                             </div>
+
                         </div>
 
                         <div class="chart-container chart-summary">
                             <canvas id="chartTurmas"></canvas>
                         </div>
 
-                        <div class="table-container table-large">
+                        <div
+                            class="table-container
+                                   table-large
+                                   detail-table-container"
+                        >
+
                             <table class="data-table">
 
                                 <thead>
                                     <tr>
                                         <th>Turma</th>
+
                                         <th class="numeric-column">
                                             Ano
                                         </th>
+
                                         <th class="numeric-column">
                                             Série
                                         </th>
+
                                         <th class="numeric-column">
                                             Alunos
                                         </th>
+
                                         <th class="numeric-column">
                                             Média
                                         </th>
+
                                         <th class="numeric-column">
                                             Frequência
                                         </th>
+
                                         <th class="numeric-column">
                                             Disciplinas
                                         </th>
+
                                         <th class="numeric-column">
                                             Faltas
                                         </th>
@@ -938,6 +1347,7 @@
                                 </tbody>
 
                             </table>
+
                         </div>
 
                     </article>
@@ -945,7 +1355,7 @@
                 </section>
 
                 <!-- ==============================================
-                     DESTAQUES E RANKING
+                     DESTAQUES
                      ============================================== -->
 
                 <section
@@ -953,9 +1363,10 @@
                     class="page-section"
                 >
 
-                    <article class="panel">
+                    <article class="panel detail-panel">
 
                         <div class="panel-header">
+
                             <div>
                                 <span class="panel-kicker">
                                     Reconhecimento acadêmico
@@ -968,9 +1379,15 @@
                                     frequência e índice de mérito.
                                 </p>
                             </div>
+
                         </div>
 
-                        <div class="table-container table-large">
+                        <div
+                            class="table-container
+                                   table-large
+                                   detail-table-container"
+                        >
+
                             <table class="data-table">
 
                                 <thead>
@@ -978,17 +1395,22 @@
                                         <th class="position-column">
                                             Posição
                                         </th>
+
                                         <th>Aluno</th>
                                         <th>Turma</th>
+
                                         <th class="numeric-column">
                                             Média
                                         </th>
+
                                         <th class="numeric-column">
                                             Frequência
                                         </th>
+
                                         <th class="numeric-column">
                                             Índice
                                         </th>
+
                                         <th>Classificação</th>
                                     </tr>
                                 </thead>
@@ -1005,6 +1427,7 @@
                                 </tbody>
 
                             </table>
+
                         </div>
 
                     </article>
@@ -1021,6 +1444,7 @@
                 >
 
                     <div class="section-heading">
+
                         <div>
                             <span class="section-eyebrow">
                                 Acompanhamento preventivo
@@ -1033,47 +1457,77 @@
                                 contato ou intervenção.
                             </p>
                         </div>
+
                     </div>
 
                     <div class="monitor-grid">
 
-                        <article class="monitor-card monitor-danger">
+                        <button
+                            class="monitor-card monitor-danger
+                                   interactive-card"
+                            type="button"
+                            data-card-filter="RISCO_ALTO"
+                            data-target-page="monitoramento"
+                        >
                             <span>Risco alto</span>
                             <strong id="monitorRiscoAlto">—</strong>
                             <small>Prioridade de acompanhamento</small>
-                        </article>
+                        </button>
 
-                        <article class="monitor-card monitor-warning">
+                        <button
+                            class="monitor-card monitor-warning
+                                   interactive-card"
+                            type="button"
+                            data-card-filter="BAIXA_FREQUENCIA"
+                            data-target-page="monitoramento"
+                        >
                             <span>Baixa frequência</span>
-                            <strong id="monitorBaixaFrequencia">
-                                —
-                            </strong>
+                            <strong id="monitorBaixaFrequencia">—</strong>
                             <small>Abaixo de 75%</small>
-                        </article>
+                        </button>
 
-                        <article class="monitor-card monitor-purple">
+                        <button
+                            class="monitor-card monitor-purple
+                                   interactive-card"
+                            type="button"
+                            data-card-filter="DECRESCENTE"
+                            data-target-page="monitoramento"
+                        >
                             <span>Desempenho em queda</span>
                             <strong id="monitorQueda">—</strong>
                             <small>Redução da média histórica</small>
-                        </article>
+                        </button>
 
-                        <article class="monitor-card monitor-neutral">
+                        <button
+                            class="monitor-card monitor-neutral
+                                   interactive-card"
+                            type="button"
+                            data-card-filter="SEM_DADOS"
+                            data-target-page="alunos"
+                        >
                             <span>Sem dados suficientes</span>
                             <strong id="monitorSemDados">—</strong>
                             <small>Registros incompletos</small>
-                        </article>
+                        </button>
 
-                        <article class="monitor-card monitor-dark">
+                        <button
+                            class="monitor-card monitor-dark
+                                   interactive-card"
+                            type="button"
+                            data-card-filter="EVADIDO_PROVAVEL"
+                            data-target-page="monitoramento"
+                        >
                             <span>Evasão provável</span>
                             <strong id="monitorEvasao">—</strong>
                             <small>Requer verificação administrativa</small>
-                        </article>
+                        </button>
 
                     </div>
 
-                    <article class="panel">
+                    <article class="panel detail-panel">
 
                         <div class="panel-header">
+
                             <div>
                                 <h3>Casos para acompanhamento</h3>
 
@@ -1082,9 +1536,15 @@
                                     de risco.
                                 </p>
                             </div>
+
                         </div>
 
-                        <div class="table-container table-large">
+                        <div
+                            class="table-container
+                                   table-large
+                                   detail-table-container"
+                        >
+
                             <table class="data-table">
 
                                 <thead>
@@ -1092,12 +1552,15 @@
                                         <th>Aluno</th>
                                         <th>Turma</th>
                                         <th>Vínculo</th>
+
                                         <th class="numeric-column">
                                             Média
                                         </th>
+
                                         <th class="numeric-column">
                                             Frequência
                                         </th>
+
                                         <th>Tendência</th>
                                         <th>Risco</th>
                                         <th>Motivo</th>
@@ -1116,6 +1579,7 @@
                                 </tbody>
 
                             </table>
+
                         </div>
 
                     </article>
@@ -1128,7 +1592,7 @@
 
     </div>
 
-    <!-- Scripts próprios: a ordem deve ser preservada -->
+    <!-- A ordem dos scripts deve ser preservada -->
 
     <script src="js/filters.js"></script>
     <script src="js/charts.js"></script>
