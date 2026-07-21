@@ -1,12 +1,13 @@
 /* ============================================================
-   DASHBOARD DE ALUNOS — FILTROS E FUNÇÕES AUXILIARES
+   PAINEL DE GESTÃO ACADÊMICA
+   Filtros, formatação e funções auxiliares
    ============================================================ */
 
 (function () {
     "use strict";
 
     // ---------------------------------------------------------
-    // Normalização e segurança
+    // Valores e textos
     // ---------------------------------------------------------
 
     function texto(valor) {
@@ -21,7 +22,8 @@
         return texto(valor)
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "")
-            .toLowerCase()
+            .toUpperCase()
+            .replace(/[^A-Z0-9]+/g, " ")
             .replace(/\s+/g, " ")
             .trim();
     }
@@ -35,18 +37,71 @@
             .replace(/'/g, "&#039;");
     }
 
-    function numero(valor, valorPadrao = 0) {
-        if (typeof valor === "number") {
-            return Number.isFinite(valor) ? valor : valorPadrao;
+    function numero(valor, valorPadrao = null) {
+        if (
+            valor === null ||
+            valor === undefined ||
+            valor === ""
+        ) {
+            return valorPadrao;
         }
 
-        const convertido = Number(
-            texto(valor)
-                .replace(/\./g, "")
-                .replace(",", ".")
-        );
+        if (typeof valor === "number") {
+            return Number.isFinite(valor)
+                ? valor
+                : valorPadrao;
+        }
 
-        return Number.isFinite(convertido) ? convertido : valorPadrao;
+        let conteudo = texto(valor);
+
+        if (!conteudo) {
+            return valorPadrao;
+        }
+
+        /*
+         * Trata números brasileiros e números JSON.
+         *
+         * Exemplos:
+         *  "7,50"     -> 7.5
+         *  "1.234,5"  -> 1234.5
+         *  "75.2"     -> 75.2
+         */
+        if (
+            conteudo.includes(",") &&
+            conteudo.includes(".")
+        ) {
+            conteudo = conteudo
+                .replace(/\./g, "")
+                .replace(",", ".");
+        } else if (conteudo.includes(",")) {
+            conteudo = conteudo.replace(",", ".");
+        }
+
+        const convertido = Number(conteudo);
+
+        return Number.isFinite(convertido)
+            ? convertido
+            : valorPadrao;
+    }
+
+    function booleano(valor) {
+        if (typeof valor === "boolean") {
+            return valor;
+        }
+
+        if (valor === 1) {
+            return true;
+        }
+
+        const conteudo = normalizarTexto(valor);
+
+        return [
+            "TRUE",
+            "VERDADEIRO",
+            "SIM",
+            "YES",
+            "1"
+        ].includes(conteudo);
     }
 
     // ---------------------------------------------------------
@@ -54,9 +109,9 @@
     // ---------------------------------------------------------
 
     function formatarNumero(valor, casas = 1) {
-        const convertido = Number(valor);
+        const convertido = numero(valor);
 
-        if (!Number.isFinite(convertido)) {
+        if (convertido === null) {
             return "—";
         }
 
@@ -67,9 +122,9 @@
     }
 
     function formatarInteiro(valor) {
-        const convertido = Number(valor);
+        const convertido = numero(valor);
 
-        if (!Number.isFinite(convertido)) {
+        if (convertido === null) {
             return "—";
         }
 
@@ -77,9 +132,9 @@
     }
 
     function formatarPercentual(valor, casas = 1) {
-        const convertido = Number(valor);
+        const convertido = numero(valor);
 
-        if (!Number.isFinite(convertido)) {
+        if (convertido === null) {
             return "—";
         }
 
@@ -100,26 +155,82 @@
         return data.toLocaleDateString("pt-BR");
     }
 
-    // ---------------------------------------------------------
-    // Valores únicos e ordenação
-    // ---------------------------------------------------------
+    function formatarDataHora(valor) {
+        if (!valor) {
+            return "—";
+        }
 
-    function compararValores(a, b) {
-        return texto(a).localeCompare(texto(b), "pt-BR", {
-            numeric: true,
-            sensitivity: "base"
+        const data = new Date(valor);
+
+        if (Number.isNaN(data.getTime())) {
+            return texto(valor);
+        }
+
+        return data.toLocaleString("pt-BR", {
+            dateStyle: "short",
+            timeStyle: "short"
         });
     }
 
-    function valoresUnicos(dados, campo) {
-        const valores = dados
-            .map((item) => item?.[campo])
-            .filter((valor) => texto(valor) !== "");
+    function formatarVariacao(
+        valor,
+        casas = 1,
+        sufixo = ""
+    ) {
+        const convertido = numero(valor);
 
-        return [...new Set(valores)].sort(compararValores);
+        if (convertido === null) {
+            return "Sem comparação disponível";
+        }
+
+        const sinal = convertido > 0 ? "+" : "";
+
+        return (
+            `${sinal}${formatarNumero(convertido, casas)}` +
+            sufixo
+        );
     }
 
-    function preencherSelect(elemento, valores, rotuloInicial) {
+    // ---------------------------------------------------------
+    // Ordenação e valores únicos
+    // ---------------------------------------------------------
+
+    function compararValores(a, b) {
+        return texto(a).localeCompare(
+            texto(b),
+            "pt-BR",
+            {
+                numeric: true,
+                sensitivity: "base"
+            }
+        );
+    }
+
+    function valoresUnicos(dados, campo) {
+        if (!Array.isArray(dados)) {
+            return [];
+        }
+
+        const mapa = new Map();
+
+        dados.forEach((item) => {
+            const valor = item?.[campo];
+            const chave = normalizarTexto(valor);
+
+            if (chave && !mapa.has(chave)) {
+                mapa.set(chave, valor);
+            }
+        });
+
+        return [...mapa.values()].sort(compararValores);
+    }
+
+    function preencherSelect(
+        elemento,
+        valores,
+        rotuloInicial,
+        valorInicial = ""
+    ) {
         if (!elemento) {
             return;
         }
@@ -129,7 +240,7 @@
         elemento.innerHTML = "";
 
         const opcaoInicial = document.createElement("option");
-        opcaoInicial.value = "";
+        opcaoInicial.value = valorInicial;
         opcaoInicial.textContent = rotuloInicial;
         elemento.appendChild(opcaoInicial);
 
@@ -140,56 +251,99 @@
             elemento.appendChild(opcao);
         });
 
-        const valorAindaExiste = [...elemento.options].some(
+        const valorExiste = [...elemento.options].some(
             (opcao) => opcao.value === valorAtual
         );
 
-        if (valorAindaExiste) {
-            elemento.value = valorAtual;
-        }
+        elemento.value = valorExiste
+            ? valorAtual
+            : valorInicial;
     }
 
     // ---------------------------------------------------------
-    // Leitura dos filtros da página
+    // Filtros da interface
     // ---------------------------------------------------------
 
     function obterFiltrosAtuais() {
         return {
-            ano: texto(document.getElementById("filtroAno")?.value),
-            turma: texto(document.getElementById("filtroTurma")?.value),
-            disciplina: texto(
-                document.getElementById("filtroDisciplina")?.value
+            ano: texto(
+                document.getElementById("filtroAno")?.value
             ),
+
+            vinculo: texto(
+                document.getElementById("filtroVinculo")?.value
+            ),
+
+            turma: texto(
+                document.getElementById("filtroTurma")?.value
+            ),
+
+            disciplina: texto(
+                document.getElementById(
+                    "filtroDisciplina"
+                )?.value
+            ),
+
             busca: normalizarTexto(
                 document.getElementById("filtroBusca")?.value
             )
         };
     }
 
-    function possuiFiltrosAtivos(filtros = obterFiltrosAtuais()) {
+    function possuiFiltrosAtivos(
+        filtros = obterFiltrosAtuais()
+    ) {
         return Boolean(
             filtros.ano ||
             filtros.turma ||
             filtros.disciplina ||
-            filtros.busca
+            filtros.busca ||
+            (
+                filtros.vinculo &&
+                filtros.vinculo !== "ATIVOS"
+            )
         );
     }
 
     function limparFiltros() {
-        const campos = [
-            "filtroAno",
-            "filtroTurma",
-            "filtroDisciplina",
-            "filtroBusca"
-        ];
+        const filtroAno =
+            document.getElementById("filtroAno");
 
-        campos.forEach((id) => {
-            const elemento = document.getElementById(id);
+        const filtroVinculo =
+            document.getElementById("filtroVinculo");
 
-            if (elemento) {
-                elemento.value = "";
-            }
-        });
+        const filtroTurma =
+            document.getElementById("filtroTurma");
+
+        const filtroDisciplina =
+            document.getElementById("filtroDisciplina");
+
+        const filtroBusca =
+            document.getElementById("filtroBusca");
+
+        if (filtroAno) {
+            filtroAno.value = "";
+        }
+
+        /*
+         * Ativos e formandos continuam sendo a população
+         * inicial depois de limpar os filtros.
+         */
+        if (filtroVinculo) {
+            filtroVinculo.value = "ATIVOS";
+        }
+
+        if (filtroTurma) {
+            filtroTurma.value = "";
+        }
+
+        if (filtroDisciplina) {
+            filtroDisciplina.value = "";
+        }
+
+        if (filtroBusca) {
+            filtroBusca.value = "";
+        }
     }
 
     // ---------------------------------------------------------
@@ -201,7 +355,10 @@
             return true;
         }
 
-        return normalizarTexto(valor) === normalizarTexto(filtro);
+        return (
+            normalizarTexto(valor) ===
+            normalizarTexto(filtro)
+        );
     }
 
     function contemTexto(valor, busca) {
@@ -209,39 +366,157 @@
             return true;
         }
 
-        return normalizarTexto(valor).includes(normalizarTexto(busca));
+        return normalizarTexto(valor).includes(
+            normalizarTexto(busca)
+        );
     }
 
-    function contemBuscaEmCampos(item, busca, campos) {
+    function contemBuscaEmCampos(
+        item,
+        busca,
+        campos
+    ) {
         if (!busca) {
             return true;
         }
 
-        return campos.some((campo) => contemTexto(item?.[campo], busca));
+        return campos.some((campo) =>
+            contemTexto(item?.[campo], busca)
+        );
     }
 
     // ---------------------------------------------------------
-    // Filtros por tipo de base
+    // Situações de vínculo
     // ---------------------------------------------------------
 
-    function filtrarAlunos(dados, filtros) {
+    const VINCULOS_ATIVOS = new Set([
+        "ATIVO",
+        "FORMANDO"
+    ]);
+
+    const VINCULOS_INATIVOS = new Set([
+        "INATIVO",
+        "INATIVO PROVAVEL",
+        "EVADIDO PROVAVEL"
+    ]);
+
+    function normalizarVinculo(valor) {
+        return normalizarTexto(valor);
+    }
+
+    function vinculoEhAtivo(valor) {
+        return VINCULOS_ATIVOS.has(
+            normalizarVinculo(valor)
+        );
+    }
+
+    function vinculoEhInativo(valor) {
+        return VINCULOS_INATIVOS.has(
+            normalizarVinculo(valor)
+        );
+    }
+
+    function correspondeVinculo(
+        situacaoAluno,
+        filtroVinculo,
+        elegivelAtivos = false
+    ) {
+        const filtro = normalizarVinculo(
+            filtroVinculo
+        );
+
+        const situacao = normalizarVinculo(
+            situacaoAluno
+        );
+
+        if (!filtro) {
+            return true;
+        }
+
+        if (filtro === "ATIVOS") {
+            return (
+                booleano(elegivelAtivos) ||
+                vinculoEhAtivo(situacao)
+            );
+        }
+
+        if (filtro === "INATIVOS") {
+            return vinculoEhInativo(situacao);
+        }
+
+        return situacao === filtro;
+    }
+
+    function rotuloVinculo(valor) {
+        const vinculo = normalizarVinculo(valor);
+
+        const rotulos = {
+            "ATIVO": "Ativo",
+            "FORMANDO": "Formando",
+            "CONCLUINTE RECENTE": "Concluinte recente",
+            "EGRESSO": "Egresso",
+            "INATIVO": "Inativo",
+            "INATIVO PROVAVEL": "Inativo provável",
+            "EVADIDO PROVAVEL": "Evasão provável",
+            "SEM CLASSIFICACAO": "Sem classificação"
+        };
+
+        return rotulos[vinculo] || texto(valor) ||
+            "Sem classificação";
+    }
+
+    function rotuloPopulacao(valor) {
+        const filtro = normalizarVinculo(valor);
+
+        const rotulos = {
+            "": "Todos os vínculos",
+            "ATIVOS": "Ativos e formandos",
+            "ATIVO": "Somente ativos",
+            "FORMANDO": "Formandos",
+            "CONCLUINTE RECENTE": "Concluintes recentes",
+            "EGRESSO": "Egressos",
+            "INATIVOS": "Inativos e evasão provável"
+        };
+
+        return rotulos[filtro] || texto(valor);
+    }
+
+    // ---------------------------------------------------------
+    // Filtro de alunos
+    // ---------------------------------------------------------
+
+    function filtrarAlunos(
+        dados,
+        filtros,
+        idsPermitidos = null
+    ) {
+        if (!Array.isArray(dados)) {
+            return [];
+        }
+
+        const conjuntoIds = idsPermitidos
+            ? new Set(
+                [...idsPermitidos].map((id) => texto(id))
+            )
+            : null;
+
         return dados.filter((aluno) => {
-            const anoAluno =
-                aluno.ultimo_ano ??
-                aluno.ano ??
-                aluno.primeiro_ano;
+            const idAluno = texto(
+                aluno.id_aluno_final
+            );
 
-            const turmaAluno =
-                aluno.turma_atual ??
-                aluno.turma;
+            const atendeIds =
+                !conjuntoIds ||
+                conjuntoIds.has(idAluno);
 
-            const atendeAno = correspondeExatamente(
-                anoAluno,
-                filtros.ano
+            const atendeVinculo = correspondeVinculo(
+                aluno.situacao_vinculo,
+                filtros.vinculo,
+                aluno.elegivel_indicadores_ativos
             );
 
             const atendeTurma = correspondeExatamente(
-                turmaAluno,
+                aluno.turma_atual ?? aluno.turma,
                 filtros.turma
             );
 
@@ -253,21 +528,45 @@
                     "nome_aluno",
                     "id_aluno_final",
                     "turma_atual",
+                    "turma",
                     "status_atual",
+                    "situacao_vinculo",
                     "classificacao",
                     "nivel_risco"
                 ]
             );
 
-            return atendeAno && atendeTurma && atendeBusca;
+            return (
+                atendeIds &&
+                atendeVinculo &&
+                atendeTurma &&
+                atendeBusca
+            );
         });
     }
 
-    function filtrarAlunosPorAno(dados, filtros) {
+    // ---------------------------------------------------------
+    // Filtro de alunos por ano
+    // ---------------------------------------------------------
+
+    function filtrarAlunosPorAno(
+        dados,
+        filtros
+    ) {
+        if (!Array.isArray(dados)) {
+            return [];
+        }
+
         return dados.filter((registro) => {
             const atendeAno = correspondeExatamente(
                 registro.ano,
                 filtros.ano
+            );
+
+            const atendeVinculo = correspondeVinculo(
+                registro.situacao_vinculo,
+                filtros.vinculo,
+                registro.elegivel_indicadores_ativos
             );
 
             const atendeTurma = correspondeExatamente(
@@ -284,25 +583,43 @@
                     "id_aluno_final",
                     "turma",
                     "status",
+                    "situacao_vinculo",
                     "classificacao"
                 ]
             );
 
-            return atendeAno && atendeTurma && atendeBusca;
+            return (
+                atendeAno &&
+                atendeVinculo &&
+                atendeTurma &&
+                atendeBusca
+            );
         });
     }
 
-    function filtrarDisciplinas(dados, filtros) {
+    // ---------------------------------------------------------
+    // Filtro de disciplinas
+    // ---------------------------------------------------------
+
+    function filtrarDisciplinas(
+        dados,
+        filtros
+    ) {
+        if (!Array.isArray(dados)) {
+            return [];
+        }
+
         return dados.filter((disciplina) => {
             const atendeAno = correspondeExatamente(
                 disciplina.ano,
                 filtros.ano
             );
 
-            const atendeDisciplina = correspondeExatamente(
-                disciplina.disciplina,
-                filtros.disciplina
-            );
+            const atendeDisciplina =
+                correspondeExatamente(
+                    disciplina.disciplina,
+                    filtros.disciplina
+                );
 
             const atendeBusca = contemBuscaEmCampos(
                 disciplina,
@@ -310,11 +627,26 @@
                 ["disciplina"]
             );
 
-            return atendeAno && atendeDisciplina && atendeBusca;
+            return (
+                atendeAno &&
+                atendeDisciplina &&
+                atendeBusca
+            );
         });
     }
 
-    function filtrarTurmas(dados, filtros) {
+    // ---------------------------------------------------------
+    // Filtro de turmas
+    // ---------------------------------------------------------
+
+    function filtrarTurmas(
+        dados,
+        filtros
+    ) {
+        if (!Array.isArray(dados)) {
+            return [];
+        }
+
         return dados.filter((turma) => {
             const atendeAno = correspondeExatamente(
                 turma.ano,
@@ -329,29 +661,56 @@
             const atendeBusca = contemBuscaEmCampos(
                 turma,
                 filtros.busca,
-                ["turma", "serie_numero"]
+                [
+                    "turma",
+                    "serie_numero"
+                ]
             );
 
-            return atendeAno && atendeTurma && atendeBusca;
+            return (
+                atendeAno &&
+                atendeTurma &&
+                atendeBusca
+            );
         });
     }
 
-    function filtrarRanking(dados, filtros, idsPermitidos = null) {
+    // ---------------------------------------------------------
+    // Filtro do ranking
+    // ---------------------------------------------------------
+
+    function filtrarRanking(
+        dados,
+        filtros,
+        idsPermitidos = null
+    ) {
+        if (!Array.isArray(dados)) {
+            return [];
+        }
+
         const conjuntoIds = idsPermitidos
-            ? new Set(idsPermitidos.map(texto))
+            ? new Set(
+                [...idsPermitidos].map((id) => texto(id))
+            )
             : null;
 
         return dados.filter((aluno) => {
             const atendeIds =
                 !conjuntoIds ||
-                conjuntoIds.has(texto(aluno.id_aluno_final));
-
-            const atendeTurma =
-                !filtros.turma ||
-                correspondeExatamente(
-                    aluno.turma_atual ?? aluno.turma,
-                    filtros.turma
+                conjuntoIds.has(
+                    texto(aluno.id_aluno_final)
                 );
+
+            const atendeVinculo = correspondeVinculo(
+                aluno.situacao_vinculo,
+                filtros.vinculo,
+                aluno.elegivel_indicadores_ativos
+            );
+
+            const atendeTurma = correspondeExatamente(
+                aluno.turma_atual ?? aluno.turma,
+                filtros.turma
+            );
 
             const atendeBusca = contemBuscaEmCampos(
                 aluno,
@@ -361,41 +720,46 @@
                     "nome_aluno",
                     "id_aluno_final",
                     "turma_atual",
+                    "situacao_vinculo",
                     "classificacao"
                 ]
             );
 
-            return atendeIds && atendeTurma && atendeBusca;
+            return (
+                atendeIds &&
+                atendeVinculo &&
+                atendeTurma &&
+                atendeBusca
+            );
         });
     }
 
     // ---------------------------------------------------------
-    // Aparência dos indicadores
+    // Classes visuais
     // ---------------------------------------------------------
 
     function classeClassificacao(valor) {
         const classificacao = normalizarTexto(valor);
 
         if (
-            classificacao.includes("excelente") ||
-            classificacao.includes("destaque") ||
-            classificacao.includes("muito bom")
+            classificacao.includes("DESTAQUE") ||
+            classificacao.includes("EXCELENTE") ||
+            classificacao.includes("MUITO BOM")
         ) {
             return "badge-success";
         }
 
         if (
-            classificacao.includes("atencao") ||
-            classificacao.includes("regular") ||
-            classificacao.includes("moderado")
+            classificacao.includes("ATENCAO") ||
+            classificacao.includes("REGULAR") ||
+            classificacao.includes("MODERADO")
         ) {
             return "badge-warning";
         }
 
         if (
-            classificacao.includes("risco") ||
-            classificacao.includes("critico") ||
-            classificacao.includes("insuficiente")
+            classificacao.includes("CRITICO") ||
+            classificacao.includes("INSUFICIENTE")
         ) {
             return "badge-danger";
         }
@@ -407,22 +771,22 @@
         const risco = normalizarTexto(valor);
 
         if (
-            risco.includes("alto") ||
-            risco.includes("critico")
+            risco.includes("ALTO") ||
+            risco.includes("CRITICO")
         ) {
             return "badge-danger";
         }
 
         if (
-            risco.includes("medio") ||
-            risco.includes("moderado")
+            risco.includes("MEDIO") ||
+            risco.includes("MODERADO")
         ) {
             return "badge-warning";
         }
 
         if (
-            risco.includes("baixo") ||
-            risco.includes("sem risco")
+            risco.includes("BAIXO") ||
+            risco.includes("SEM RISCO")
         ) {
             return "badge-success";
         }
@@ -430,46 +794,192 @@
         return "badge-neutral";
     }
 
-    function criarBadge(valor, tipo = "classificacao") {
-        const conteudo = texto(valor) || "Sem informação";
+    function classeVinculo(valor) {
+        const vinculo = normalizarVinculo(valor);
 
-        const classe =
-            tipo === "risco"
-                ? classeRisco(conteudo)
-                : classeClassificacao(conteudo);
+        if (
+            vinculo === "ATIVO" ||
+            vinculo === "FORMANDO"
+        ) {
+            return "badge-success";
+        }
 
-        return `<span class="badge ${classe}">${escaparHTML(conteudo)}</span>`;
+        if (
+            vinculo === "CONCLUINTE RECENTE" ||
+            vinculo === "EGRESSO"
+        ) {
+            return "badge-purple";
+        }
+
+        if (
+            vinculo === "INATIVO PROVAVEL"
+        ) {
+            return "badge-warning";
+        }
+
+        if (
+            vinculo === "INATIVO" ||
+            vinculo === "EVADIDO PROVAVEL"
+        ) {
+            return "badge-danger";
+        }
+
+        return "badge-neutral";
+    }
+
+    function classeTendencia(valor) {
+        const tendencia = normalizarTexto(valor);
+
+        if (
+            tendencia.includes("CRESCENTE") ||
+            tendencia.includes("ALTA")
+        ) {
+            return "badge-success";
+        }
+
+        if (
+            tendencia.includes("DECRESCENTE") ||
+            tendencia.includes("QUEDA")
+        ) {
+            return "badge-danger";
+        }
+
+        if (tendencia.includes("ESTAVEL")) {
+            return "badge-purple";
+        }
+
+        return "badge-neutral";
     }
 
     // ---------------------------------------------------------
-    // Disponibilização para os demais scripts
+    // Criação de badges
+    // ---------------------------------------------------------
+
+    function criarBadge(
+        valor,
+        tipo = "classificacao"
+    ) {
+        let conteudo = texto(valor);
+        let classe = "badge-neutral";
+
+        if (tipo === "risco") {
+            conteudo = conteudo || "Sem risco";
+            classe = classeRisco(conteudo);
+        } else if (tipo === "vinculo") {
+            conteudo = rotuloVinculo(conteudo);
+            classe = classeVinculo(valor);
+        } else if (tipo === "tendencia") {
+            conteudo = conteudo || "Sem histórico";
+            classe = classeTendencia(conteudo);
+        } else {
+            conteudo = conteudo || "Sem informação";
+            classe = classeClassificacao(conteudo);
+        }
+
+        return `
+            <span class="badge ${classe}">
+                ${escaparHTML(conteudo)}
+            </span>
+        `;
+    }
+
+    // ---------------------------------------------------------
+    // Apoio para indicadores
+    // ---------------------------------------------------------
+
+    function media(dados, campo) {
+        if (!Array.isArray(dados)) {
+            return null;
+        }
+
+        const valores = dados
+            .map((item) => numero(item?.[campo]))
+            .filter((valor) => valor !== null);
+
+        if (!valores.length) {
+            return null;
+        }
+
+        return valores.reduce(
+            (soma, valor) => soma + valor,
+            0
+        ) / valores.length;
+    }
+
+    function soma(dados, campo) {
+        if (!Array.isArray(dados)) {
+            return 0;
+        }
+
+        return dados.reduce((total, item) => {
+            const valor = numero(item?.[campo], 0);
+            return total + valor;
+        }, 0);
+    }
+
+    function contarDistintos(dados, campo) {
+        if (!Array.isArray(dados)) {
+            return 0;
+        }
+
+        return new Set(
+            dados
+                .map((item) => texto(item?.[campo]))
+                .filter(Boolean)
+        ).size;
+    }
+
+    // ---------------------------------------------------------
+    // Disponibilização para os outros scripts
     // ---------------------------------------------------------
 
     window.DashboardFilters = {
         texto,
         numero,
+        booleano,
         normalizarTexto,
         escaparHTML,
+
         formatarNumero,
         formatarInteiro,
         formatarPercentual,
         formatarData,
+        formatarDataHora,
+        formatarVariacao,
+
         compararValores,
         valoresUnicos,
         preencherSelect,
+
         obterFiltrosAtuais,
         possuiFiltrosAtivos,
         limparFiltros,
+
         correspondeExatamente,
         contemTexto,
         contemBuscaEmCampos,
+
+        normalizarVinculo,
+        vinculoEhAtivo,
+        vinculoEhInativo,
+        correspondeVinculo,
+        rotuloVinculo,
+        rotuloPopulacao,
+
         filtrarAlunos,
         filtrarAlunosPorAno,
         filtrarDisciplinas,
         filtrarTurmas,
         filtrarRanking,
+
         classeClassificacao,
         classeRisco,
-        criarBadge
+        classeVinculo,
+        classeTendencia,
+        criarBadge,
+
+        media,
+        soma,
+        contarDistintos
     };
 })();
