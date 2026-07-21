@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Painel longitudinal de acompanhamento acadêmico">
+  <title>Painel de Gestão Acadêmica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><span>PA</span><div><strong>Painel Acadêmico</strong><small>Acompanhamento longitudinal</small></div></div>
+      <nav>
+        <button class="nav active" data-page="geral">▦ <span>Visão geral</span></button>
+        <button class="nav" data-page="alunos">♙ <span>Alunos</span></button>
+        <button class="nav" data-page="disciplinas">▤ <span>Disciplinas</span></button>
+        <button class="nav" data-page="turmas">▦ <span>Turmas atuais</span></button>
+        <button class="nav" data-page="ranking">★ <span>Destaques</span></button>
+        <button class="nav" data-page="monitoramento">△ <span>Monitoramento</span></button>
+      </nav>
+      <footer>Versão de demonstração</footer>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div><button id="menu" class="menu">☰</button><h1 id="tituloPagina">Visão geral</h1><p>Situação atual e trajetória acadêmica dos alunos</p></div>
+        <span class="updated" id="atualizacao">Carregando dados…</span>
+      </header>
+
+      <section class="filters">
+        <label>População analisada<select id="filtroVinculo"><option value="ATIVOS">Ativos e formandos</option><option value="">Todos os vínculos</option><option value="ATIVO">Somente ativos</option><option value="FORMANDO">Formandos</option><option value="CONCLUINTE_RECENTE">Concluintes recentes</option><option value="EGRESSO">Egressos</option><option value="INATIVOS">Inativos e evasão provável</option></select></label>
+        <label>Turma atual<select id="filtroTurma"><option value="">Todas as turmas</option></select></label>
+        <label>Desempenho<select id="filtroDesempenho"><option value="">Todos</option><option value="DESTAQUE">Destaque</option><option value="REGULAR">Regular</option><option value="ATENCAO">Atenção</option><option value="CRITICO">Crítico</option><option value="SEM_DADOS">Sem dados</option></select></label>
+        <label>Risco<select id="filtroRisco"><option value="">Todos</option><option value="BAIXO">Baixo</option><option value="MEDIO">Médio</option><option value="ALTO">Alto</option></select></label>
+        <label class="search">Pesquisar aluno<input id="filtroBusca" type="search" placeholder="Digite o nome…"></label>
+        <button id="limpar">Limpar</button>
+      </section>
+
+      <div id="quickBar" class="quick hidden"><span>Filtro aplicado: <strong id="quickLabel"></strong></span><button id="quickRemove">Remover ×</button></div>
+      <section id="loading" class="state"><span class="spinner"></span><h2>Carregando informações</h2></section>
+      <section id="error" class="state hidden"><h2>Não foi possível carregar os dados</h2><p></p></section>
+
+      <div id="content" class="hidden">
+        <section id="page-geral" class="page active">
+          <div class="heading"><div><small>RESUMO GERENCIAL</small><h2>Situação atual do curso</h2><p>Os alunos aparecem na turma mais recente conhecida; os anos anteriores ficam no histórico individual.</p></div><strong id="populacaoAtual">Ativos e formandos</strong></div>
+          <div class="charts two"><article class="panel"><header><h3>Evolução acadêmica</h3><p>Trajetória agregada ao longo dos anos.</p></header><div class="chart"><canvas id="chartEvolucao"></canvas></div></article><article class="panel clickable"><header><h3>Vínculos atuais</h3><p>Clique em uma categoria para detalhar.</p></header><div class="chart"><canvas id="chartVinculos"></canvas></div></article></div>
+          <div class="tables two"><article class="panel priority"><header><h3>Maior necessidade de atenção</h3><p>Dez casos prioritários.</p></header><div class="tablebox"><table><thead><tr><th>Aluno</th><th>Turma atual</th><th>Média</th><th>Freq.</th><th>Risco</th><th>Motivo</th></tr></thead><tbody id="resumoAtencao"></tbody></table></div></article><article class="panel highlight"><header><h3>Maiores destaques</h3><p>Desempenho acumulado elegível.</p></header><div class="tablebox"><table><thead><tr><th>Pos.</th><th>Aluno</th><th>Turma atual</th><th>Média histórica</th><th>Freq.</th></tr></thead><tbody id="resumoRanking"></tbody></table></div></article></div>
+          <div class="kpis"><button data-action="todos"><span>Alunos selecionados</span><strong id="kpiAlunos">—</strong></button><button><span>Média histórica</span><strong id="kpiMedia">—</strong></button><button><span>Frequência histórica</span><strong id="kpiFrequencia">—</strong></button><button data-action="atencao"><span>Necessitam atenção</span><strong id="kpiAtencao">—</strong></button><button data-action="evasao"><span>Evasão provável</span><strong id="kpiEvasao">—</strong></button><button data-action="formandos"><span>Formandos</span><strong id="kpiFormandos">—</strong></button></div>
+          <div class="charts two"><article class="panel clickable"><header><h3>Desempenho acumulado</h3><p>Clique em uma faixa para detalhar.</p></header><div class="chart"><canvas id="chartDesempenho"></canvas></div></article><article class="panel"><header><h3>Disciplinas que exigem atenção</h3><p>Menores médias no período mais recente.</p></header><div class="chart"><canvas id="chartDisciplinas"></canvas></div></article></div>
+        </section>
+
+        <section id="page-alunos" class="page"><article class="panel"><header><h2>Alunos — situação atual</h2><p>Clique em um nome para abrir a trajetória completa.</p></header><div class="tablebox large"><table><thead><tr><th>Aluno</th><th>Turma atual</th><th>Série</th><th>Último ano</th><th>Vínculo</th><th>Média histórica</th><th>Frequência</th><th>Desempenho</th><th>Risco</th></tr></thead><tbody id="tabelaAlunos"></tbody></table></div></article></section>
+        <section id="page-disciplinas" class="page"><article class="panel"><header><h2>Disciplinas — período mais recente</h2></header><div class="tablebox large"><table><thead><tr><th>Disciplina</th><th>Ano</th><th>Alunos</th><th>Média</th><th>Frequência</th><th>Notas abaixo de 6</th></tr></thead><tbody id="tabelaDisciplinas"></tbody></table></div></article></section>
+        <section id="page-turmas" class="page"><article class="panel"><header><h2>Turmas atuais</h2></header><div class="chart short"><canvas id="chartTurmas"></canvas></div><div class="tablebox large"><table><thead><tr><th>Turma</th><th>Ano</th><th>Série</th><th>Alunos</th><th>Média</th><th>Frequência</th><th>Disciplinas</th></tr></thead><tbody id="tabelaTurmas"></tbody></table></div></article></section>
+        <section id="page-ranking" class="page"><article class="panel"><header><h2>Destaques acumulados</h2><p>Ranking baseado no histórico completo, com critérios mínimos de elegibilidade.</p></header><div class="tablebox large"><table><thead><tr><th>Pos.</th><th>Aluno</th><th>Turma atual</th><th>Média histórica</th><th>Frequência</th><th>Índice</th><th>Classificação</th></tr></thead><tbody id="tabelaRanking"></tbody></table></div></article></section>
+        <section id="page-monitoramento" class="page"><article class="panel"><header><h2>Monitoramento atual</h2></header><div class="tablebox large"><table><thead><tr><th>Aluno</th><th>Turma atual</th><th>Vínculo</th><th>Média</th><th>Frequência</th><th>Tendência</th><th>Risco</th><th>Motivo</th></tr></thead><tbody id="tabelaMonitoramento"></tbody></table></div></article></section>
+      </div>
+    </main>
+  </div>
+
+  <div id="studentModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="studentName"><div class="modal-card"><button id="closeStudent" class="close" aria-label="Fechar">×</button><header class="student-head"><small>HISTÓRICO INDIVIDUAL</small><h2 id="studentName"></h2><p id="studentCurrent"></p></header><div class="student-kpis" id="studentKpis"></div><div class="chart student-chart"><canvas id="chartAluno"></canvas></div><h3>Resumo por ano</h3><div class="tablebox"><table><thead><tr><th>Ano</th><th>Turma</th><th>Série</th><th>Média</th><th>Frequência</th><th>Notas</th><th>Classificação</th></tr></thead><tbody id="studentYears"></tbody></table></div><h3>Histórico por disciplina</h3><div class="tablebox history"><table><thead><tr><th>Ano</th><th>Bim.</th><th>Disciplina</th><th>Turma</th><th>Nota</th><th>Frequência</th><th>Faltas</th></tr></thead><tbody id="studentHistory"></tbody></table></div></div></div>
+
+  <script src="js/filters.js" defer></script>
+  <script src="js/charts.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>
