@@ -1,0 +1,54 @@
+[
+  {
+    "indicador":"Ano de referência",
+    "valor":2026
+  },
+  {
+    "indicador":"População padrão",
+    "valor":"ATIVOS E FORMANDOS"
+  },
+  {
+    "indicador":"Registros acadêmicos históricos",
+    "valor":19016
+  },
+  {
+    "indicador":"Alunos distintos históricos",
+    "valor":482
+  },
+  {
+    "indicador":"Alunos ativos e formandos",
+    "valor":140
+  },
+  {
+    "indicador":"Egressos",
+    "valor":96
+  },
+  {
+    "indicador":"Concluintes recentes",
+    "valor":36
+  },
+  {
+    "indicador":"Inativos ou evasão provável",
+    "valor":210
+  },
+  {
+    "indicador":"Média geral — população ativa",
+    "valor":6.8
+  },
+  {
+    "indicador":"Frequência média — população ativa",
+    "valor":79.77
+  },
+  {
+    "indicador":"Alunos ativos em destaque",
+    "valor":19
+  },
+  {
+    "indicador":"Alunos ativos em atenção ou críticos",
+    "valor":58
+  },
+  {
+    "indicador":"Alunos ativos com risco alto",
+    "valor":32
+  }
+]
