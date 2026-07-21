@@ -1,0 +1,30 @@
+[
+  {
+    "situacao_vinculo":"ATIVO",
+    "alunos_distintos":140,
+    "media_historica":6.92,
+    "frequencia_media":80.85,
+    "total_faltas_horas":99403386.0
+  },
+  {
+    "situacao_vinculo":"EVADIDO_PROVÁVEL",
+    "alunos_distintos":112,
+    "media_historica":0.57,
+    "frequencia_media":12.34,
+    "total_faltas_horas":67760.0
+  },
+  {
+    "situacao_vinculo":"INATIVO",
+    "alunos_distintos":39,
+    "media_historica":3.05,
+    "frequencia_media":46.65,
+    "total_faltas_horas":5595.0
+  },
+  {
+    "situacao_vinculo":"INATIVO_PROVÁVEL",
+    "alunos_distintos":191,
+    "media_historica":6.47,
+    "frequencia_media":78.04,
+    "total_faltas_horas":28172838.0
+  }
+]
