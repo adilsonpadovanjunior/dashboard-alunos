@@ -1,6 +1,6 @@
 /* ============================================================
-   DASHBOARD DE ALUNOS — GRÁFICOS
-   Requer Chart.js carregado no index.html
+   PAINEL DE GESTÃO ACADÊMICA
+   Gráficos gerenciais com Chart.js
    ============================================================ */
 
 (function () {
@@ -8,35 +8,54 @@
 
     const graficos = {};
 
+    // ---------------------------------------------------------
+    // Paleta visual
+    // ---------------------------------------------------------
+
     const CORES = {
-        azul: "#2563eb",
-        azulClaro: "rgba(37, 99, 235, 0.16)",
-        verde: "#16a34a",
-        verdeClaro: "rgba(22, 163, 74, 0.16)",
-        amarelo: "#d97706",
-        vermelho: "#dc2626",
-        roxo: "#7c3aed",
-        ciano: "#0891b2",
-        cinza: "#64748b",
-        grade: "rgba(148, 163, 184, 0.20)",
-        texto: "#475569"
+        roxoEscuro: "#302e42",
+        roxo: "#585570",
+        roxoMedio: "#817d9c",
+        roxoClaro: "#d8d5e5",
+        roxoFundo: "rgba(88, 85, 112, 0.12)",
+
+        verdeEscuro: "#155631",
+        verde: "#23844c",
+        verdeMedio: "#2c9b5c",
+        verdeClaro: "#bfe3cd",
+        verdeFundo: "rgba(35, 132, 76, 0.12)",
+
+        amarelo: "#b7790d",
+        amareloClaro: "#f1d789",
+
+        vermelho: "#c13d3d",
+        vermelhoClaro: "#edb8b8",
+
+        azul: "#32658a",
+        cinza: "#858592",
+        cinzaClaro: "#ccccd3",
+
+        texto: "#4f4f5c",
+        textoEscuro: "#25252d",
+        grade: "rgba(105, 105, 119, 0.15)",
+        branco: "#ffffff"
     };
 
-    const PALETA = [
-        "#2563eb",
-        "#16a34a",
-        "#d97706",
-        "#7c3aed",
-        "#0891b2",
-        "#dc2626",
-        "#4f46e5",
-        "#059669",
-        "#ea580c",
-        "#9333ea"
+    const PALETA_DISCIPLINAS = [
+        "#585570",
+        "#696580",
+        "#77728e",
+        "#23844c",
+        "#2c9b5c",
+        "#4ba873",
+        "#b7790d",
+        "#c99129",
+        "#32658a",
+        "#4c7896"
     ];
 
     // ---------------------------------------------------------
-    // Configuração geral
+    // Utilidades
     // ---------------------------------------------------------
 
     function chartDisponivel() {
@@ -47,6 +66,29 @@
         return document.getElementById(id);
     }
 
+    function numero(valor, valorPadrao = 0) {
+        const convertido = Number(valor);
+
+        return Number.isFinite(convertido)
+            ? convertido
+            : valorPadrao;
+    }
+
+    function formatarNumero(valor, casas = 1) {
+        return numero(valor).toLocaleString("pt-BR", {
+            minimumFractionDigits: casas,
+            maximumFractionDigits: casas
+        });
+    }
+
+    function normalizarTexto(valor) {
+        return String(valor ?? "")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toUpperCase()
+            .trim();
+    }
+
     function destruirGrafico(id) {
         if (graficos[id]) {
             graficos[id].destroy();
@@ -55,7 +97,9 @@
     }
 
     function destruirTodos() {
-        Object.keys(graficos).forEach(destruirGrafico);
+        Object.keys(graficos).forEach(
+            destruirGrafico
+        );
     }
 
     function prepararGrafico(id) {
@@ -70,98 +114,149 @@
         return canvas.getContext("2d");
     }
 
-    function numero(valor, valorPadrao = 0) {
-        const convertido = Number(valor);
-        return Number.isFinite(convertido) ? convertido : valorPadrao;
-    }
-
-    function formatarNumero(valor, casas = 1) {
-        return numero(valor).toLocaleString("pt-BR", {
-            minimumFractionDigits: casas,
-            maximumFractionDigits: casas
-        });
-    }
-
-    function ordenarTexto(a, b) {
-        return String(a ?? "").localeCompare(
-            String(b ?? ""),
-            "pt-BR",
-            {
-                numeric: true,
-                sensitivity: "base"
-            }
+    function ordenarPorAno(dados) {
+        return [...dados].sort(
+            (a, b) => numero(a.ano) - numero(b.ano)
         );
     }
 
-    function opcoesComuns() {
+    function limitarRotulo(valor, limite = 34) {
+        const conteudo = String(valor ?? "");
+
+        if (conteudo.length <= limite) {
+            return conteudo;
+        }
+
+        return `${conteudo.slice(0, limite - 1)}…`;
+    }
+
+    function configuracaoFonte() {
+        return {
+            family: "Inter",
+            size: 11
+        };
+    }
+
+    // ---------------------------------------------------------
+    // Opções compartilhadas
+    // ---------------------------------------------------------
+
+    function pluginsComuns() {
+        return {
+            legend: {
+                position: "bottom",
+
+                labels: {
+                    color: CORES.texto,
+                    usePointStyle: true,
+                    pointStyle: "circle",
+                    boxWidth: 8,
+                    boxHeight: 8,
+                    padding: 17,
+                    font: configuracaoFonte()
+                }
+            },
+
+            tooltip: {
+                backgroundColor: CORES.roxoEscuro,
+                titleColor: CORES.branco,
+                bodyColor: "#eeeeF2",
+                borderColor: "rgba(255, 255, 255, 0.12)",
+                borderWidth: 1,
+                padding: 12,
+                cornerRadius: 8,
+                displayColors: true,
+                titleFont: {
+                    family: "Inter",
+                    size: 12,
+                    weight: "600"
+                },
+                bodyFont: {
+                    family: "Inter",
+                    size: 11
+                }
+            }
+        };
+    }
+
+    function opcoesCartesianas() {
         return {
             responsive: true,
             maintainAspectRatio: false,
+
             interaction: {
                 mode: "index",
                 intersect: false
             },
-            plugins: {
-                legend: {
-                    position: "bottom",
-                    labels: {
-                        color: CORES.texto,
-                        usePointStyle: true,
-                        pointStyle: "circle",
-                        padding: 18,
-                        font: {
-                            family: "Inter",
-                            size: 12
-                        }
-                    }
-                },
-                tooltip: {
-                    backgroundColor: "#0f172a",
-                    titleColor: "#ffffff",
-                    bodyColor: "#e2e8f0",
-                    padding: 12,
-                    cornerRadius: 8,
-                    displayColors: true
-                }
+
+            animation: {
+                duration: 450
             },
+
+            plugins: pluginsComuns(),
+
             scales: {
                 x: {
                     grid: {
                         display: false
                     },
-                    ticks: {
-                        color: CORES.texto,
-                        font: {
-                            family: "Inter"
-                        }
-                    }
-                },
-                y: {
-                    beginAtZero: true,
-                    grid: {
+
+                    border: {
                         color: CORES.grade
                     },
+
                     ticks: {
                         color: CORES.texto,
-                        font: {
-                            family: "Inter"
-                        }
+                        font: configuracaoFonte()
+                    }
+                },
+
+                y: {
+                    beginAtZero: true,
+
+                    grid: {
+                        color: CORES.grade,
+                        drawTicks: false
+                    },
+
+                    border: {
+                        display: false
+                    },
+
+                    ticks: {
+                        color: CORES.texto,
+                        padding: 8,
+                        font: configuracaoFonte()
                     }
                 }
             }
         };
     }
 
-    function mensagemSemChart() {
+    function opcoesCirculares() {
+        return {
+            responsive: true,
+            maintainAspectRatio: false,
+
+            animation: {
+                duration: 450
+            },
+
+            plugins: pluginsComuns()
+        };
+    }
+
+    function registrarErroChart() {
         if (!chartDisponivel()) {
             console.error(
-                "Chart.js não foi carregado. Confira o link CDN no index.html."
+                "Chart.js não foi carregado. " +
+                "Confira o endereço CDN no index.html."
             );
         }
     }
 
     // ---------------------------------------------------------
-    // Evolução anual
+    // Evolução acadêmica
     // ---------------------------------------------------------
 
     function renderizarEvolucao(dados = []) {
@@ -169,37 +264,52 @@
         const contexto = prepararGrafico(id);
 
         if (!contexto) {
-            mensagemSemChart();
+            registrarErroChart();
             return;
         }
 
-        const registros = [...dados].sort(
-            (a, b) => numero(a.ano) - numero(b.ano)
+        const registros = ordenarPorAno(dados);
+
+        const labels = registros.map(
+            (item) => item.ano
         );
 
-        const labels = registros.map((item) => item.ano);
-        const medias = registros.map((item) =>
-            numero(item.media_geral)
-        );
-        const frequencias = registros.map((item) =>
-            numero(item.frequencia_media)
+        const medias = registros.map(
+            (item) => numero(item.media_geral)
         );
 
-        const opcoes = opcoesComuns();
+        const frequencias = registros.map(
+            (item) => numero(item.frequencia_media)
+        );
+
+        const opcoes = opcoesCartesianas();
 
         opcoes.scales.y = {
             beginAtZero: true,
             suggestedMax: 10,
+            max: 10,
+
             grid: {
-                color: CORES.grade
+                color: CORES.grade,
+                drawTicks: false
             },
+
+            border: {
+                display: false
+            },
+
             ticks: {
-                color: CORES.texto
+                color: CORES.texto,
+                padding: 8,
+                stepSize: 2,
+                font: configuracaoFonte()
             },
+
             title: {
                 display: true,
-                text: "Média das notas",
-                color: CORES.texto
+                text: "Média",
+                color: CORES.texto,
+                font: configuracaoFonte()
             }
         };
 
@@ -207,56 +317,273 @@
             position: "right",
             beginAtZero: true,
             suggestedMax: 100,
+            max: 100,
+
             grid: {
                 drawOnChartArea: false
             },
+
+            border: {
+                display: false
+            },
+
             ticks: {
                 color: CORES.texto,
-                callback: (valor) => `${valor}%`
+                padding: 8,
+                callback: (valor) => `${valor}%`,
+                font: configuracaoFonte()
             },
+
             title: {
                 display: true,
                 text: "Frequência",
-                color: CORES.texto
+                color: CORES.texto,
+                font: configuracaoFonte()
+            }
+        };
+
+        opcoes.plugins.tooltip.callbacks = {
+            label(context) {
+                if (context.dataset.yAxisID === "yFrequencia") {
+                    return (
+                        ` ${context.dataset.label}: ` +
+                        `${formatarNumero(context.raw, 1)}%`
+                    );
+                }
+
+                return (
+                    ` ${context.dataset.label}: ` +
+                    formatarNumero(context.raw, 2)
+                );
             }
         };
 
         graficos[id] = new Chart(contexto, {
             type: "line",
+
             data: {
                 labels,
+
                 datasets: [
                     {
                         label: "Média geral",
                         data: medias,
-                        borderColor: CORES.azul,
-                        backgroundColor: CORES.azulClaro,
-                        fill: true,
-                        tension: 0.35,
+                        yAxisID: "y",
+
+                        borderColor: CORES.roxo,
+                        backgroundColor: CORES.roxoFundo,
+
+                        borderWidth: 2.5,
                         pointRadius: 4,
                         pointHoverRadius: 6,
-                        borderWidth: 3,
-                        yAxisID: "y"
+                        pointBackgroundColor: CORES.branco,
+                        pointBorderColor: CORES.roxo,
+                        pointBorderWidth: 2,
+
+                        tension: 0.32,
+                        fill: true
                     },
+
                     {
                         label: "Frequência média",
                         data: frequencias,
+                        yAxisID: "yFrequencia",
+
                         borderColor: CORES.verde,
-                        backgroundColor: CORES.verdeClaro,
-                        tension: 0.35,
+                        backgroundColor: CORES.verdeFundo,
+
+                        borderWidth: 2.5,
                         pointRadius: 4,
                         pointHoverRadius: 6,
-                        borderWidth: 3,
-                        yAxisID: "yFrequencia"
+                        pointBackgroundColor: CORES.branco,
+                        pointBorderColor: CORES.verde,
+                        pointBorderWidth: 2,
+
+                        tension: 0.32,
+                        fill: false
                     }
                 ]
             },
+
             options: opcoes
         });
     }
 
     // ---------------------------------------------------------
-    // Distribuição de desempenho dos alunos
+    // Situação dos vínculos
+    // ---------------------------------------------------------
+
+    function renderizarVinculos(
+        alunos = [],
+        indicadoresVinculo = []
+    ) {
+        const id = "chartVinculos";
+        const contexto = prepararGrafico(id);
+
+        if (!contexto) {
+            registrarErroChart();
+            return;
+        }
+
+        const contagem = {
+            "Ativos": 0,
+            "Formandos": 0,
+            "Concluintes recentes": 0,
+            "Egressos": 0,
+            "Inativos": 0,
+            "Evasão provável": 0,
+            "Sem classificação": 0
+        };
+
+        /*
+         * Prioriza o arquivo indicadores_por_vinculo.json.
+         * Se ele não estiver disponível, calcula com alunos.json.
+         */
+        if (
+            Array.isArray(indicadoresVinculo) &&
+            indicadoresVinculo.length
+        ) {
+            indicadoresVinculo.forEach((item) => {
+                const vinculo = normalizarTexto(
+                    item.situacao_vinculo
+                );
+
+                const quantidade = numero(
+                    item.alunos_distintos
+                );
+
+                adicionarVinculo(
+                    contagem,
+                    vinculo,
+                    quantidade
+                );
+            });
+        } else {
+            alunos.forEach((aluno) => {
+                const vinculo = normalizarTexto(
+                    aluno.situacao_vinculo
+                );
+
+                adicionarVinculo(
+                    contagem,
+                    vinculo,
+                    1
+                );
+            });
+        }
+
+        const entradas = Object.entries(contagem)
+            .filter(([, quantidade]) => quantidade > 0);
+
+        const labels = entradas.map(
+            ([rotulo]) => rotulo
+        );
+
+        const valores = entradas.map(
+            ([, quantidade]) => quantidade
+        );
+
+        const mapaCores = {
+            "Ativos": CORES.verde,
+            "Formandos": CORES.verdeMedio,
+            "Concluintes recentes": CORES.roxoMedio,
+            "Egressos": CORES.roxo,
+            "Inativos": CORES.amarelo,
+            "Evasão provável": CORES.vermelho,
+            "Sem classificação": CORES.cinza
+        };
+
+        const opcoes = opcoesCirculares();
+
+        opcoes.cutout = "62%";
+
+        opcoes.plugins.tooltip.callbacks = {
+            label(context) {
+                const total = context.dataset.data.reduce(
+                    (soma, valor) => soma + valor,
+                    0
+                );
+
+                const quantidade = numero(context.raw);
+
+                const percentual = total
+                    ? (quantidade / total) * 100
+                    : 0;
+
+                return (
+                    ` ${context.label}: ${quantidade} ` +
+                    `(${formatarNumero(percentual, 1)}%)`
+                );
+            }
+        };
+
+        graficos[id] = new Chart(contexto, {
+            type: "doughnut",
+
+            data: {
+                labels,
+
+                datasets: [{
+                    data: valores,
+
+                    backgroundColor: labels.map(
+                        (rotulo) =>
+                            mapaCores[rotulo] || CORES.cinza
+                    ),
+
+                    borderColor: CORES.branco,
+                    borderWidth: 3,
+                    hoverOffset: 7
+                }]
+            },
+
+            options: opcoes
+        });
+    }
+
+    function adicionarVinculo(
+        contagem,
+        vinculo,
+        quantidade
+    ) {
+        if (vinculo === "ATIVO") {
+            contagem["Ativos"] += quantidade;
+            return;
+        }
+
+        if (vinculo === "FORMANDO") {
+            contagem["Formandos"] += quantidade;
+            return;
+        }
+
+        if (vinculo === "CONCLUINTE_RECENTE") {
+            contagem["Concluintes recentes"] += quantidade;
+            return;
+        }
+
+        if (vinculo === "EGRESSO") {
+            contagem["Egressos"] += quantidade;
+            return;
+        }
+
+        if (
+            vinculo === "INATIVO" ||
+            vinculo === "INATIVO_PROVAVEL"
+        ) {
+            contagem["Inativos"] += quantidade;
+            return;
+        }
+
+        if (vinculo === "EVADIDO_PROVAVEL") {
+            contagem["Evasão provável"] += quantidade;
+            return;
+        }
+
+        contagem["Sem classificação"] += quantidade;
+    }
+
+    // ---------------------------------------------------------
+    // Distribuição de desempenho
     // ---------------------------------------------------------
 
     function renderizarDesempenho(alunos = []) {
@@ -264,217 +591,117 @@
         const contexto = prepararGrafico(id);
 
         if (!contexto) {
-            mensagemSemChart();
+            registrarErroChart();
             return;
         }
 
         const faixas = {
-            "Excelente": 0,
-            "Bom": 0,
+            "Destaque": 0,
             "Regular": 0,
-            "Insuficiente": 0,
+            "Atenção": 0,
+            "Crítico": 0,
             "Sem dados": 0
         };
 
         alunos.forEach((aluno) => {
-            const media = Number(aluno.media_historica);
+            const classificacao = normalizarTexto(
+                aluno.classificacao
+            );
 
-            if (!Number.isFinite(media)) {
-                faixas["Sem dados"] += 1;
-            } else if (media >= 8) {
-                faixas["Excelente"] += 1;
-            } else if (media >= 7) {
-                faixas["Bom"] += 1;
-            } else if (media >= 6) {
+            if (
+                classificacao.includes("DESTAQUE") ||
+                classificacao.includes("EXCELENTE")
+            ) {
+                faixas["Destaque"] += 1;
+            } else if (
+                classificacao.includes("CRITICO") ||
+                classificacao.includes("INSUFICIENTE")
+            ) {
+                faixas["Crítico"] += 1;
+            } else if (
+                classificacao.includes("ATENCAO")
+            ) {
+                faixas["Atenção"] += 1;
+            } else if (
+                classificacao.includes("REGULAR")
+            ) {
                 faixas["Regular"] += 1;
             } else {
-                faixas["Insuficiente"] += 1;
+                /*
+                 * Compatibilidade com arquivos antigos que
+                 * ainda não possuam a classificação.
+                 */
+                const media =
+                    Number(aluno.media_ano_referencia) ||
+                    Number(aluno.media_historica);
+
+                if (!Number.isFinite(media)) {
+                    faixas["Sem dados"] += 1;
+                } else if (media >= 8.5) {
+                    faixas["Destaque"] += 1;
+                } else if (media >= 7) {
+                    faixas["Regular"] += 1;
+                } else if (media >= 6) {
+                    faixas["Atenção"] += 1;
+                } else {
+                    faixas["Crítico"] += 1;
+                }
             }
         });
 
+        const opcoes = opcoesCirculares();
+
+        opcoes.cutout = "60%";
+
+        opcoes.plugins.tooltip.callbacks = {
+            label(context) {
+                const total = context.dataset.data.reduce(
+                    (soma, valor) => soma + valor,
+                    0
+                );
+
+                const quantidade = numero(context.raw);
+
+                const percentual = total
+                    ? (quantidade / total) * 100
+                    : 0;
+
+                return (
+                    ` ${context.label}: ${quantidade} ` +
+                    `(${formatarNumero(percentual, 1)}%)`
+                );
+            }
+        };
+
         graficos[id] = new Chart(contexto, {
             type: "doughnut",
+
             data: {
                 labels: Object.keys(faixas),
+
                 datasets: [{
                     data: Object.values(faixas),
+
                     backgroundColor: [
                         CORES.verde,
-                        CORES.azul,
+                        CORES.roxo,
                         CORES.amarelo,
                         CORES.vermelho,
                         CORES.cinza
                     ],
-                    borderColor: "#ffffff",
+
+                    borderColor: CORES.branco,
                     borderWidth: 3,
-                    hoverOffset: 8
+                    hoverOffset: 7
                 }]
             },
-            options: {
-                ...opcoesComuns(),
-                cutout: "62%",
-                scales: {},
-                plugins: {
-                    ...opcoesComuns().plugins,
-                    tooltip: {
-                        ...opcoesComuns().plugins.tooltip,
-                        callbacks: {
-                            label: function (context) {
-                                const total = context.dataset.data.reduce(
-                                    (soma, valor) => soma + valor,
-                                    0
-                                );
 
-                                const quantidade = context.raw;
-                                const percentual = total
-                                    ? (quantidade / total) * 100
-                                    : 0;
-
-                                return (
-                                    ` ${context.label}: ${quantidade} ` +
-                                    `(${formatarNumero(percentual, 1)}%)`
-                                );
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    }
-
-    // ---------------------------------------------------------
-    // Comparativo entre turmas
-    // ---------------------------------------------------------
-
-    function renderizarTurmas(dados = []) {
-        const id = "chartTurmas";
-        const contexto = prepararGrafico(id);
-
-        if (!contexto) {
-            mensagemSemChart();
-            return;
-        }
-
-        const registros = [...dados]
-            .sort((a, b) =>
-                numero(b.media_notas) - numero(a.media_notas)
-            )
-            .slice(0, 12);
-
-        const labels = registros.map((item) => {
-            const ano = item.ano ? ` — ${item.ano}` : "";
-            return `${item.turma ?? "Sem turma"}${ano}`;
-        });
-
-        const medias = registros.map((item) =>
-            numero(item.media_notas)
-        );
-
-        const opcoes = opcoesComuns();
-
-        opcoes.indexAxis = "y";
-        opcoes.scales.x = {
-            beginAtZero: true,
-            suggestedMax: 10,
-            grid: {
-                color: CORES.grade
-            },
-            ticks: {
-                color: CORES.texto
-            }
-        };
-
-        opcoes.scales.y = {
-            grid: {
-                display: false
-            },
-            ticks: {
-                color: CORES.texto
-            }
-        };
-
-        graficos[id] = new Chart(contexto, {
-            type: "bar",
-            data: {
-                labels,
-                datasets: [{
-                    label: "Média da turma",
-                    data: medias,
-                    backgroundColor: CORES.azul,
-                    borderRadius: 6,
-                    borderSkipped: false
-                }]
-            },
             options: opcoes
         });
     }
 
     // ---------------------------------------------------------
-    // Níveis de risco
-    // ---------------------------------------------------------
-
-    function renderizarRisco(alunos = []) {
-        const id = "chartRisco";
-        const contexto = prepararGrafico(id);
-
-        if (!contexto) {
-            mensagemSemChart();
-            return;
-        }
-
-        const niveis = {
-            "Baixo": 0,
-            "Médio": 0,
-            "Alto": 0,
-            "Sem classificação": 0
-        };
-
-        alunos.forEach((aluno) => {
-            const risco = String(
-                aluno.nivel_risco ?? ""
-            ).toLowerCase();
-
-            if (risco.includes("alto") || risco.includes("crítico")) {
-                niveis["Alto"] += 1;
-            } else if (
-                risco.includes("médio") ||
-                risco.includes("medio") ||
-                risco.includes("moderado")
-            ) {
-                niveis["Médio"] += 1;
-            } else if (
-                risco.includes("baixo") ||
-                risco.includes("sem risco")
-            ) {
-                niveis["Baixo"] += 1;
-            } else {
-                niveis["Sem classificação"] += 1;
-            }
-        });
-
-        graficos[id] = new Chart(contexto, {
-            type: "bar",
-            data: {
-                labels: Object.keys(niveis),
-                datasets: [{
-                    label: "Quantidade de alunos",
-                    data: Object.values(niveis),
-                    backgroundColor: [
-                        CORES.verde,
-                        CORES.amarelo,
-                        CORES.vermelho,
-                        CORES.cinza
-                    ],
-                    borderRadius: 7,
-                    borderSkipped: false
-                }]
-            },
-            options: opcoesComuns()
-        });
-    }
-
-    // ---------------------------------------------------------
-    // Disciplinas com menor média
+    // Disciplinas que exigem atenção
     // ---------------------------------------------------------
 
     function renderizarDisciplinas(dados = []) {
@@ -482,7 +709,7 @@
         const contexto = prepararGrafico(id);
 
         if (!contexto) {
-            mensagemSemChart();
+            registrarErroChart();
             return;
         }
 
@@ -494,14 +721,15 @@
                 "Sem disciplina";
 
             const media = Number(item.media_notas);
-            const quantidade = Math.max(
-                numero(item.quantidade_notas, 1),
-                1
-            );
 
             if (!Number.isFinite(media)) {
                 return;
             }
+
+            const quantidade = Math.max(
+                numero(item.quantidade_notas, 1),
+                1
+            );
 
             if (!agrupadas[disciplina]) {
                 agrupadas[disciplina] = {
@@ -513,30 +741,47 @@
             agrupadas[disciplina].somaPonderada +=
                 media * quantidade;
 
-            agrupadas[disciplina].quantidade += quantidade;
+            agrupadas[disciplina].quantidade +=
+                quantidade;
         });
 
         const registros = Object.entries(agrupadas)
             .map(([disciplina, valores]) => ({
                 disciplina,
+
                 media:
                     valores.somaPonderada /
                     valores.quantidade
             }))
+            .filter((item) =>
+                Number.isFinite(item.media)
+            )
             .sort((a, b) => a.media - b.media)
             .slice(0, 10);
 
-        const opcoes = opcoesComuns();
+        const opcoes = opcoesCartesianas();
 
         opcoes.indexAxis = "y";
+
         opcoes.scales.x = {
             beginAtZero: true,
             suggestedMax: 10,
+            max: 10,
+
             grid: {
-                color: CORES.grade
+                color: CORES.grade,
+                drawTicks: false
             },
+
+            border: {
+                display: false
+            },
+
             ticks: {
-                color: CORES.texto
+                color: CORES.texto,
+                padding: 8,
+                stepSize: 2,
+                font: configuracaoFonte()
             }
         };
 
@@ -544,33 +789,246 @@
             grid: {
                 display: false
             },
+
+            border: {
+                display: false
+            },
+
             ticks: {
-                color: CORES.texto
+                color: CORES.texto,
+                font: configuracaoFonte(),
+
+                callback(valor) {
+                    const rotulo =
+                        this.getLabelForValue(valor);
+
+                    return limitarRotulo(rotulo, 31);
+                }
+            }
+        };
+
+        opcoes.plugins.legend.display = false;
+
+        opcoes.plugins.tooltip.callbacks = {
+            label(context) {
+                return (
+                    ` Média: ` +
+                    formatarNumero(context.raw, 2)
+                );
             }
         };
 
         graficos[id] = new Chart(contexto, {
             type: "bar",
+
             data: {
                 labels: registros.map(
                     (item) => item.disciplina
                 ),
+
                 datasets: [{
                     label: "Média da disciplina",
-                    data: registros.map((item) => item.media),
-                    backgroundColor: registros.map(
-                        (_, indice) => PALETA[indice % PALETA.length]
+
+                    data: registros.map(
+                        (item) => item.media
                     ),
-                    borderRadius: 6,
-                    borderSkipped: false
+
+                    backgroundColor: registros.map(
+                        (item, indice) => {
+                            if (item.media < 6) {
+                                return CORES.vermelho;
+                            }
+
+                            if (item.media < 7) {
+                                return CORES.amarelo;
+                            }
+
+                            return PALETA_DISCIPLINAS[
+                                indice %
+                                PALETA_DISCIPLINAS.length
+                            ];
+                        }
+                    ),
+
+                    borderRadius: 5,
+                    borderSkipped: false,
+                    barThickness: 18
                 }]
             },
+
             options: opcoes
         });
     }
 
     // ---------------------------------------------------------
-    // Atualização conjunta
+    // Comparação entre turmas
+    // ---------------------------------------------------------
+
+    function renderizarTurmas(dados = []) {
+        const id = "chartTurmas";
+        const contexto = prepararGrafico(id);
+
+        if (!contexto) {
+            registrarErroChart();
+            return;
+        }
+
+        const registros = [...dados]
+            .filter((item) =>
+                Number.isFinite(
+                    Number(item.media_notas)
+                )
+            )
+            .sort(
+                (a, b) =>
+                    numero(b.media_notas) -
+                    numero(a.media_notas)
+            )
+            .slice(0, 15);
+
+        const labels = registros.map((item) => {
+            const turma =
+                item.turma || "Sem turma";
+
+            const ano = item.ano
+                ? ` — ${item.ano}`
+                : "";
+
+            return `${turma}${ano}`;
+        });
+
+        const medias = registros.map(
+            (item) => numero(item.media_notas)
+        );
+
+        const frequencias = registros.map(
+            (item) => numero(item.frequencia_media)
+        );
+
+        const opcoes = opcoesCartesianas();
+
+        opcoes.scales.y = {
+            beginAtZero: true,
+            suggestedMax: 10,
+            max: 10,
+
+            grid: {
+                color: CORES.grade,
+                drawTicks: false
+            },
+
+            border: {
+                display: false
+            },
+
+            ticks: {
+                color: CORES.texto,
+                padding: 8,
+                stepSize: 2,
+                font: configuracaoFonte()
+            },
+
+            title: {
+                display: true,
+                text: "Média",
+                color: CORES.texto,
+                font: configuracaoFonte()
+            }
+        };
+
+        opcoes.scales.yFrequencia = {
+            position: "right",
+            beginAtZero: true,
+            max: 100,
+
+            grid: {
+                drawOnChartArea: false
+            },
+
+            border: {
+                display: false
+            },
+
+            ticks: {
+                color: CORES.texto,
+                padding: 8,
+                callback: (valor) => `${valor}%`,
+                font: configuracaoFonte()
+            },
+
+            title: {
+                display: true,
+                text: "Frequência",
+                color: CORES.texto,
+                font: configuracaoFonte()
+            }
+        };
+
+        opcoes.plugins.tooltip.callbacks = {
+            label(context) {
+                if (
+                    context.dataset.yAxisID ===
+                    "yFrequencia"
+                ) {
+                    return (
+                        ` ${context.dataset.label}: ` +
+                        `${formatarNumero(context.raw, 1)}%`
+                    );
+                }
+
+                return (
+                    ` ${context.dataset.label}: ` +
+                    formatarNumero(context.raw, 2)
+                );
+            }
+        };
+
+        graficos[id] = new Chart(contexto, {
+            type: "bar",
+
+            data: {
+                labels,
+
+                datasets: [
+                    {
+                        type: "bar",
+                        label: "Média",
+                        data: medias,
+                        yAxisID: "y",
+
+                        backgroundColor: CORES.roxo,
+                        borderRadius: 5,
+                        borderSkipped: false,
+                        maxBarThickness: 34
+                    },
+
+                    {
+                        type: "line",
+                        label: "Frequência",
+                        data: frequencias,
+                        yAxisID: "yFrequencia",
+
+                        borderColor: CORES.verde,
+                        backgroundColor: CORES.verde,
+
+                        borderWidth: 2,
+                        pointRadius: 3,
+                        pointHoverRadius: 5,
+                        pointBackgroundColor: CORES.branco,
+                        pointBorderColor: CORES.verde,
+                        pointBorderWidth: 2,
+
+                        tension: 0.25
+                    }
+                ]
+            },
+
+            options: opcoes
+        });
+    }
+
+    // ---------------------------------------------------------
+    // Renderização conjunta
     // ---------------------------------------------------------
 
     function renderizarTodos(dados = {}) {
@@ -578,33 +1036,34 @@
             dados.indicadoresPorAno ?? []
         );
 
+        renderizarVinculos(
+            dados.todosAlunos ?? dados.alunos ?? [],
+            dados.indicadoresVinculo ?? []
+        );
+
         renderizarDesempenho(
-            dados.alunos ?? []
-        );
-
-        renderizarTurmas(
-            dados.turmas ?? []
-        );
-
-        renderizarRisco(
             dados.alunos ?? []
         );
 
         renderizarDisciplinas(
             dados.disciplinas ?? []
         );
+
+        renderizarTurmas(
+            dados.turmas ?? []
+        );
     }
 
     // ---------------------------------------------------------
-    // Disponibilização para o app.js
+    // Exposição para app.js
     // ---------------------------------------------------------
 
     window.DashboardCharts = {
         renderizarEvolucao,
+        renderizarVinculos,
         renderizarDesempenho,
-        renderizarTurmas,
-        renderizarRisco,
         renderizarDisciplinas,
+        renderizarTurmas,
         renderizarTodos,
         destruirGrafico,
         destruirTodos
