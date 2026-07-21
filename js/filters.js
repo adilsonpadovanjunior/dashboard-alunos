@@ -1,17 +1,20 @@
 /* ============================================================
    PAINEL DE GESTÃO ACADÊMICA
-   Filtros, formatação e funções auxiliares
+   Filtros, comparações, formatação e filtros rápidos
    ============================================================ */
 
 (function () {
     "use strict";
 
     // ---------------------------------------------------------
-    // Valores e textos
+    // Textos e valores
     // ---------------------------------------------------------
 
     function texto(valor) {
-        if (valor === null || valor === undefined) {
+        if (
+            valor === null ||
+            valor === undefined
+        ) {
             return "";
         }
 
@@ -37,7 +40,10 @@
             .replace(/'/g, "&#039;");
     }
 
-    function numero(valor, valorPadrao = null) {
+    function numero(
+        valor,
+        valorPadrao = null
+    ) {
         if (
             valor === null ||
             valor === undefined ||
@@ -58,14 +64,6 @@
             return valorPadrao;
         }
 
-        /*
-         * Trata números brasileiros e números JSON.
-         *
-         * Exemplos:
-         *  "7,50"     -> 7.5
-         *  "1.234,5"  -> 1234.5
-         *  "75.2"     -> 75.2
-         */
         if (
             conteudo.includes(",") &&
             conteudo.includes(".")
@@ -93,22 +91,23 @@
             return true;
         }
 
-        const conteudo = normalizarTexto(valor);
-
         return [
             "TRUE",
             "VERDADEIRO",
             "SIM",
             "YES",
             "1"
-        ].includes(conteudo);
+        ].includes(normalizarTexto(valor));
     }
 
     // ---------------------------------------------------------
     // Formatação
     // ---------------------------------------------------------
 
-    function formatarNumero(valor, casas = 1) {
+    function formatarNumero(
+        valor,
+        casas = 1
+    ) {
         const convertido = numero(valor);
 
         if (convertido === null) {
@@ -128,17 +127,24 @@
             return "—";
         }
 
-        return Math.round(convertido).toLocaleString("pt-BR");
+        return Math.round(convertido)
+            .toLocaleString("pt-BR");
     }
 
-    function formatarPercentual(valor, casas = 1) {
+    function formatarPercentual(
+        valor,
+        casas = 1
+    ) {
         const convertido = numero(valor);
 
         if (convertido === null) {
             return "—";
         }
 
-        return `${formatarNumero(convertido, casas)}%`;
+        return `${formatarNumero(
+            convertido,
+            casas
+        )}%`;
     }
 
     function formatarData(valor) {
@@ -183,16 +189,20 @@
             return "Sem comparação disponível";
         }
 
-        const sinal = convertido > 0 ? "+" : "";
+        const sinal = convertido > 0
+            ? "+"
+            : "";
 
         return (
-            `${sinal}${formatarNumero(convertido, casas)}` +
-            sufixo
+            `${sinal}${formatarNumero(
+                convertido,
+                casas
+            )}${sufixo}`
         );
     }
 
     // ---------------------------------------------------------
-    // Ordenação e valores únicos
+    // Ordenação e selects
     // ---------------------------------------------------------
 
     function compararValores(a, b) {
@@ -206,7 +216,10 @@
         );
     }
 
-    function valoresUnicos(dados, campo) {
+    function valoresUnicos(
+        dados,
+        campo
+    ) {
         if (!Array.isArray(dados)) {
             return [];
         }
@@ -217,12 +230,16 @@
             const valor = item?.[campo];
             const chave = normalizarTexto(valor);
 
-            if (chave && !mapa.has(chave)) {
+            if (
+                chave &&
+                !mapa.has(chave)
+            ) {
                 mapa.set(chave, valor);
             }
         });
 
-        return [...mapa.values()].sort(compararValores);
+        return [...mapa.values()]
+            .sort(compararValores);
     }
 
     function preencherSelect(
@@ -239,20 +256,29 @@
 
         elemento.innerHTML = "";
 
-        const opcaoInicial = document.createElement("option");
+        const opcaoInicial =
+            document.createElement("option");
+
         opcaoInicial.value = valorInicial;
         opcaoInicial.textContent = rotuloInicial;
+
         elemento.appendChild(opcaoInicial);
 
         valores.forEach((valor) => {
-            const opcao = document.createElement("option");
+            const opcao =
+                document.createElement("option");
+
             opcao.value = texto(valor);
             opcao.textContent = texto(valor);
+
             elemento.appendChild(opcao);
         });
 
-        const valorExiste = [...elemento.options].some(
-            (opcao) => opcao.value === valorAtual
+        const valorExiste = [
+            ...elemento.options
+        ].some(
+            (opcao) =>
+                opcao.value === valorAtual
         );
 
         elemento.value = valorExiste
@@ -261,21 +287,27 @@
     }
 
     // ---------------------------------------------------------
-    // Filtros da interface
+    // Leitura dos filtros da tela
     // ---------------------------------------------------------
 
     function obterFiltrosAtuais() {
         return {
             ano: texto(
-                document.getElementById("filtroAno")?.value
+                document.getElementById(
+                    "filtroAno"
+                )?.value
             ),
 
             vinculo: texto(
-                document.getElementById("filtroVinculo")?.value
+                document.getElementById(
+                    "filtroVinculo"
+                )?.value
             ),
 
             turma: texto(
-                document.getElementById("filtroTurma")?.value
+                document.getElementById(
+                    "filtroTurma"
+                )?.value
             ),
 
             disciplina: texto(
@@ -284,8 +316,22 @@
                 )?.value
             ),
 
+            desempenho: texto(
+                document.getElementById(
+                    "filtroDesempenho"
+                )?.value
+            ),
+
+            risco: texto(
+                document.getElementById(
+                    "filtroRisco"
+                )?.value
+            ),
+
             busca: normalizarTexto(
-                document.getElementById("filtroBusca")?.value
+                document.getElementById(
+                    "filtroBusca"
+                )?.value
             )
         };
     }
@@ -297,6 +343,8 @@
             filtros.ano ||
             filtros.turma ||
             filtros.disciplina ||
+            filtros.desempenho ||
+            filtros.risco ||
             filtros.busca ||
             (
                 filtros.vinculo &&
@@ -306,51 +354,36 @@
     }
 
     function limparFiltros() {
-        const filtroAno =
-            document.getElementById("filtroAno");
+        const valores = {
+            filtroAno: "",
+            filtroVinculo: "ATIVOS",
+            filtroTurma: "",
+            filtroDisciplina: "",
+            filtroDesempenho: "",
+            filtroRisco: "",
+            filtroBusca: ""
+        };
 
-        const filtroVinculo =
-            document.getElementById("filtroVinculo");
+        Object.entries(valores).forEach(
+            ([id, valor]) => {
+                const campo =
+                    document.getElementById(id);
 
-        const filtroTurma =
-            document.getElementById("filtroTurma");
-
-        const filtroDisciplina =
-            document.getElementById("filtroDisciplina");
-
-        const filtroBusca =
-            document.getElementById("filtroBusca");
-
-        if (filtroAno) {
-            filtroAno.value = "";
-        }
-
-        /*
-         * Ativos e formandos continuam sendo a população
-         * inicial depois de limpar os filtros.
-         */
-        if (filtroVinculo) {
-            filtroVinculo.value = "ATIVOS";
-        }
-
-        if (filtroTurma) {
-            filtroTurma.value = "";
-        }
-
-        if (filtroDisciplina) {
-            filtroDisciplina.value = "";
-        }
-
-        if (filtroBusca) {
-            filtroBusca.value = "";
-        }
+                if (campo) {
+                    campo.value = valor;
+                }
+            }
+        );
     }
 
     // ---------------------------------------------------------
-    // Comparações
+    // Comparações básicas
     // ---------------------------------------------------------
 
-    function correspondeExatamente(valor, filtro) {
+    function correspondeExatamente(
+        valor,
+        filtro
+    ) {
         if (!filtro) {
             return true;
         }
@@ -361,14 +394,18 @@
         );
     }
 
-    function contemTexto(valor, busca) {
+    function contemTexto(
+        valor,
+        busca
+    ) {
         if (!busca) {
             return true;
         }
 
-        return normalizarTexto(valor).includes(
-            normalizarTexto(busca)
-        );
+        return normalizarTexto(valor)
+            .includes(
+                normalizarTexto(busca)
+            );
     }
 
     function contemBuscaEmCampos(
@@ -381,12 +418,15 @@
         }
 
         return campos.some((campo) =>
-            contemTexto(item?.[campo], busca)
+            contemTexto(
+                item?.[campo],
+                busca
+            )
         );
     }
 
     // ---------------------------------------------------------
-    // Situações de vínculo
+    // Vínculo
     // ---------------------------------------------------------
 
     const VINCULOS_ATIVOS = new Set([
@@ -453,16 +493,23 @@
         const rotulos = {
             "ATIVO": "Ativo",
             "FORMANDO": "Formando",
-            "CONCLUINTE RECENTE": "Concluinte recente",
+            "CONCLUINTE RECENTE":
+                "Concluinte recente",
             "EGRESSO": "Egresso",
             "INATIVO": "Inativo",
-            "INATIVO PROVAVEL": "Inativo provável",
-            "EVADIDO PROVAVEL": "Evasão provável",
-            "SEM CLASSIFICACAO": "Sem classificação"
+            "INATIVO PROVAVEL":
+                "Inativo provável",
+            "EVADIDO PROVAVEL":
+                "Evasão provável",
+            "SEM CLASSIFICACAO":
+                "Sem classificação"
         };
 
-        return rotulos[vinculo] || texto(valor) ||
-            "Sem classificação";
+        return (
+            rotulos[vinculo] ||
+            texto(valor) ||
+            "Sem classificação"
+        );
     }
 
     function rotuloPopulacao(valor) {
@@ -473,12 +520,190 @@
             "ATIVOS": "Ativos e formandos",
             "ATIVO": "Somente ativos",
             "FORMANDO": "Formandos",
-            "CONCLUINTE RECENTE": "Concluintes recentes",
+            "CONCLUINTE RECENTE":
+                "Concluintes recentes",
             "EGRESSO": "Egressos",
-            "INATIVOS": "Inativos e evasão provável"
+            "INATIVOS":
+                "Inativos e evasão provável"
         };
 
         return rotulos[filtro] || texto(valor);
+    }
+
+    // ---------------------------------------------------------
+    // Desempenho
+    // ---------------------------------------------------------
+
+    function normalizarDesempenho(valor) {
+        const classificacao =
+            normalizarTexto(valor);
+
+        if (
+            classificacao.includes("DESTAQUE") ||
+            classificacao.includes("EXCELENTE")
+        ) {
+            return "DESTAQUE";
+        }
+
+        if (
+            classificacao.includes("CRITICO") ||
+            classificacao.includes("INSUFICIENTE")
+        ) {
+            return "CRITICO";
+        }
+
+        if (
+            classificacao.includes("ATENCAO")
+        ) {
+            return "ATENCAO";
+        }
+
+        if (
+            classificacao.includes("REGULAR")
+        ) {
+            return "REGULAR";
+        }
+
+        return "SEM_DADOS";
+    }
+
+    function classificarPorMetricas(
+        classificacao,
+        media,
+        frequencia
+    ) {
+        if (texto(classificacao)) {
+            return normalizarDesempenho(
+                classificacao
+            );
+        }
+
+        const nota = numero(media);
+        const presenca = numero(frequencia);
+
+        if (
+            nota === null &&
+            presenca === null
+        ) {
+            return "SEM_DADOS";
+        }
+
+        if (
+            nota !== null &&
+            nota >= 8.5 &&
+            (
+                presenca === null ||
+                presenca >= 90
+            )
+        ) {
+            return "DESTAQUE";
+        }
+
+        if (
+            (
+                nota !== null &&
+                nota < 6
+            ) ||
+            (
+                presenca !== null &&
+                presenca < 75
+            )
+        ) {
+            return "CRITICO";
+        }
+
+        if (
+            nota !== null &&
+            nota < 7
+        ) {
+            return "ATENCAO";
+        }
+
+        return "REGULAR";
+    }
+
+    function correspondeDesempenho(
+        classificacao,
+        filtro,
+        media = null,
+        frequencia = null
+    ) {
+        if (!filtro) {
+            return true;
+        }
+
+        return (
+            classificarPorMetricas(
+                classificacao,
+                media,
+                frequencia
+            ) === normalizarTexto(filtro)
+        );
+    }
+
+    function rotuloDesempenho(valor) {
+        const desempenho =
+            normalizarTexto(valor);
+
+        const rotulos = {
+            "DESTAQUE": "Destaque",
+            "REGULAR": "Regular",
+            "ATENCAO": "Atenção",
+            "CRITICO": "Crítico",
+            "SEM DADOS": "Sem dados",
+            "SEM_DADOS": "Sem dados"
+        };
+
+        return (
+            rotulos[desempenho] ||
+            texto(valor) ||
+            "Sem dados"
+        );
+    }
+
+    // ---------------------------------------------------------
+    // Risco
+    // ---------------------------------------------------------
+
+    function normalizarRisco(valor) {
+        const risco = normalizarTexto(valor);
+
+        if (
+            risco.includes("ALTO") ||
+            risco.includes("CRITICO")
+        ) {
+            return "ALTO";
+        }
+
+        if (
+            risco.includes("MEDIO") ||
+            risco.includes("MODERADO")
+        ) {
+            return "MEDIO";
+        }
+
+        if (
+            risco.includes("BAIXO") ||
+            risco.includes("SEM RISCO")
+        ) {
+            return "BAIXO";
+        }
+
+        return "SEM_CLASSIFICACAO";
+    }
+
+    function correspondeRisco(
+        valor,
+        filtro
+    ) {
+        if (!filtro) {
+            return true;
+        }
+
+        return (
+            normalizarRisco(valor) ===
+            normalizarTexto(filtro)
+        );
     }
 
     // ---------------------------------------------------------
@@ -496,7 +721,9 @@
 
         const conjuntoIds = idsPermitidos
             ? new Set(
-                [...idsPermitidos].map((id) => texto(id))
+                [...idsPermitidos].map(
+                    (id) => texto(id)
+                )
             )
             : null;
 
@@ -509,37 +736,60 @@
                 !conjuntoIds ||
                 conjuntoIds.has(idAluno);
 
-            const atendeVinculo = correspondeVinculo(
-                aluno.situacao_vinculo,
-                filtros.vinculo,
-                aluno.elegivel_indicadores_ativos
-            );
+            const atendeVinculo =
+                correspondeVinculo(
+                    aluno.situacao_vinculo,
+                    filtros.vinculo,
+                    aluno.elegivel_indicadores_ativos
+                );
 
-            const atendeTurma = correspondeExatamente(
-                aluno.turma_atual ?? aluno.turma,
-                filtros.turma
-            );
+            const atendeTurma =
+                correspondeExatamente(
+                    aluno.turma_atual ??
+                    aluno.turma,
+                    filtros.turma
+                );
 
-            const atendeBusca = contemBuscaEmCampos(
-                aluno,
-                filtros.busca,
-                [
-                    "nome_aluno_final",
-                    "nome_aluno",
-                    "id_aluno_final",
-                    "turma_atual",
-                    "turma",
-                    "status_atual",
-                    "situacao_vinculo",
-                    "classificacao",
-                    "nivel_risco"
-                ]
-            );
+            const atendeDesempenho =
+                correspondeDesempenho(
+                    aluno.classificacao ??
+                    aluno.classificacao_historica,
+                    filtros.desempenho,
+                    aluno.media_ano_referencia ??
+                    aluno.media_historica,
+                    aluno.frequencia_ano_referencia ??
+                    aluno.frequencia_media
+                );
+
+            const atendeRisco =
+                correspondeRisco(
+                    aluno.nivel_risco,
+                    filtros.risco
+                );
+
+            const atendeBusca =
+                contemBuscaEmCampos(
+                    aluno,
+                    filtros.busca,
+                    [
+                        "nome_aluno_final",
+                        "nome_aluno",
+                        "id_aluno_final",
+                        "turma_atual",
+                        "turma",
+                        "status_atual",
+                        "situacao_vinculo",
+                        "classificacao",
+                        "nivel_risco"
+                    ]
+                );
 
             return (
                 atendeIds &&
                 atendeVinculo &&
                 atendeTurma &&
+                atendeDesempenho &&
+                atendeRisco &&
                 atendeBusca
             );
         });
@@ -558,47 +808,67 @@
         }
 
         return dados.filter((registro) => {
-            const atendeAno = correspondeExatamente(
-                registro.ano,
-                filtros.ano
-            );
+            const atendeAno =
+                correspondeExatamente(
+                    registro.ano,
+                    filtros.ano
+                );
 
-            const atendeVinculo = correspondeVinculo(
-                registro.situacao_vinculo,
-                filtros.vinculo,
-                registro.elegivel_indicadores_ativos
-            );
+            const atendeVinculo =
+                correspondeVinculo(
+                    registro.situacao_vinculo,
+                    filtros.vinculo,
+                    registro.elegivel_indicadores_ativos
+                );
 
-            const atendeTurma = correspondeExatamente(
-                registro.turma,
-                filtros.turma
-            );
+            const atendeTurma =
+                correspondeExatamente(
+                    registro.turma,
+                    filtros.turma
+                );
 
-            const atendeBusca = contemBuscaEmCampos(
-                registro,
-                filtros.busca,
-                [
-                    "nome_aluno_final",
-                    "nome_aluno",
-                    "id_aluno_final",
-                    "turma",
-                    "status",
-                    "situacao_vinculo",
-                    "classificacao"
-                ]
-            );
+            const atendeDesempenho =
+                correspondeDesempenho(
+                    registro.classificacao,
+                    filtros.desempenho,
+                    registro.media_notas,
+                    registro.frequencia_media
+                );
+
+            const atendeRisco =
+                correspondeRisco(
+                    registro.nivel_risco,
+                    filtros.risco
+                );
+
+            const atendeBusca =
+                contemBuscaEmCampos(
+                    registro,
+                    filtros.busca,
+                    [
+                        "nome_aluno_final",
+                        "nome_aluno",
+                        "id_aluno_final",
+                        "turma",
+                        "status",
+                        "situacao_vinculo",
+                        "classificacao"
+                    ]
+                );
 
             return (
                 atendeAno &&
                 atendeVinculo &&
                 atendeTurma &&
+                atendeDesempenho &&
+                atendeRisco &&
                 atendeBusca
             );
         });
     }
 
     // ---------------------------------------------------------
-    // Filtro de disciplinas
+    // Disciplinas
     // ---------------------------------------------------------
 
     function filtrarDisciplinas(
@@ -609,23 +879,25 @@
             return [];
         }
 
-        return dados.filter((disciplina) => {
-            const atendeAno = correspondeExatamente(
-                disciplina.ano,
-                filtros.ano
-            );
+        return dados.filter((item) => {
+            const atendeAno =
+                correspondeExatamente(
+                    item.ano,
+                    filtros.ano
+                );
 
             const atendeDisciplina =
                 correspondeExatamente(
-                    disciplina.disciplina,
+                    item.disciplina,
                     filtros.disciplina
                 );
 
-            const atendeBusca = contemBuscaEmCampos(
-                disciplina,
-                filtros.busca,
-                ["disciplina"]
-            );
+            const atendeBusca =
+                contemBuscaEmCampos(
+                    item,
+                    filtros.busca,
+                    ["disciplina"]
+                );
 
             return (
                 atendeAno &&
@@ -636,7 +908,7 @@
     }
 
     // ---------------------------------------------------------
-    // Filtro de turmas
+    // Turmas
     // ---------------------------------------------------------
 
     function filtrarTurmas(
@@ -647,25 +919,28 @@
             return [];
         }
 
-        return dados.filter((turma) => {
-            const atendeAno = correspondeExatamente(
-                turma.ano,
-                filtros.ano
-            );
+        return dados.filter((item) => {
+            const atendeAno =
+                correspondeExatamente(
+                    item.ano,
+                    filtros.ano
+                );
 
-            const atendeTurma = correspondeExatamente(
-                turma.turma,
-                filtros.turma
-            );
+            const atendeTurma =
+                correspondeExatamente(
+                    item.turma,
+                    filtros.turma
+                );
 
-            const atendeBusca = contemBuscaEmCampos(
-                turma,
-                filtros.busca,
-                [
-                    "turma",
-                    "serie_numero"
-                ]
-            );
+            const atendeBusca =
+                contemBuscaEmCampos(
+                    item,
+                    filtros.busca,
+                    [
+                        "turma",
+                        "serie_numero"
+                    ]
+                );
 
             return (
                 atendeAno &&
@@ -676,7 +951,7 @@
     }
 
     // ---------------------------------------------------------
-    // Filtro do ranking
+    // Ranking
     // ---------------------------------------------------------
 
     function filtrarRanking(
@@ -690,7 +965,9 @@
 
         const conjuntoIds = idsPermitidos
             ? new Set(
-                [...idsPermitidos].map((id) => texto(id))
+                [...idsPermitidos].map(
+                    (id) => texto(id)
+                )
             )
             : null;
 
@@ -701,66 +978,234 @@
                     texto(aluno.id_aluno_final)
                 );
 
-            const atendeVinculo = correspondeVinculo(
-                aluno.situacao_vinculo,
-                filtros.vinculo,
-                aluno.elegivel_indicadores_ativos
-            );
+            const atendeVinculo =
+                correspondeVinculo(
+                    aluno.situacao_vinculo,
+                    filtros.vinculo,
+                    aluno.elegivel_indicadores_ativos
+                );
 
-            const atendeTurma = correspondeExatamente(
-                aluno.turma_atual ?? aluno.turma,
-                filtros.turma
-            );
+            const atendeTurma =
+                correspondeExatamente(
+                    aluno.turma_atual ??
+                    aluno.turma,
+                    filtros.turma
+                );
 
-            const atendeBusca = contemBuscaEmCampos(
-                aluno,
-                filtros.busca,
-                [
-                    "nome_aluno_final",
-                    "nome_aluno",
-                    "id_aluno_final",
-                    "turma_atual",
-                    "situacao_vinculo",
-                    "classificacao"
-                ]
-            );
+            const atendeDesempenho =
+                correspondeDesempenho(
+                    aluno.classificacao ??
+                    aluno.classificacao_historica,
+                    filtros.desempenho,
+                    aluno.media_ano_referencia ??
+                    aluno.media_historica,
+                    aluno.frequencia_ano_referencia ??
+                    aluno.frequencia_media
+                );
+
+            const atendeRisco =
+                correspondeRisco(
+                    aluno.nivel_risco,
+                    filtros.risco
+                );
+
+            const atendeBusca =
+                contemBuscaEmCampos(
+                    aluno,
+                    filtros.busca,
+                    [
+                        "nome_aluno_final",
+                        "nome_aluno",
+                        "id_aluno_final",
+                        "turma_atual",
+                        "situacao_vinculo",
+                        "classificacao"
+                    ]
+                );
 
             return (
                 atendeIds &&
                 atendeVinculo &&
                 atendeTurma &&
+                atendeDesempenho &&
+                atendeRisco &&
                 atendeBusca
             );
         });
     }
 
     // ---------------------------------------------------------
-    // Classes visuais
+    // Filtros rápidos
+    // ---------------------------------------------------------
+
+    function correspondeFiltroRapido(
+        aluno,
+        tipo,
+        metricas = {}
+    ) {
+        if (!tipo) {
+            return true;
+        }
+
+        const filtro = normalizarTexto(tipo);
+
+        const media = numero(
+            metricas.media ??
+            aluno.media_ano_referencia ??
+            aluno.media_historica
+        );
+
+        const frequencia = numero(
+            metricas.frequencia ??
+            aluno.frequencia_ano_referencia ??
+            aluno.frequencia_media
+        );
+
+        const desempenho =
+            classificarPorMetricas(
+                metricas.classificacao ??
+                aluno.classificacao ??
+                aluno.classificacao_historica,
+                media,
+                frequencia
+            );
+
+        const risco = normalizarRisco(
+            aluno.nivel_risco
+        );
+
+        const vinculo = normalizarVinculo(
+            aluno.situacao_vinculo
+        );
+
+        const tendencia = normalizarTexto(
+            aluno.tendencia
+        );
+
+        if (
+            filtro === "TODOS" ||
+            filtro === "DESEMPENHO" ||
+            filtro === "FREQUENCIA"
+        ) {
+            return true;
+        }
+
+        if (filtro === "ATENCAO") {
+            return (
+                desempenho === "ATENCAO" ||
+                desempenho === "CRITICO" ||
+                risco === "ALTO" ||
+                risco === "MEDIO"
+            );
+        }
+
+        if (filtro === "CRITICO") {
+            return desempenho === "CRITICO";
+        }
+
+        if (filtro === "DESTAQUE") {
+            return desempenho === "DESTAQUE";
+        }
+
+        if (filtro === "REGULAR") {
+            return desempenho === "REGULAR";
+        }
+
+        if (filtro === "SEM DADOS") {
+            return desempenho === "SEM_DADOS";
+        }
+
+        if (filtro === "BAIXA FREQUENCIA") {
+            return (
+                frequencia !== null &&
+                frequencia < 75
+            );
+        }
+
+        if (filtro === "DECRESCENTE") {
+            return tendencia.includes(
+                "DECRESCENTE"
+            );
+        }
+
+        if (filtro === "RISCO ALTO") {
+            return risco === "ALTO";
+        }
+
+        if (filtro === "EVADIDO PROVAVEL") {
+            return vinculo ===
+                "EVADIDO PROVAVEL";
+        }
+
+        if (filtro === "INATIVOS") {
+            return vinculoEhInativo(vinculo);
+        }
+
+        if (filtro === "FORMANDO") {
+            return vinculo === "FORMANDO";
+        }
+
+        return true;
+    }
+
+    function rotuloFiltroRapido(tipo) {
+        const filtro = normalizarTexto(tipo);
+
+        const rotulos = {
+            "TODOS": "Todos os alunos",
+            "DESEMPENHO":
+                "Indicadores de desempenho",
+            "FREQUENCIA":
+                "Indicadores de frequência",
+            "ATENCAO":
+                "Alunos que necessitam atenção",
+            "CRITICO":
+                "Desempenho crítico",
+            "DESTAQUE":
+                "Alunos em destaque",
+            "REGULAR":
+                "Desempenho regular",
+            "SEM DADOS":
+                "Sem dados suficientes",
+            "BAIXA FREQUENCIA":
+                "Frequência abaixo de 75%",
+            "DECRESCENTE":
+                "Desempenho em queda",
+            "RISCO ALTO":
+                "Risco alto",
+            "EVADIDO PROVAVEL":
+                "Evasão provável",
+            "INATIVOS":
+                "Inativos e evasão provável",
+            "FORMANDO":
+                "Formandos",
+            "DISCIPLINAS CRITICAS":
+                "Disciplinas críticas"
+        };
+
+        return rotulos[filtro] || texto(tipo);
+    }
+
+    // ---------------------------------------------------------
+    // Classes dos badges
     // ---------------------------------------------------------
 
     function classeClassificacao(valor) {
-        const classificacao = normalizarTexto(valor);
+        const desempenho =
+            normalizarDesempenho(valor);
 
-        if (
-            classificacao.includes("DESTAQUE") ||
-            classificacao.includes("EXCELENTE") ||
-            classificacao.includes("MUITO BOM")
-        ) {
+        if (desempenho === "DESTAQUE") {
             return "badge-success";
         }
 
         if (
-            classificacao.includes("ATENCAO") ||
-            classificacao.includes("REGULAR") ||
-            classificacao.includes("MODERADO")
+            desempenho === "ATENCAO" ||
+            desempenho === "REGULAR"
         ) {
             return "badge-warning";
         }
 
-        if (
-            classificacao.includes("CRITICO") ||
-            classificacao.includes("INSUFICIENTE")
-        ) {
+        if (desempenho === "CRITICO") {
             return "badge-danger";
         }
 
@@ -768,26 +1213,17 @@
     }
 
     function classeRisco(valor) {
-        const risco = normalizarTexto(valor);
+        const risco = normalizarRisco(valor);
 
-        if (
-            risco.includes("ALTO") ||
-            risco.includes("CRITICO")
-        ) {
+        if (risco === "ALTO") {
             return "badge-danger";
         }
 
-        if (
-            risco.includes("MEDIO") ||
-            risco.includes("MODERADO")
-        ) {
+        if (risco === "MEDIO") {
             return "badge-warning";
         }
 
-        if (
-            risco.includes("BAIXO") ||
-            risco.includes("SEM RISCO")
-        ) {
+        if (risco === "BAIXO") {
             return "badge-success";
         }
 
@@ -795,7 +1231,8 @@
     }
 
     function classeVinculo(valor) {
-        const vinculo = normalizarVinculo(valor);
+        const vinculo =
+            normalizarVinculo(valor);
 
         if (
             vinculo === "ATIVO" ||
@@ -828,32 +1265,29 @@
     }
 
     function classeTendencia(valor) {
-        const tendencia = normalizarTexto(valor);
+        const tendencia =
+            normalizarTexto(valor);
 
         if (
-            tendencia.includes("CRESCENTE") ||
-            tendencia.includes("ALTA")
+            tendencia.includes("CRESCENTE")
         ) {
             return "badge-success";
         }
 
         if (
-            tendencia.includes("DECRESCENTE") ||
-            tendencia.includes("QUEDA")
+            tendencia.includes("DECRESCENTE")
         ) {
             return "badge-danger";
         }
 
-        if (tendencia.includes("ESTAVEL")) {
+        if (
+            tendencia.includes("ESTAVEL")
+        ) {
             return "badge-purple";
         }
 
         return "badge-neutral";
     }
-
-    // ---------------------------------------------------------
-    // Criação de badges
-    // ---------------------------------------------------------
 
     function criarBadge(
         valor,
@@ -869,11 +1303,16 @@
             conteudo = rotuloVinculo(conteudo);
             classe = classeVinculo(valor);
         } else if (tipo === "tendencia") {
-            conteudo = conteudo || "Sem histórico";
+            conteudo =
+                conteudo || "Sem histórico";
+
             classe = classeTendencia(conteudo);
         } else {
-            conteudo = conteudo || "Sem informação";
-            classe = classeClassificacao(conteudo);
+            conteudo =
+                conteudo || "Sem informação";
+
+            classe =
+                classeClassificacao(conteudo);
         }
 
         return `
@@ -884,7 +1323,7 @@
     }
 
     // ---------------------------------------------------------
-    // Apoio para indicadores
+    // Indicadores auxiliares
     // ---------------------------------------------------------
 
     function media(dados, campo) {
@@ -893,8 +1332,12 @@
         }
 
         const valores = dados
-            .map((item) => numero(item?.[campo]))
-            .filter((valor) => valor !== null);
+            .map((item) =>
+                numero(item?.[campo])
+            )
+            .filter(
+                (valor) => valor !== null
+            );
 
         if (!valores.length) {
             return null;
@@ -911,26 +1354,33 @@
             return 0;
         }
 
-        return dados.reduce((total, item) => {
-            const valor = numero(item?.[campo], 0);
-            return total + valor;
-        }, 0);
+        return dados.reduce(
+            (total, item) =>
+                total +
+                numero(item?.[campo], 0),
+            0
+        );
     }
 
-    function contarDistintos(dados, campo) {
+    function contarDistintos(
+        dados,
+        campo
+    ) {
         if (!Array.isArray(dados)) {
             return 0;
         }
 
         return new Set(
             dados
-                .map((item) => texto(item?.[campo]))
+                .map((item) =>
+                    texto(item?.[campo])
+                )
                 .filter(Boolean)
         ).size;
     }
 
     // ---------------------------------------------------------
-    // Disponibilização para os outros scripts
+    // Exposição
     // ---------------------------------------------------------
 
     window.DashboardFilters = {
@@ -966,11 +1416,22 @@
         rotuloVinculo,
         rotuloPopulacao,
 
+        normalizarDesempenho,
+        classificarPorMetricas,
+        correspondeDesempenho,
+        rotuloDesempenho,
+
+        normalizarRisco,
+        correspondeRisco,
+
         filtrarAlunos,
         filtrarAlunosPorAno,
         filtrarDisciplinas,
         filtrarTurmas,
         filtrarRanking,
+
+        correspondeFiltroRapido,
+        rotuloFiltroRapido,
 
         classeClassificacao,
         classeRisco,
