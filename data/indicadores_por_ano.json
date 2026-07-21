@@ -1,0 +1,26 @@
+[
+  {
+    "ano":2022,
+    "alunos_distintos":288,
+    "media_geral":5.28,
+    "frequencia_media":64.63,
+    "total_faltas_horas":44118.0,
+    "registros":5219
+  },
+  {
+    "ano":2023,
+    "alunos_distintos":224,
+    "media_geral":4.95,
+    "frequencia_media":61.41,
+    "total_faltas_horas":35176.0,
+    "registros":4816
+  },
+  {
+    "ano":2024,
+    "alunos_distintos":171,
+    "media_geral":5.58,
+    "frequencia_media":65.48,
+    "total_faltas_horas":127535352.0,
+    "registros":4268
+  }
+]

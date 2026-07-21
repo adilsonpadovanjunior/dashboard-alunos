@@ -1,1 +1,46 @@
-
+[
+  {
+    "indicador":"Ano de referência",
+    "valor":2024.0
+  },
+  {
+    "indicador":"Registros acadêmicos",
+    "valor":14303.0
+  },
+  {
+    "indicador":"Alunos distintos históricos",
+    "valor":364.0
+  },
+  {
+    "indicador":"Alunos com registro no ano",
+    "valor":171.0
+  },
+  {
+    "indicador":"Disciplinas distintas",
+    "valor":275.0
+  },
+  {
+    "indicador":"Turmas distintas",
+    "valor":4.0
+  },
+  {
+    "indicador":"Média geral das notas",
+    "valor":5.81
+  },
+  {
+    "indicador":"Frequência média geral",
+    "valor":69.76
+  },
+  {
+    "indicador":"Alunos em destaque",
+    "valor":35.0
+  },
+  {
+    "indicador":"Alunos em atenção ou críticos",
+    "valor":215.0
+  },
+  {
+    "indicador":"Alunos com risco alto",
+    "valor":193.0
+  }
+]

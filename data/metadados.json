@@ -1,0 +1,14 @@
+{
+  "arquivo_origem": "C:\\Users\\apjr_quarto\\Desktop\\dash_alunos\\r4\\output\\bases\\base_final_corrigida.xlsx",
+  "ano_referencia": 2024,
+  "quantidade_alunos": 364,
+  "quantidade_registros_anuais": 683,
+  "criterios": {
+    "media_destaque": 8.5,
+    "media_regular": 7.0,
+    "media_atencao": 6.0,
+    "frequencia_minima": 75.0,
+    "peso_media": 0.8,
+    "peso_frequencia": 0.2
+  }
+}

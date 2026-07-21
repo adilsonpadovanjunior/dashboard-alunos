@@ -1,0 +1,365 @@
+﻿id_aluno_final;nome_aluno_final;coorte_ingresso;primeiro_ano;ultimo_ano;serie_atual;turma_atual;status_atual;media_historica;mediana_historica;quantidade_notas;frequencia_media;total_faltas_horas;disciplinas_distintas;anos_com_registro;indice_merito;classificacao;tendencia;variacao_media;pontos_risco;nivel_risco;motivos_risco
+ALU_000001;Abdulaziz Suleiman Carvalho;2022;2022;2023;;4ª A;ATIVO;7,83;8,5;37;85,64;282,0;7;2;79,76;REGULAR;CRESCENTE;0,64;3;MÉDIO;sem registro no ano de referência
+ALU_000004;Adrian Henrique Camargo Rodrigues;2024;2024;2024;;1ª A;ATIVO;1,83;0,0;32;26,84;516,0;30;1;20,02;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000002;Adriana Paula Gomes Da Silva;2024;2022;2024;1,0;3ª A;ATIVO;8,09;8,3;85;94,47;134,0;51;3;83,62;REGULAR;ESTÁVEL;0,19;0;BAIXO;
+ALU_000003;Adriane Aparecida Da Silva;2023;2023;2023;;3ª A;ATIVO;0,0;0,0;4;0,0;144,0;6;1;0,0;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000005;Adrielle Eduarda Ventura Paulo;2022;2022;2022;;1ª A;ATIVO;0,0;0,0;32;12,48;600,0;5;1;2,5;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000006;Alan Junior Di Bonito;2022;2022;2022;;4ª A;ATIVO;8,83;8,5;6;100,0;0,0;3;1;90,67;DESTAQUE;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000007;Alan Michel De Oliveira;2022;2022;2024;;2ª A;ATIVO;7,78;8,0;61;85,71;196,0;45;3;79,4;REGULAR;ESTÁVEL;-0,18;0;BAIXO;
+ALU_000008;Aldemir Pereira Rodrigues;2022;2022;2023;;1ª A;ATIVO;0,14;0,0;57;2,24;1286,0;19;2;1,57;CRÍTICO;ESTÁVEL;0,24;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000009;Alessandra Ferreira Peterlini;2022;2022;2022;;4ª A;ATIVO;8,75;8,75;4;100,0;0,0;3;1;90,0;DESTAQUE;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000012;Alex De Almeida Alves;2022;2022;2022;;4ª A;ATIVO;9,17;9,25;6;100,0;0,0;3;1;93,33;DESTAQUE;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000013;Alex De Lima Souza;2024;2024;2024;;1ª A;ATIVO;0,0;0,0;32;5,13;674,0;30;1;1,03;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000014;Alex Miante Galeriani;2022;2022;2022;;4ª A;ATIVO;9,08;9,25;6;100,0;0,0;3;1;92,67;DESTAQUE;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000015;Alex Pereira Pinto;2022;2022;2024;;4ª A;ATIVO;0,0;0,0;12;0,0;1200,0;7;3;0,0;CRÍTICO;ESTÁVEL;0,0;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000016;Alex Pires Renau;2022;2022;2023;;4ª A;ATIVO;5,14;7,5;11;63,64;400,0;4;2;53,82;CRÍTICO;CRESCENTE;4,5;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000010;Alexandre Antonio Santos;2022;2022;2022;;1ª A;ATIVO;9,12;9,0;4;91,67;6,0;1;1;91,33;DESTAQUE;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000011;Alexandre Antonio Santos Artuzo;2024;2022;2024;1,0;3ª A;ATIVO;8,43;8,5;81;93,65;138,0;50;3;86,18;REGULAR;CRESCENTE;0,76;0;BAIXO;
+ALU_000017;Alisson Eduardo Madeira De Souza;2023;2023;2023;;1ª A;ATIVO;0,0;0,0;33;5,3;706,0;17;1;1,06;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000018;Alisson Medeiros Figueiredo;2022;2022;2023;;4ª A;ATIVO;5,91;6,5;36;76,69;192,0;5;2;62,65;CRÍTICO;DECRESCENTE;-6,08;6;ALTO;sem registro no ano de referência | média abaixo de 6,0 | desempenho decrescente
+ALU_000019;Amanda Camili Benatto;2022;2022;2023;;1ª A;ATIVO;0,0;0,0;31;9,95;610,0;15;2;1,99;CRÍTICO;ESTÁVEL;0,0;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000020;Ana Carolina Lopes Rosseau;2024;2022;2024;1,0;3ª A;ATIVO;8,96;9,3;85;92,04;182,0;51;3;90,06;DESTAQUE;CRESCENTE;0,42;0;BAIXO;
+ALU_000021;Ana Carolina Rodrigues Da Silva;2024;2024;2024;;1ª A;ATIVO;8,17;8,55;34;85,43;112,0;32;1;82,47;REGULAR;SEM HISTÓRICO;;0;BAIXO;
+ALU_000022;Ana Flavia Dos Santos;2022;2022;2022;;1ª A;ATIVO;0,0;0,0;30;7,16;594,0;5;1;1,43;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000023;Ana Julia Inglez Andreiow;2023;2023;2024;;1ª A;ATIVO;4,11;4,6;46;63,19;453,0;30;2;45,54;CRÍTICO;DECRESCENTE;-3,95;5;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000024;Ana Julia Rodrigues Da Silva;2024;2024;2024;;1ª A;ATIVO;1,65;0,0;31;28,67;38194424,0;33;1;18,92;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000025;Ana Maria Leal Soares;2022;2022;2024;;2ª A;ATIVO;7,79;8,5;61;87,52;169,0;45;3;79,81;REGULAR;CRESCENTE;1,62;0;BAIXO;
+ALU_000026;Ana Paula Dos Santos Walter;2022;2022;2022;;4ª A;ATIVO;8,25;8,0;6;100,0;0,0;3;1;86,0;REGULAR;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000027;Andre Muraro Nunes;2022;2022;2022;;3ª A;ATIVO;0,0;0,0;15;7,22;411,0;1;1;1,44;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000028;Anna Clara De Goes Fuloni;2022;2022;2024;;2ª A;ATIVO;8,85;9,0;68;90,88;142,0;52;3;88,99;DESTAQUE;DECRESCENTE;-0,88;1;BAIXO;desempenho decrescente
+ALU_000029;Anna Julia Da Silva;2022;2022;2024;;3ª A;ATIVO;8,24;8,5;80;92,73;152,0;47;3;84,46;REGULAR;ESTÁVEL;-0,06;0;BAIXO;
+ALU_000030;Ariele Pereira Marin;2022;2022;2024;;4ª A;ATIVO;6,75;8,5;39;76,17;542,0;11;3;69,26;ATENÇÃO;CRESCENTE;1,44;0;BAIXO;
+ALU_000031;Augusto Barco Caldeira;2022;2022;2024;;4ª A;ATIVO;7,53;8,56;63;83,52;582,0;26;3;76,93;REGULAR;DECRESCENTE;-8,89;1;BAIXO;desempenho decrescente
+ALU_000032;Ayki Fukuoka Kubota;2022;2022;2022;;1ª A;ATIVO;0,0;0,0;22;1,05;650,0;5;1;0,21;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000033;Ayko Fukuoka Kubota;2022;2022;2022;;1ª A;ATIVO;0,0;0,0;1;0,0;18,0;1;1;0,0;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000034;Barbara Barbosa Garcia;2022;2022;2022;;4ª A;ATIVO;7,25;9,0;6;100,0;0,0;3;1;78,0;REGULAR;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000035;Beatriz Dos Santos Garcia;2022;2022;2023;;1ª A;ATIVO;0,0;0,0;31;9,92;600,0;15;2;1,98;CRÍTICO;ESTÁVEL;0,0;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000036;Beatriz Lima De Paula E Silva;2022;2022;2022;;2ª A;ATIVO;0,0;0,0;19;0,0;466,0;5;1;0,0;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000037;Bianca Lopes De Oliveira;2024;2024;2024;;1ª A;ATIVO;8,04;8,2;34;82,95;132,0;32;1;80,9;REGULAR;SEM HISTÓRICO;;0;BAIXO;
+ALU_000038;Bruna Alves De Avila;2022;2022;2023;;4ª A;ATIVO;7,8;8,0;46;87,93;126,0;14;2;79,96;REGULAR;CRESCENTE;0,77;3;MÉDIO;sem registro no ano de referência
+ALU_000039;Bruna De Castro Suber;2022;2022;2022;;4ª A;ATIVO;9,5;9,5;1;100,0;0,0;2;1;96,0;DESTAQUE;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000040;Bruna De Oliveira Zanella;2024;2024;2024;;1ª A;ATIVO;7,96;8,25;34;89,89;68,0;32;1;81,7;REGULAR;SEM HISTÓRICO;;0;BAIXO;
+ALU_000041;Bruna Gabriele Silva De Moura;2022;2022;2022;;3ª A;ATIVO;0,78;0,0;23;13,53;570,0;5;1;8,97;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000042;Bruna Stephany Bloemer Dos Santos;2022;2022;2022;;2ª A;ATIVO;0,0;0,0;24;0,0;590,0;4;1;0,0;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000043;Bruno Almeida Araujo;2022;2022;2022;;3ª A;ATIVO;0,0;0,0;15;0,35;392,0;1;1;0,07;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000044;Bruno De Perez Dias Venturini;2022;2022;2024;;2ª A;ATIVO;7,87;8,0;68;89,05;174,0;52;3;80,8;REGULAR;DECRESCENTE;-1,6;1;BAIXO;desempenho decrescente
+ALU_000045;Bruno Oliveira Das Neves;2022;2022;2023;;1ª A;CANCELADO;0,0;0,0;8;0,0;222,0;7;2;0,0;CRÍTICO;SEM HISTÓRICO;;7;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | status cancelado
+ALU_000046;Camila Justino De Almeida;2022;2022;2022;;4ª A;ATIVO;0,0;0,0;4;0,0;400,0;1;1;0,0;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000047;Camila Tomaz Paula;2022;2022;2023;;3ª A;ATIVO;7,52;8,05;28;84,15;84,0;19;2;77,03;REGULAR;DECRESCENTE;-7,8;4;ALTO;sem registro no ano de referência | desempenho decrescente
+ALU_000048;Camille Dos Santos Rodrigues De Lim A;2024;2024;2024;;1ª A;ATIVO;0,0;0,0;31;0,69;698,0;30;1;0,14;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000049;Camilly Coelho Alexandre;2022;2022;2023;;3ª A;CANCELADO;7,86;8,1;28;85,04;82,0;19;2;79,92;REGULAR;DECRESCENTE;-8,16;4;ALTO;desempenho decrescente | status cancelado
+ALU_000050;Carina Silva Dos Santos;2022;2022;2023;;1ª A;ATIVO;0,0;0,0;31;4,87;658,0;15;2;0,97;CRÍTICO;ESTÁVEL;0,0;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000051;Carlos Eduardo Geraldo Senetra;2022;2022;2024;;4ª A;ATIVO;8,17;8,5;80;95,56;84,0;48;3;84,44;REGULAR;ESTÁVEL;0,24;0;BAIXO;
+ALU_000052;Carlos Eduardo Monaretto Lazarot O;2022;2022;2024;;4ª A;ATIVO;8,37;8,5;81;93,62;128,0;47;3;85,68;REGULAR;ESTÁVEL;-0,03;0;BAIXO;
+ALU_000053;Carlos Henrique Santos Ferreira;2022;2022;2022;;4ª A;ATIVO;1,52;0,0;20;26,9;455,0;4;1;17,57;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000054;Caroline Mayra Biasin Jung;2022;2022;2024;;3ª A;ATIVO;6,22;6,5;57;75,83;352,0;39;3;64,96;ATENÇÃO;CRESCENTE;0,85;0;BAIXO;
+ALU_000055;Cassiano Ricardo Goncalves;2022;2022;2024;;2ª A;ATIVO;3,66;0,0;64;44,59;798,0;48;3;38,17;CRÍTICO;CRESCENTE;0,33;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000056;Claiton Do Nascimento Costa;2024;2024;2024;;1ª A;ATIVO;0,5;0,0;32;15,59;598,0;30;1;7,12;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000057;Claudenice Martins;2022;2022;2024;;4ª A;ATIVO;3,14;0,0;18;33,33;1200,0;9;3;31,78;CRÍTICO;DECRESCENTE;-5,65;5;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000058;Clayton Pagnan Pereira;2022;2022;2023;;3ª A;ATIVO;6,33;7,88;28;64,43;250,0;17;2;63,54;CRÍTICO;DECRESCENTE;-5,06;6;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | desempenho decrescente
+ALU_000059;Cleilton Aparecido Medeiros;2022;2022;2022;;2ª A;ATIVO;0,0;0,0;8;0,0;262,0;2;1;0,0;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000060;Cleiton Carlos De Almeida;2022;2022;2022;;4ª A;ATIVO;1,8;0,0;10;21,11;470,0;2;1;18,62;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000061;Cleverson Neves Dos Santos;2022;2022;2023;;1ª A;ATIVO;0,27;0,0;31;11,38;590,0;15;2;4,47;CRÍTICO;CRESCENTE;0,29;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000062;Cristiana Vaz;2024;2024;2024;;1ª A;ATIVO;7,16;7,65;32;97,14;24,0;30;1;76,74;REGULAR;SEM HISTÓRICO;;0;BAIXO;
+ALU_000063;Cristiane Iagla Farias;2022;2022;2022;;2ª A;ATIVO;0,0;0,0;15;1,39;398,0;5;1;0,28;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000064;Daele Fernanda Olenik Da Costa;2022;2022;2023;;4ª A;ATIVO;7,51;8,5;37;83,46;300,0;7;2;76,74;REGULAR;CRESCENTE;1,23;3;MÉDIO;sem registro no ano de referência
+ALU_000065;Daiane Aparecida Ferreira;2023;2023;2023;;1ª A;ATIVO;8,54;8,5;8;93,06;10,0;4;1;86,91;DESTAQUE;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000066;Daiane Aparecida Ferreira Silverio;2022;2022;2024;;2ª A;ATIVO;8,27;8,3;59;93,84;66,0;48;3;84,95;REGULAR;CRESCENTE;0,75;0;BAIXO;
+ALU_000067;Dalila Dos Santos Barbosa;2022;2022;2024;;4ª A;ATIVO;5,78;7,0;41;70,81;600,0;11;3;60,39;CRÍTICO;CRESCENTE;1,34;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000069;Daniel Aghetoni Francisco;2022;2022;2022;;2ª A;ATIVO;5,28;6,0;28;78,03;126,0;4;1;57,83;CRÍTICO;SEM HISTÓRICO;;5;ALTO;sem registro no ano de referência | média abaixo de 6,0
+ALU_000073;Daniel Pedro De Carvalho Da Silva;2022;2022;2023;;2ª A;ATIVO;3,96;5,4;37;58,79;352,0;18;2;43,41;CRÍTICO;DECRESCENTE;-4,71;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000074;Daniel Wiedermann Lacerda;2022;2022;2023;;2ª A;ATIVO;3,1;1,25;36;58,68;334,0;9;2;36,54;CRÍTICO;DECRESCENTE;-0,67;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000068;Daniela Efigenio Loures;2022;2022;2024;;4ª A;ATIVO;6,72;7,47;44;86,79;296,0;16;3;71,11;ATENÇÃO;CRESCENTE;0,44;0;BAIXO;
+ALU_000070;Daniela Rodrigues De Aguiar;2022;2022;2024;;4ª A;ATIVO;1,67;0,0;15;20,0;1200,0;8;3;17,33;CRÍTICO;DECRESCENTE;-3,57;5;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000071;Daniele Da Cruz;2024;2024;2024;;1ª A;ATIVO;0,0;0,0;34;5,89;690,0;32;1;1,18;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000072;Danielle Chitko De Souza;2022;2022;2024;;4ª A;ATIVO;8,74;9,0;81;96,61;66,0;48;3;89,24;DESTAQUE;ESTÁVEL;0,0;0;BAIXO;
+ALU_000075;Danilo Cadedo Fiorin;2024;2022;2024;1,0;3ª A;ATIVO;9,13;9,45;92;93,85;156,0;49;3;91,8;DESTAQUE;CRESCENTE;0,5;0;BAIXO;
+ALU_000076;Danilo Zamoro;2024;2022;2024;1,0;3ª A;ATIVO;7,6;8,0;90;90,26;226,0;48;3;78,82;REGULAR;CRESCENTE;0,38;0;BAIXO;
+ALU_000079;De Deze Mbro Incoterms;2022;2022;2022;;4ª A;ATIVO;;;0;;;1;1;;SEM DADOS;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000077;Debora Depicoli;2022;2022;2024;;4ª A;ATIVO;3,0;0,0;18;33,33;1200,0;9;3;30,67;CRÍTICO;DECRESCENTE;-5,4;5;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000078;Debora Lohana Gabriel Duarte;2022;2022;2024;;2ª A;ATIVO;7,52;7,5;59;92,75;103,0;43;3;78,74;REGULAR;CRESCENTE;1,2;0;BAIXO;
+ALU_000080;Deilson Dos Santos Reis;2022;2022;2024;;2ª A;ATIVO;7,03;7,5;67;88,69;152,0;52;3;74,01;REGULAR;CRESCENTE;0,28;0;BAIXO;
+ALU_000081;Deise Laine De Silva Ferreira;2022;2022;2022;;1ª A;ATIVO;2,88;0,0;33;39,52;430,0;5;1;30,96;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000082;Diego Moreira;2022;2022;2022;;4ª A;ATIVO;8,2;8,0;10;100,0;0,0;3;1;85,6;REGULAR;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000083;Diego Murante De Melo;2022;2022;2024;;1ª A;ATIVO;4,89;6,35;40;66,87;330,0;23;3;52,51;CRÍTICO;DECRESCENTE;-6,12;5;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000084;Douglas Antonio De Oliveira;2024;2024;2024;;1ª A;ATIVO;1,96;0,0;32;30,59;484,0;30;1;21,82;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000085;Douglas Matheus Dos Santos Lopes;2022;2022;2024;;4ª A;ATIVO;6,62;7,4;46;85,09;146,0;19;3;70,01;ATENÇÃO;CRESCENTE;0,49;0;BAIXO;
+ALU_000086;Dreycon Francisco Fassioli Bortolo;2022;2022;2023;;1ª A;ATIVO;4,32;6,0;25;67,55;184,0;7;2;48,04;CRÍTICO;CRESCENTE;3,84;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000087;Ediel Henrique Pereira;2022;2022;2023;;4ª A;ATIVO;4,25;4,25;8;50,0;400,0;3;2;44,0;CRÍTICO;CRESCENTE;8,5;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000088;Edmilson Martins Will;2024;2024;2024;;1ª A;ATIVO;6,29;8,0;32;70,01;184,0;30;1;64,33;CRÍTICO;SEM HISTÓRICO;;2;MÉDIO;frequência abaixo do mínimo
+ALU_000089;Eduardo Bassette Davantel;2022;2022;2022;;2ª A;ATIVO;;;0;;;1;1;;SEM DADOS;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000090;Eduardo Salvati Salazar Do Carmo;2024;2024;2024;;1ª A;ATIVO;0,38;0,0;32;50,0;288,0;30;1;13,0;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000091;Ekielcio Jose Moreira Da Silva;2024;2022;2024;1,0;3ª A;ATIVO;6,69;7,0;33;84,42;158,0;18;2;70,44;ATENÇÃO;ESTÁVEL;-0,05;0;BAIXO;
+ALU_000092;Elisangela De Lima Lopes;2022;2022;2024;;4ª A;ATIVO;8,21;8,35;80;92,17;155,0;47;3;84,15;REGULAR;ESTÁVEL;-0,03;0;BAIXO;
+ALU_000093;Elizabeth De Oliveira Brito;2024;2024;2024;;1ª A;ATIVO;6,91;7,65;34;82,42;134,0;32;1;71,8;ATENÇÃO;SEM HISTÓRICO;;0;BAIXO;
+ALU_000094;Elton Johnny Ribeiro Santos;2022;2022;2024;;2ª A;ATIVO;8,65;8,75;66;93,39;78,0;52;3;87,9;DESTAQUE;CRESCENTE;1,17;0;BAIXO;
+ALU_000095;Elvis Felipe Nunes Machado;2022;2022;2022;;3ª A;CANCELADO;8,0;8,0;1;100,0;0,0;2;1;84,0;REGULAR;SEM HISTÓRICO;;3;MÉDIO;status cancelado
+ALU_000096;Emanuel Ludugerio Varela Machado;2024;2024;2024;;1ª A;ATIVO;0,0;0,0;34;5,01;698,0;32;1;1,0;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000097;Emanuely Mataran Maistroviz;2022;2022;2022;;4ª A;ATIVO;7,83;8,3;31;92,09;52,0;6;1;81,05;REGULAR;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000098;Emily Vitoria Rodrigues Mota;2024;2024;2024;;1ª A;ATIVO;0,0;0,0;32;0,69;712,0;30;1;0,14;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000099;Enrico Labegalini Goncalves;2022;2022;2023;;1ª A;ATIVO;1,0;0,0;31;15,85;560,0;15;2;11,17;CRÍTICO;CRESCENTE;1,07;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000100;Erica Dos Santos Souza;2024;2024;2024;;1ª A;ATIVO;7,78;7,75;32;91,01;64,0;30;1;80,43;REGULAR;SEM HISTÓRICO;;0;BAIXO;
+ALU_000101;Estefani Miante Galeriani;2022;2022;2022;;4ª A;ATIVO;9,08;9,25;6;100,0;0,0;3;1;92,67;DESTAQUE;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000102;Ezenilde Mendes De Oliveira;2022;2022;2023;;1ª A;CANCELADO;;;0;;;15;2;;SEM DADOS;SEM HISTÓRICO;;3;MÉDIO;status cancelado
+ALU_000103;Fabricio Alves Dias;2022;2022;2022;;4ª A;ATIVO;8,33;8,0;3;100,0;0,0;2;1;86,67;REGULAR;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000104;Felipe Alves De Morais;2022;2022;2024;;4ª A;ATIVO;8,44;8,4;49;94,78;76,0;16;3;86,49;REGULAR;DECRESCENTE;-0,49;1;BAIXO;desempenho decrescente
+ALU_000105;Felipe De Souza Melo;2023;2023;2024;;1ª A;ATIVO;3,44;1,7;50;43,22;740,0;34;2;36,15;CRÍTICO;DECRESCENTE;-2,47;5;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000106;Felipe Emanuel Perosa Da Silva;2022;2022;2022;;4ª A;ATIVO;0,0;0,0;7;0,0;490,0;1;1;0,0;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000107;Felipe Leonardo De Oliveira;2022;2022;2023;;2ª A;ATIVO;6,25;7,6;43;75,2;258,0;24;2;65,01;ATENÇÃO;DECRESCENTE;-4,88;4;ALTO;sem registro no ano de referência | desempenho decrescente
+ALU_000108;Felipeleonardodeoliveira Tra;2023;2023;2023;;2ª A;ATIVO;0,0;0,0;1;0,0;10,0;1;1;0,0;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000109;Fernanda Cravicz;2024;2022;2024;1,0;3ª A;ATIVO;5,75;7,5;83;64,11;729,0;41;3;58,79;CRÍTICO;DECRESCENTE;-7,75;5;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000110;Fernanda De Paula Fragoso;2024;2024;2024;;1ª A;ATIVO;6,43;7,1;32;85,63;108,0;30;1;68,57;ATENÇÃO;SEM HISTÓRICO;;0;BAIXO;
+ALU_000111;Fernando De Oliveira Silva;2022;2022;2022;;4ª A;TRANCADO;;;0;;;3;1;;SEM DADOS;SEM HISTÓRICO;;3;MÉDIO;status trancado
+ALU_000112;Fernando Ferreira De Oliveira;2022;2022;2022;;2ª A;ATIVO;0,0;0,0;20;6,95;484,0;5;1;1,39;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000113;Flavia Moreira Viana;2022;2022;2023;;1ª A;ATIVO;0,27;0,0;30;4,17;638,0;15;2;2,97;CRÍTICO;CRESCENTE;0,29;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000114;Flavio Junior Dos Santos;2024;2024;2024;;1ª A;ATIVO;0,06;0,0;32;5,54;672,0;30;1;1,61;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000115;Florisvaldo Barbosa Barbalho;2022;2022;2023;;4ª A;ATIVO;8,67;8,8;56;97,53;38,0;22;2;88,88;DESTAQUE;ESTÁVEL;-0,22;3;MÉDIO;sem registro no ano de referência
+ALU_000116;Franciele Sonienski Costa;2022;2022;2024;;1ª A;ATIVO;7,51;7,7;32;86,81;100,0;31;2;77,48;REGULAR;SEM HISTÓRICO;;0;BAIXO;
+ALU_000117;Francieli Silva De Carvalho;2022;2022;2023;;4ª A;ATIVO;7,69;8,0;60;91,58;157,0;22;2;79,82;REGULAR;DECRESCENTE;-0,48;4;ALTO;sem registro no ano de referência | desempenho decrescente
+ALU_000118;Francisco Alaor Cardoso Neto;2022;2022;2022;;1ª A;CANCELADO;0,0;0,0;26;12,15;464,0;5;1;2,43;CRÍTICO;SEM HISTÓRICO;;7;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | status cancelado
+ALU_000121;Gabriel Barbosa Rocha;2022;2022;2022;;1ª A;ATIVO;5,09;6,3;34;75,24;206,0;5;1;55,73;CRÍTICO;SEM HISTÓRICO;;5;ALTO;sem registro no ano de referência | média abaixo de 6,0
+ALU_000122;Gabriel Da Silva Oliveira;2024;2024;2024;;1ª A;ATIVO;8,09;8,25;32;90,39;70,0;30;1;82,77;REGULAR;SEM HISTÓRICO;;0;BAIXO;
+ALU_000124;Gabriel Henrique Delfino Correa;2022;2022;2023;;3ª A;ATIVO;2,57;0,0;27;43,87;360,0;8;2;29,31;CRÍTICO;DECRESCENTE;-5,33;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000125;Gabriel Henrique Ferreira;2022;2022;2024;;2ª A;TRANCADO;5,35;7,0;42;72,92;263,0;44;3;57,38;CRÍTICO;DECRESCENTE;-6,89;8;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente | status trancado
+ALU_000126;Gabriel Henrique Jacomel;2022;2022;2023;;4ª A;ATIVO;3,65;0,0;13;33,33;800,0;5;2;35,9;CRÍTICO;DECRESCENTE;-5,28;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000128;Gabriel Machado Goncalves;2022;2022;2024;;4ª A;ATIVO;7,31;8,0;78;90,09;360,0;47;3;76,48;REGULAR;DECRESCENTE;-1,52;1;BAIXO;desempenho decrescente
+ALU_000129;Gabriel Nascimento Verissimo;2022;2022;2023;;2ª A;ATIVO;4,92;6,6;41;64,74;372,0;11;2;52,34;CRÍTICO;CRESCENTE;2,35;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000130;Gabriel Phillipe Silva Da Rocha;2022;2022;2022;;1ª A;ATIVO;2,8;0,0;32;33,85;452,0;5;1;29,15;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000131;Gabriel Pinheiro De Souza;2022;2022;2023;;2ª A;TRANCADO;6,91;7,5;39;85,8;112,0;22;2;72,46;ATENÇÃO;DECRESCENTE;-7,42;4;ALTO;desempenho decrescente | status trancado
+ALU_000133;Gabriel Souza Ajalas;2023;2023;2023;;1ª A;CANCELADO;0,0;0,0;1;0,0;14,0;17;1;0,0;CRÍTICO;SEM HISTÓRICO;;7;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | status cancelado
+ALU_000119;Gabriela Knach Angelo;2022;2022;2024;;4ª A;ATIVO;4,95;5,29;42;64,25;826,0;12;3;52,42;CRÍTICO;DECRESCENTE;-6,18;5;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000120;Gabriela Pedroso Da Silva;2022;2022;2023;;2ª A;ATIVO;3,27;2,0;17;49,98;258,0;4;2;36,16;CRÍTICO;DECRESCENTE;-2,25;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000123;Gabriele Nascimento Aguirre;2024;2024;2024;;1ª A;ATIVO;7,92;8,3;34;94,79;39,0;32;1;82,35;REGULAR;SEM HISTÓRICO;;0;BAIXO;
+ALU_000127;Gabriella Brito Gutemberg Da Silva;2024;2024;2024;;1ª A;ATIVO;7,8;8,1;34;83,28;128,0;32;1;79,08;REGULAR;SEM HISTÓRICO;;0;BAIXO;
+ALU_000132;Gabrielpinheirodesouza Tra;2023;2023;2023;;2ª A;ATIVO;0,0;0,0;1;0,0;10,0;1;1;0,0;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000134;Gean Lucas Silvestre Farias;2022;2022;2023;;4ª A;ATIVO;8,63;8,65;42;94,91;54,0;14;2;88,03;DESTAQUE;DECRESCENTE;-0,44;4;ALTO;sem registro no ano de referência | desempenho decrescente
+ALU_000135;Geovana Goncalves Medeiros;2022;2022;2022;;4ª A;ATIVO;7,25;9,0;6;100,0;0,0;3;1;78,0;REGULAR;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000136;Geovani Felipe Rodrigues;2024;2022;2024;1,0;3ª A;ATIVO;6,23;7,5;75;74,38;511,0;45;3;64,71;CRÍTICO;DECRESCENTE;-5,99;3;MÉDIO;frequência abaixo do mínimo | desempenho decrescente
+ALU_000137;Gessica Nascimento Da Silva;2022;2022;2023;;4ª A;ATIVO;6,91;7,0;45;94,86;54,0;13;2;74,27;ATENÇÃO;DECRESCENTE;-0,72;4;ALTO;sem registro no ano de referência | desempenho decrescente
+ALU_000138;Gilberto Pereira Da Rosa;2022;2022;2022;;4ª A;ATIVO;7,51;8,0;20;85,51;62,0;2;1;77,19;REGULAR;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000139;Giovana Monteiro Da Silva;2024;2024;2024;;1ª A;ATIVO;0,0;0,0;34;1,62;744,0;32;1;0,32;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000140;Giovani Giacomolli;2022;2022;2024;;4ª A;ATIVO;3,73;0,0;15;46,67;800,0;8;3;39,2;CRÍTICO;CRESCENTE;4,57;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000141;Glicia Adriana Santana De Oliveira;2022;2022;2024;;2ª A;ATIVO;8,3;8,5;66;86,78;215,0;51;3;83,73;REGULAR;CRESCENTE;2,0;0;BAIXO;
+ALU_000142;Greice Kele Da Silva Correa;2022;2022;2022;;1ª A;ATIVO;1,02;0,0;32;35,2;484,0;5;1;15,19;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000143;Guilherme Ferreira Dos Santos;2022;2022;2023;;1ª A;CANCELADO;1,88;0,0;12;32,98;200,0;7;2;21,6;CRÍTICO;SEM HISTÓRICO;;7;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | status cancelado
+ALU_000144;Guilherme Krenski Almeida;2023;2023;2024;;1ª A;ATIVO;4,3;5,15;46;54,7;584,0;30;2;45,37;CRÍTICO;DECRESCENTE;-6,0;5;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000145;Guilherme Marolato Francelino;2024;2022;2024;1,0;3ª A;ATIVO;6,87;7,3;77;86,56;254,0;45;3;72,29;ATENÇÃO;CRESCENTE;0,41;0;BAIXO;
+ALU_000146;Guilherme Miyashita Evangelista;2022;2022;2022;;1ª A;CANCELADO;0,0;0,0;10;16,67;182,0;5;1;3,33;CRÍTICO;SEM HISTÓRICO;;7;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | status cancelado
+ALU_000147;Guilherme Tarelli Machado Dos Santos;2022;2022;2022;;2ª A;ATIVO;0,0;0,0;9;0,0;200,0;2;1;0,0;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000148;Gustavo Alexandre Soares;2024;2024;2024;;1ª A;ATIVO;0,26;0,0;32;13,2;620,0;30;1;4,74;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000149;Gustavo Da Silva Oliveira;2024;2022;2024;1,0;3ª A;ATIVO;7,88;8,05;90;85,97;330,0;48;3;80,23;REGULAR;CRESCENTE;0,51;0;BAIXO;
+ALU_000150;Gustavo Dos Santos Alves;2022;2022;2023;;1ª A;ATIVO;0,0;0,0;30;1,7;648,0;15;2;0,34;CRÍTICO;ESTÁVEL;0,0;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000151;Gustavo Goncalves Da Silva;2024;2024;2024;;1ª A;ATIVO;0,0;0,0;34;8,04;677,0;32;1;1,61;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000152;Gustavo Henrique Mazete De Sena;2022;2022;2022;;1ª A;ATIVO;7,36;8,0;35;89,82;82,0;5;1;76,84;REGULAR;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000153;Gustavo Knach Angelo;2022;2022;2024;;2ª A;ATIVO;6,21;8,0;67;71,39;468,0;39;3;63,95;CRÍTICO;CRESCENTE;6,5;2;MÉDIO;frequência abaixo do mínimo
+ALU_000154;Gustavo Pereira Schuengue;2022;2022;2024;;1ª A;ATIVO;3,89;4,3;63;48,99;699,0;23;3;40,92;CRÍTICO;ESTÁVEL;-0,06;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000155;Heber Vinicius Ruiz Rosa;2022;2022;2023;;4ª A;ATIVO;8,68;8,8;42;95,42;54,0;14;2;88,53;DESTAQUE;ESTÁVEL;0,2;3;MÉDIO;sem registro no ano de referência
+ALU_000156;Helen Ariane Leite Da Silva;2022;2022;2024;;4ª A;ATIVO;8,23;8,5;81;87,65;232,0;47;3;83,41;REGULAR;ESTÁVEL;-0,11;0;BAIXO;
+ALU_000157;Helio Rayone Nunes Da Cruz;2024;2022;2024;1,0;3ª A;ATIVO;7,62;8,0;91;86,1;310,0;48;3;78,15;REGULAR;DECRESCENTE;-0,26;1;BAIXO;desempenho decrescente
+ALU_000158;Henrique Cunha Freitas;2022;2022;2024;;2ª A;ATIVO;7,64;7,95;50;85,0;159,0;33;3;78,15;REGULAR;CRESCENTE;0,62;0;BAIXO;
+ALU_000159;Henrique De Almeida Alves;2022;2022;2024;;2ª A;ATIVO;9,26;9,5;66;96,98;49,0;51;3;93,5;DESTAQUE;CRESCENTE;0,95;0;BAIXO;
+ALU_000160;Hetony Claudio Mantovan;2022;2022;2023;;4ª A;ATIVO;4,46;7,9;9;55,56;400,0;4;2;46,76;CRÍTICO;CRESCENTE;6,2;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000161;Hyaralini Dos Santos Vieira;2022;2022;2022;;1ª A;CANCELADO;0,0;0,0;10;16,67;182,0;5;1;3,33;CRÍTICO;SEM HISTÓRICO;;7;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | status cancelado
+ALU_000162;Isabele Luara Da Luz Freitas;2022;2022;2024;;2ª A;ATIVO;7,0;7,4;58;92,25;105,0;43;3;74,48;REGULAR;CRESCENTE;1,01;0;BAIXO;
+ALU_000163;Isabelle Kaory Volpato De Paula;2022;2022;2024;;2ª A;ATIVO;8,81;9,0;68;95,02;68,0;52;3;89,47;DESTAQUE;CRESCENTE;1,86;0;BAIXO;
+ALU_000164;Isadora Elisa Schebeliski;2022;2022;2023;;2ª A;ATIVO;6,28;7,0;41;80,76;166,0;8;2;66,36;ATENÇÃO;DECRESCENTE;-3,64;4;ALTO;sem registro no ano de referência | desempenho decrescente
+ALU_000165;Isadora Paes Mohring Caldana;2024;2022;2024;1,0;3ª A;ATIVO;8,76;9,0;85;92,02;183,0;51;3;88,49;DESTAQUE;ESTÁVEL;0,01;0;BAIXO;
+ALU_000166;Italo Gabriel Dos Santos Domingos;2022;2022;2022;;4ª A;ATIVO;0,0;0,0;4;0,0;400,0;1;1;0,0;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000167;Izabel Dos Santos Hildebrando;2022;2022;2024;;4ª A;ATIVO;6,58;8,4;38;74,05;552,0;10;3;67,42;CRÍTICO;CRESCENTE;1,19;2;MÉDIO;frequência abaixo do mínimo
+ALU_000168;Jairo Rodrigo Goncalves Pereira;2022;2022;2022;;4ª A;ATIVO;7,6;7,6;4;100,0;0,0;1;1;80,8;REGULAR;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000169;Janete Marques Vidas;2024;2024;2024;;1ª A;ATIVO;7,46;8,0;32;89,4;81,0;30;1;77,52;REGULAR;SEM HISTÓRICO;;0;BAIXO;
+ALU_000170;Jaqueline Renata De Oliveira Silva;2022;2022;2023;;4ª A;ATIVO;8,19;8,5;58;97,63;44,0;22;2;85,03;REGULAR;DECRESCENTE;-0,62;4;ALTO;sem registro no ano de referência | desempenho decrescente
+ALU_000171;Jefferson De Siqueira Drumand;2024;2024;2024;;4ª A;ATIVO;0,0;0,0;9;5,83;138,0;8;1;1,17;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000172;Jefferson Ferreira Nascimento;2022;2022;2024;;4ª A;ATIVO;6,57;7,0;46;90,74;104,0;19;3;70,74;ATENÇÃO;CRESCENTE;1,3;0;BAIXO;
+ALU_000173;Jeniffer Vaz De Souza;2024;2024;2024;;1ª A;ATIVO;6,95;7,5;32;96,5;24,0;30;1;74,92;ATENÇÃO;SEM HISTÓRICO;;0;BAIXO;
+ALU_000174;Jeronimo Elio Bossak Taborda;2024;2024;2024;;1ª A;ATIVO;8,91;9,0;34;98,3;14,0;32;1;90,95;DESTAQUE;SEM HISTÓRICO;;0;BAIXO;
+ALU_000175;Jessica Fernanda De Lima Da Silva;2022;2022;2024;;4ª A;ATIVO;6,58;7,5;63;86,7;384,0;26;3;69,95;ATENÇÃO;CRESCENTE;1,15;0;BAIXO;
+ALU_000177;Jhonata Wilson Fermino;2022;2022;2022;;4ª A;ATIVO;9,5;9,5;2;100,0;0,0;1;1;96,0;DESTAQUE;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000176;Jhonatan Wesley Dos Santos;2024;2022;2024;1,0;3ª A;ATIVO;7,83;8,1;85;90,28;226,0;51;3;80,68;REGULAR;DECRESCENTE;-0,33;1;BAIXO;desempenho decrescente
+ALU_000178;Jhony Harumi Santos;2022;2022;2023;;1ª A;ATIVO;0,0;0,0;29;1,76;632,0;15;2;0,35;CRÍTICO;ESTÁVEL;0,0;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000179;Jhoran Henrinque Fragoso;2022;2022;2022;;2ª A;ATIVO;6,5;6,5;2;93,55;4,0;1;1;70,71;ATENÇÃO;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000180;Jhoran Henrique Fragozo;2022;2022;2022;;2ª A;ATIVO;5,09;5,2;23;82,99;82,0;5;1;57,33;CRÍTICO;SEM HISTÓRICO;;5;ALTO;sem registro no ano de referência | média abaixo de 6,0
+ALU_000181;Joao Antonio Franca Santos;2022;2022;2023;;2ª A;ATIVO;2,51;1,8;38;51,69;454,0;12;2;30,4;CRÍTICO;DECRESCENTE;-2,14;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000182;Joao Augusto Do Prado Guaiume;2022;2022;2023;;2ª A;ATIVO;5,39;6,5;38;78,79;204,0;16;2;58,9;CRÍTICO;DECRESCENTE;-1,92;6;ALTO;sem registro no ano de referência | média abaixo de 6,0 | desempenho decrescente
+ALU_000183;Joao Augusto Do Prado Guaiume Ekielcio Jose Moreira Da Silva Ot;2023;2023;2023;;2ª A;ATIVO;9,1;9,1;1;92,31;2,0;1;1;91,26;DESTAQUE;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000184;Joao Carlos Prado;2022;2022;2024;;2ª A;ATIVO;3,96;4,2;61;51,37;644,0;45;3;41,97;CRÍTICO;ESTÁVEL;0,0;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000185;Joao Guilherme Oliveira Dos Santos;2024;2024;2024;;1ª A;ATIVO;1,39;0,0;34;22,92;564,0;32;1;15,74;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000186;Joao Marcos Inglez Rosa;2022;2022;2023;;1ª A;ATIVO;0,79;0,0;53;16,54;990,0;18;2;9,62;CRÍTICO;DECRESCENTE;-0,89;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000187;Jocimar Costa E Silva;2022;2022;2023;;1ª A;ATIVO;0,0;0,0;30;0,83;656,0;15;2;0,17;CRÍTICO;ESTÁVEL;0,0;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000188;Joel Da Silva Junior;2022;2022;2023;;3ª A;ATIVO;5,17;6,5;47;67,28;402,0;20;2;54,82;CRÍTICO;DECRESCENTE;-5,04;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000189;Joilson Quadros Santana;2022;2022;2022;;4ª A;ATIVO;7,74;8,15;30;93,79;40,0;5;1;80,67;REGULAR;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000190;Jonas De Paula E Silva;2022;2022;2022;;4ª A;ATIVO;8,67;9,0;33;96,76;26,0;6;1;88,7;DESTAQUE;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000191;Jonatas Marcal Vasques;2022;2022;2024;;2ª A;ATIVO;9,0;9,0;68;94,64;84,0;52;3;90,96;DESTAQUE;DECRESCENTE;-1,06;1;BAIXO;desempenho decrescente
+ALU_000192;Jordana De Almeida;2022;2022;2024;;2ª A;ATIVO;8,01;8,5;68;89,74;138,0;52;3;81,99;REGULAR;DECRESCENTE;-1,59;1;BAIXO;desempenho decrescente
+ALU_000193;Jorge Roberto Da Luz Barauna;2022;2022;2023;;3ª A;ATIVO;3,84;5,1;43;64,74;426,0;15;2;43,66;CRÍTICO;DECRESCENTE;-1,81;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000194;Jorge Silvio Ramos Filho;2023;2023;2023;;1ª A;ATIVO;0,0;0,0;33;7,78;684,0;17;1;1,56;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000195;Jose Henrique Gilabel De Castilho;2024;2024;2024;;1ª A;CANCELADO;0,0;0,0;4;23,61;82,0;30;1;4,72;CRÍTICO;SEM HISTÓRICO;;7;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | status cancelado
+ALU_000196;Jose Ronaldo Conceicao Batista;2022;2022;2023;;2ª A;ATIVO;2,07;0,0;31;27,88;626,0;9;2;22,12;CRÍTICO;DECRESCENTE;-2,56;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000197;Juliana Marques Pinto;2022;2022;2023;;4ª A;ATIVO;7,07;8,0;34;85,25;278,0;7;2;73,63;REGULAR;ESTÁVEL;0,14;3;MÉDIO;sem registro no ano de referência
+ALU_000198;Juliane Santos;2022;2022;2023;;4ª A;ATIVO;5,85;7,7;17;71,73;422,0;4;2;61,18;CRÍTICO;CRESCENTE;3,72;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000199;Juliano Dias;2022;2022;2022;;4ª A;ATIVO;8,5;8,5;6;100,0;0,0;3;1;88,0;DESTAQUE;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000200;Julio Cesar Valentim;2024;2024;2024;;1ª A;ATIVO;0,0;0,0;32;5,65;670,0;30;1;1,13;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000201;Kailayne Soares Ribeiro;2022;2022;2024;;4ª A;ATIVO;8,4;8,5;80;95,49;91,0;47;3;86,31;REGULAR;CRESCENTE;0,49;0;BAIXO;
+ALU_000202;Kaio Vinicio Da Silva;2022;2022;2024;;4ª A;ATIVO;7,71;8,5;63;89,25;334,0;26;3;79,54;REGULAR;ESTÁVEL;-0,11;0;BAIXO;
+ALU_000203;Kamilly Ferreira De Sene;2022;2022;2024;;4ª A;ATIVO;8,29;8,5;82;92,06;156,0;47;3;84,71;REGULAR;DECRESCENTE;-0,71;1;BAIXO;desempenho decrescente
+ALU_000204;Karen Pereira;2024;2022;2024;1,0;3ª A;ATIVO;8,53;9,0;90;93,08;164,0;49;3;86,88;DESTAQUE;ESTÁVEL;0,22;0;BAIXO;
+ALU_000205;Karina Silva Guimaraes;2022;2022;2022;;4ª A;ATIVO;9,5;9,5;4;100,0;0,0;3;1;96,0;DESTAQUE;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000206;Karla Michelle Rodrigues Dos Santos;2022;2022;2022;;1ª A;ATIVO;0,0;0,0;18;3,6;434,0;3;1;0,72;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000207;Kauani Regina Da Silva Santos;2024;2024;2024;;1ª A;ATIVO;0,54;0,0;32;13,68;616,0;30;1;7,06;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000208;Kawan Motta Ferreira;2024;2024;2024;;1ª A;ATIVO;6,43;7,5;34;80,52;138,0;32;1;67,56;ATENÇÃO;SEM HISTÓRICO;;0;BAIXO;
+ALU_000209;Kayle Tayane Lage De Souza;2022;2022;2022;;4ª A;ATIVO;0,0;0,0;14;5,55;646,0;2;1;1,11;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000210;Kelly Campos Jacinto;2022;2022;2022;;4ª A;ATIVO;9,42;9,5;6;100,0;0,0;3;1;95,33;DESTAQUE;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000211;Kelly Patricia De Souza Dos Santos;2022;2022;2023;;4ª A;ATIVO;6,3;7,8;14;71,43;400,0;5;2;64,69;CRÍTICO;CRESCENTE;2,1;5;ALTO;sem registro no ano de referência | frequência abaixo do mínimo
+ALU_000212;Kennan Dyogo Dos Santos Lima;2024;2022;2024;1,0;3ª A;ATIVO;6,19;8,1;76;65,9;750,0;44;3;62,66;CRÍTICO;DECRESCENTE;-6,65;3;MÉDIO;frequência abaixo do mínimo | desempenho decrescente
+ALU_000213;Kethllen Prado Gottsfritz Rodrigues;2022;2022;2022;;4ª A;ATIVO;7,74;7,79;32;92,73;52,0;6;1;80,46;REGULAR;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000214;Kimberlly Diodato Marques;2022;2022;2024;;2ª A;ATIVO;0,0;0,0;21;5,46;454,0;21;2;1,09;CRÍTICO;ESTÁVEL;0,0;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000215;Laisa De Souza De Franca;2024;2022;2024;1,0;3ª A;ATIVO;6,9;7,0;76;88,76;210,0;45;3;72,93;ATENÇÃO;ESTÁVEL;0,06;0;BAIXO;
+ALU_000216;Lara Aiyumi Oliveira Koriyama;2024;2024;2024;;1ª A;ATIVO;8,27;8,5;30;88,34;70,0;28;1;83,83;REGULAR;SEM HISTÓRICO;;0;BAIXO;
+ALU_000217;Larissa Backes Da Silva;2024;2024;2024;;1ª A;ATIVO;2,8;0,0;27;26,52;437,0;27;1;27,7;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000218;Larissa Barbosa De Paiva;2022;2022;2022;;4ª A;ATIVO;8,33;8,0;3;100,0;0,0;2;1;86,67;REGULAR;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000219;Larissa Bernardino Dos Santos;2024;2024;2024;;1ª A;ATIVO;3,62;0,75;32;41,4;14062412,0;30;1;37,25;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000220;Laryssa Lauanne Tolentino;2024;2022;2024;1,0;3ª A;ATIVO;8,01;8,5;89;93,03;178,0;49;3;82,65;REGULAR;DECRESCENTE;-0,35;1;BAIXO;desempenho decrescente
+ALU_000221;Leandro Vinicius Pianoski Da Rosa;2022;2022;2022;;4ª A;ATIVO;8,33;8,5;6;100,0;0,0;3;1;86,67;REGULAR;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000222;Leiara Fungari Golanoski Tonete;2022;2022;2024;;2ª A;ATIVO;8,2;8,4;66;90,18;138,0;51;3;83,67;REGULAR;CRESCENTE;0,52;0;BAIXO;
+ALU_000223;Leidiane Aparecida Czuy Da Silva;2022;2022;2024;;1ª A;ATIVO;2,66;0,0;17;30,85;256,0;18;2;27,49;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000224;Leonardo Afonso Sperandio De Carvalho;2022;2022;2023;;2ª A;ATIVO;5,86;7,8;55;75,18;303,0;22;2;61,92;CRÍTICO;DECRESCENTE;-5,67;6;ALTO;sem registro no ano de referência | média abaixo de 6,0 | desempenho decrescente
+ALU_000226;Leonardo Da Silva;2023;2023;2023;;1ª A;ATIVO;0,0;0,0;33;5,98;690,0;17;1;1,2;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000225;Leonardoafonsosperandiode Tra;2023;2023;2023;;2ª A;ATIVO;0,0;0,0;1;0,0;10,0;1;1;0,0;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000227;Leslie Costa Dos Santos;2022;2022;2024;;4ª A;ATIVO;8,39;8,7;82;93,55;128,0;47;3;85,82;REGULAR;CRESCENTE;0,73;0;BAIXO;
+ALU_000228;Leslie Karine Borgo Perandre;2022;2022;2022;;3ª A;ATIVO;;;0;;;1;1;;SEM DADOS;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000229;Lethycia Ohana Fernandes Quintal;2022;2022;2024;;4ª A;ATIVO;8,23;8,5;82;90,09;198,0;47;3;83,82;REGULAR;DECRESCENTE;-0,31;1;BAIXO;desempenho decrescente
+ALU_000230;Leticia Calixto Da Rocha;2022;2022;2024;;2ª A;ATIVO;7,58;8,5;66;78,43;368,0;51;3;76,33;REGULAR;DECRESCENTE;-0,98;1;BAIXO;desempenho decrescente
+ALU_000231;Lohayne De Lima Ferreira;2022;2022;2023;;4ª A;ATIVO;3,5;3,5;8;50,0;400,0;3;2;38,0;CRÍTICO;CRESCENTE;7,0;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000232;Lorena Gabriela Da Silva;2022;2022;2023;;4ª A;TRANCADO;7,98;8,49;28;88,75;94,0;22;2;81,58;REGULAR;DECRESCENTE;-8,27;4;ALTO;desempenho decrescente | status trancado
+ALU_000233;Lorena Taborda Dos Santos;2022;2022;2024;;4ª A;ATIVO;8,37;8,6;81;95,02;98,0;47;3;85,94;REGULAR;ESTÁVEL;0,04;0;BAIXO;
+ALU_000234;Louise Bortotti Rodrigues;2022;2022;2023;;1ª A;ATIVO;6,48;8,0;27;74,08;164,0;7;2;66,67;CRÍTICO;DECRESCENTE;-2,68;6;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | desempenho decrescente
+ALU_000235;Luana Aparecida Belo Alves;2022;2022;2023;;4ª A;ATIVO;0,0;0,0;8;0,0;800,0;3;2;0,0;CRÍTICO;ESTÁVEL;0,0;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000236;Luana Raisa Rufo;2022;2022;2022;;1ª A;CANCELADO;5,19;6,2;28;78,51;126,0;5;1;57,25;CRÍTICO;SEM HISTÓRICO;;5;ALTO;média abaixo de 6,0 | status cancelado
+ALU_000237;Luana Teles;2022;2022;2022;;4ª A;ATIVO;0,0;0,0;8;5,55;190,0;3;1;1,11;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000238;Luara Caroline Ribeiro;2022;2022;2023;;1ª A;ATIVO;1,96;0,0;24;33,42;346,0;7;2;22,38;CRÍTICO;CRESCENTE;6,3;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000239;Lucas Brilhador Dias;2023;2023;2024;;1ª A;ATIVO;0,59;0,0;67;11,81;1301,0;49;2;7,1;CRÍTICO;CRESCENTE;0,87;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000240;Lucas Eduardo Faian;2022;2022;2023;;3ª A;CANCELADO;7,91;8,0;21;84,28;102,0;10;2;80,14;REGULAR;DECRESCENTE;-8,31;4;ALTO;desempenho decrescente | status cancelado
+ALU_000241;Lucas Eduardo Leite;2022;2022;2023;;1ª A;CANCELADO;0,0;0,0;12;13,98;286,0;7;2;2,8;CRÍTICO;SEM HISTÓRICO;;7;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | status cancelado
+ALU_000242;Lucas Kenji Nomura;2022;2022;2023;;4ª A;ATIVO;4,04;0,0;14;42,86;800,0;5;2;40,86;CRÍTICO;DECRESCENTE;-5,65;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000243;Lucas Marques Rodrigues;2022;2022;2024;;4ª A;ATIVO;4,69;7,0;18;55,56;800,0;9;3;48,67;CRÍTICO;CRESCENTE;1,35;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000244;Lucas Natalino Matos;2022;2022;2023;;4ª A;ATIVO;7,47;8,1;41;87,51;131,0;16;2;77,25;REGULAR;DECRESCENTE;-0,61;4;ALTO;sem registro no ano de referência | desempenho decrescente
+ALU_000245;Luigi Bonini;2022;2022;2022;;4ª A;ATIVO;3,08;0,0;19;44,25;556,0;3;1;33,46;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000246;Luis Felipe Gomes Da Silva;2022;2022;2024;;4ª A;ATIVO;8,42;8,6;37;90,73;94,0;20;3;85,5;REGULAR;DECRESCENTE;-0,7;1;BAIXO;desempenho decrescente
+ALU_000247;Luis Felipe Rigon Brun;2022;2022;2023;;4ª A;ATIVO;8,57;8,6;59;95,87;70,0;22;2;87,75;DESTAQUE;DECRESCENTE;-0,26;4;ALTO;sem registro no ano de referência | desempenho decrescente
+ALU_000248;Luiz Guilherme Henrique;2022;2022;2024;;2ª A;ATIVO;6,12;7,0;61;76,24;334,0;45;3;64,18;ATENÇÃO;DECRESCENTE;-1,81;1;BAIXO;desempenho decrescente
+ALU_000249;Luiz Henrique Eugenio;2024;2022;2024;1,0;3ª A;ATIVO;8,23;8,4;84;94,62;122,0;51;3;84,73;REGULAR;ESTÁVEL;-0,15;0;BAIXO;
+ALU_000250;Marcelo Goncalves;2022;2022;2023;;4ª A;ATIVO;1,57;0,0;26;18,03;816,0;5;2;16,16;CRÍTICO;CRESCENTE;7,84;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000251;Marcelo Leonardo Pereira Bronzel;2024;2024;2024;;1ª A;ATIVO;0,44;0,0;34;9,67;674,0;32;1;5,46;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000252;Marcos Matheus Dos Santos;2022;2022;2022;;4ª A;ATIVO;1,2;0,0;23;28,04;454,0;3;1;15,18;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000253;Marcos Vinicius Bolognini Rocha Mo Raes;2022;2022;2023;;2ª A;ATIVO;3,97;5,0;41;57,32;368,0;17;2;43,25;CRÍTICO;DECRESCENTE;-5,93;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000254;Marcos Vinicius Ferraz De Almeida;2022;2022;2024;1,0;3ª A;ATIVO;7,57;7,8;84;90,99;210,0;51;3;78,74;REGULAR;DECRESCENTE;-0,37;1;BAIXO;desempenho decrescente
+ALU_000255;Maria Danieli Monteiro De Souza;2022;2022;2023;;4ª A;ATIVO;4,47;5,5;17;48,4;820,0;4;2;45,43;CRÍTICO;DECRESCENTE;-5,84;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000256;Maria Eduarda De Lara Ferreira;2022;2022;2023;;1ª A;ATIVO;4,89;6,0;29;62,13;250,0;15;2;51,57;CRÍTICO;DECRESCENTE;-0,28;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000257;Maria Eduarda Santos;2023;2023;2023;;1ª A;ATIVO;0,37;0,0;33;10,22;666,0;17;1;5,0;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000258;Maria Gabriela Garcia;2022;2022;2023;;3ª A;ATIVO;4,92;6,8;41;65,47;310,0;14;2;52,47;CRÍTICO;DECRESCENTE;-6,96;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000259;Maria Isabella De Oliveira;2023;2023;2023;;1ª A;CANCELADO;;;0;;;4;1;;SEM DADOS;SEM HISTÓRICO;;3;MÉDIO;status cancelado
+ALU_000260;Maria Isabella De Oliveira Cardoso;2022;2022;2023;;1ª A;CANCELADO;2,17;0,0;12;39,16;152,0;11;2;25,17;CRÍTICO;SEM HISTÓRICO;;7;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | status cancelado
+ALU_000261;Maria Julia Nunes Figueiredo;2024;2024;2024;;1ª A;ATIVO;7,4;7,65;32;87,85;90,0;30;1;76,76;REGULAR;SEM HISTÓRICO;;0;BAIXO;
+ALU_000264;Maria Paula Silva Nascimento;2022;2022;2023;;2ª A;ATIVO;6,32;7,0;52;84,27;166,0;16;2;67,42;ATENÇÃO;DECRESCENTE;-1,63;4;ALTO;sem registro no ano de referência | desempenho decrescente
+ALU_000265;Maria Rita De Abreu;2022;2022;2022;;1ª A;CANCELADO;2,25;0,0;15;41,11;170,0;5;1;26,2;CRÍTICO;SEM HISTÓRICO;;7;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | status cancelado
+ALU_000262;Mariana Aricia Nascimento Da Silva;2022;2022;2024;;3ª A;ATIVO;7,3;8,0;52;83,56;216,0;27;3;75,13;REGULAR;CRESCENTE;2,28;0;BAIXO;
+ALU_000263;Marianna Oliveira E Alves;2022;2022;2024;;2ª A;ATIVO;7,71;7,95;50;84,57;168,0;33;3;78,63;REGULAR;ESTÁVEL;0,01;0;BAIXO;
+ALU_000266;Marlos Alberto Pereira;2022;2022;2022;;2ª A;ATIVO;0,0;0,0;15;0,0;404,0;5;1;0,0;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000267;Mateus Dias Manoel;2024;2024;2024;;1ª A;ATIVO;7,93;8,0;32;89,01;81,0;30;1;81,28;REGULAR;SEM HISTÓRICO;;0;BAIXO;
+ALU_000268;Mateus Emanuel De Matos;2022;2022;2023;;1ª A;ATIVO;0,0;0,0;23;0,42;556,0;7;2;0,08;CRÍTICO;ESTÁVEL;0,0;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000269;Mateus Henrique Castro Amarante;2022;2022;2023;;2ª A;ATIVO;1,29;0,0;37;29,32;683,0;15;2;16,2;CRÍTICO;ESTÁVEL;-0,11;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000270;Mateus Henrique Oliveira De Almeida;2022;2022;2024;;2ª A;ATIVO;4,35;5,9;82;55,1;852,0;34;3;45,8;CRÍTICO;CRESCENTE;7,05;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000271;Matheus De Andrade Mota;2024;2024;2024;;1ª A;ATIVO;8,07;8,35;12;87,5;38,0;10;1;82,1;REGULAR;SEM HISTÓRICO;;0;BAIXO;
+ALU_000272;Matheus De Andrade Mota Loures Da Roch;2024;2024;2024;;1ª A;ATIVO;8,39;8,25;20;89,88;42,0;20;1;85,1;REGULAR;SEM HISTÓRICO;;0;BAIXO;
+ALU_000273;Matheus Goncalves Nogueira;2022;2022;2024;;2ª A;ATIVO;6,52;7,85;50;80,88;236,0;33;3;68,34;ATENÇÃO;DECRESCENTE;-2,91;1;BAIXO;desempenho decrescente
+ALU_000274;Matheus Jose Silva;2022;2022;2024;;1ª A;ATIVO;3,69;3,6;53;51,36;14062642,0;22;3;39,78;CRÍTICO;DECRESCENTE;-5,75;5;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000275;Mayara Araujo De Souza;2022;2022;2023;;4ª A;ATIVO;5,73;7,0;35;74,8;238,0;5;2;60,77;CRÍTICO;DECRESCENTE;-5,89;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000276;Maycon Andre Roberto De Andrade;2022;2022;2023;;4ª A;ATIVO;1,74;0,0;44;33,65;756,0;17;2;20,62;CRÍTICO;DECRESCENTE;-4,09;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000277;Micheli Aparecida Rocha;2022;2022;2024;;4ª A;ATIVO;7,43;8,0;80;92,2;166,0;47;3;77,92;REGULAR;CRESCENTE;0,46;0;BAIXO;
+ALU_000278;Michelly Marques De Oliveira;2022;2022;2024;;4ª A;ATIVO;8,34;8,6;81;93,32;120,0;47;3;85,38;REGULAR;CRESCENTE;1,01;0;BAIXO;
+ALU_000279;Milena Dos Santos Oliveira;2022;2022;2022;;2ª A;ATIVO;0,0;0,0;17;0,0;426,0;4;1;0,0;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000280;Milena Roberta Santos Carvalho;2022;2022;2023;;1ª A;ATIVO;1,32;0,0;28;33,7;417,0;15;2;17,34;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000281;Murilo De Oliveira Da Silva;2022;2022;2023;;1ª A;ATIVO;0,0;0,0;31;3,06;678,0;15;2;0,61;CRÍTICO;ESTÁVEL;0,0;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000282;Natalia Vitoria Da Silva Borges Aion;2022;2022;2024;;4ª A;ATIVO;8,81;9,0;81;95,92;80,0;47;3;89,7;DESTAQUE;CRESCENTE;0,51;0;BAIXO;
+ALU_000283;Natanael Pires Correia;2022;2022;2023;;2ª A;ATIVO;2,45;0,7;35;47,53;390,0;10;2;29,07;CRÍTICO;DECRESCENTE;-3,72;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000284;Nathalia Fernanda Lima E Fonseca;2022;2022;2023;;4ª A;ATIVO;8,31;8,5;39;88,41;114,0;13;2;84,18;REGULAR;ESTÁVEL;-0,04;3;MÉDIO;sem registro no ano de referência
+ALU_000285;Nathalia Moura Jandre;2022;2022;2024;;4ª A;ATIVO;2,56;0,0;49;46,91;616,0;22;3;29,82;CRÍTICO;DECRESCENTE;-4,19;5;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000286;Nattan Wilhian Pereira;2024;2024;2024;;1ª A;ATIVO;8,71;8,8;34;93,61;42,0;32;1;88,37;DESTAQUE;SEM HISTÓRICO;;0;BAIXO;
+ALU_000287;Nicole Polli Gasparelo Hipolito;2024;2024;2024;;1ª A;ATIVO;6,51;8,2;31;70,06;224,0;29;1;66,11;CRÍTICO;SEM HISTÓRICO;;2;MÉDIO;frequência abaixo do mínimo
+ALU_000288;Odair Moreira Dias Junior;2022;2022;2024;;4ª A;ATIVO;7,31;7,92;61;95,46;76,0;26;3;77,59;REGULAR;CRESCENTE;0,29;0;BAIXO;
+ALU_000289;Pamela Nunes Correa;2022;2022;2024;;4ª A;ATIVO;2,64;0,4;76;46,97;1394,0;36;3;30,53;CRÍTICO;DECRESCENTE;-2,53;5;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000290;Patricia Aparecida Martins;2022;2022;2024;;3ª A;ATIVO;1,12;0,0;16;31,6;304,0;8;2;15,32;CRÍTICO;DECRESCENTE;-1,5;5;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000291;Patricia De Oliveira Marques;2024;2024;2024;;1ª A;ATIVO;7,12;7,55;32;83,12;136,0;30;1;73,56;REGULAR;SEM HISTÓRICO;;0;BAIXO;
+ALU_000292;Patricia Viviane Escuro;2022;2022;2023;;1ª A;ATIVO;0,0;0,0;23;10,94;490,0;7;2;2,19;CRÍTICO;ESTÁVEL;0,0;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000293;Patrick Celestrino Dos Santos;2022;2022;2024;;4ª A;ATIVO;7,73;8,0;81;94,46;109,0;48;3;80,7;REGULAR;ESTÁVEL;0,17;0;BAIXO;
+ALU_000294;Paula Nobue Vedovelli Nishizawa;2022;2022;2023;;2ª A;TRANCADO;7,85;8,2;23;81,85;96,0;11;2;79,15;REGULAR;SEM HISTÓRICO;;3;MÉDIO;status trancado
+ALU_000295;Paulo Henrique Moreira Freitas;2022;2022;2024;;4ª A;ATIVO;8,8;9,0;82;90,79;176,0;47;3;88,54;DESTAQUE;ESTÁVEL;0,15;0;BAIXO;
+ALU_000296;Paulo Ricardo De Souza;2022;2022;2022;;1ª A;ATIVO;6,67;7,05;34;83,89;128,0;5;1;70,12;ATENÇÃO;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000297;Paulo Ricardo Lazarini;2022;2022;2022;;1ª A;CANCELADO;0,0;0,0;10;16,67;182,0;5;1;3,33;CRÍTICO;SEM HISTÓRICO;;7;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | status cancelado
+ALU_000298;Paulo Sergio Da Silva Marcelino;2022;2022;2024;;4ª A;ATIVO;3,28;0,0;13;33,33;800,0;7;3;32,88;CRÍTICO;CRESCENTE;6,6;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000299;Pedro Henrique Martins Do Nascimento;2022;2022;2023;;1ª A;ATIVO;1,1;0,0;23;17,45;452,0;7;2;12,29;CRÍTICO;DECRESCENTE;-1,15;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000300;Pedro Henrique Pires De Aguiar;2022;2022;2023;;1ª A;ATIVO;5,68;7,0;27;69,04;212,0;7;2;59,26;CRÍTICO;DECRESCENTE;-6,14;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000301;Pedro Oliva;2022;2022;2023;;4ª A;ATIVO;8,47;8,7;58;92,79;116,0;22;2;86,31;REGULAR;ESTÁVEL;-0,17;3;MÉDIO;sem registro no ano de referência
+ALU_000302;Pedro Pereira Salviano;2023;2023;2023;;1ª A;ATIVO;0,4;0,0;32;15,79;586,0;16;1;6,36;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000303;Pedro Silverio Da Rocha Neto;2022;2022;2024;;4ª A;ATIVO;7,25;8,0;59;85,79;522,0;26;3;75,16;REGULAR;DECRESCENTE;-8,35;1;BAIXO;desempenho decrescente
+ALU_000304;Priscila Dos Santos Lima;2023;2023;2023;;1ª A;ATIVO;8,88;8,5;8;87,5;18,0;4;1;88,5;REGULAR;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000305;Priscila Dos Santos Lima Custodio;2022;2022;2024;;2ª A;ATIVO;8,43;8,8;59;93,05;88,0;47;3;86,07;REGULAR;CRESCENTE;2,33;0;BAIXO;
+ALU_000306;Rafael Nogueira Pierin Do Prado;2022;2022;2023;;1ª A;ATIVO;0,0;0,0;31;10,44;596,0;15;2;2,09;CRÍTICO;ESTÁVEL;0,0;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000307;Rafael Pazotto Bertolucci;2024;2024;2024;;1ª A;ATIVO;0,0;0,0;34;0,31;752,0;32;1;0,06;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000308;Raphael Matheus De Melo;2022;2022;2024;;2ª A;ATIVO;6,23;7,0;51;86,28;184,0;35;3;67,08;ATENÇÃO;DECRESCENTE;-1,01;1;BAIXO;desempenho decrescente
+ALU_000309;Raul Baggio Da Costa;2024;2024;2024;;1ª A;CANCELADO;;;0;;;32;1;;SEM DADOS;SEM HISTÓRICO;;3;MÉDIO;status cancelado
+ALU_000310;Rayane Nayara Viertel;2022;2022;2023;;4ª A;ATIVO;7,08;7,4;51;93,28;90,0;16;2;75,3;REGULAR;CRESCENTE;0,59;3;MÉDIO;sem registro no ano de referência
+ALU_000311;Rebeka Suelen Pereira Marin;2022;2022;2024;;4ª A;ATIVO;6,64;8,41;40;76,77;542,0;11;3;68,5;ATENÇÃO;CRESCENTE;1,48;0;BAIXO;
+ALU_000312;Renan Bueno Da Cruz;2022;2022;2022;;1ª A;ATIVO;6,59;7,0;34;83,68;126,0;5;1;69,49;ATENÇÃO;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000313;Robson Dovorak Dos Santos;2022;2022;2023;;4ª A;ATIVO;4,39;7,5;9;50,0;400,0;3;2;45,11;CRÍTICO;CRESCENTE;6,5;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000314;Rodrigo Queiroz Da Silva;2022;2022;2024;;1ª A;ATIVO;0,08;0,0;44;8,88;896,0;37;2;2,39;CRÍTICO;ESTÁVEL;0,1;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000315;Rodrigo Silva Sao Pedro;2022;2022;2023;;2ª A;ATIVO;8,02;8,5;62;93,78;98,0;22;2;82,95;REGULAR;DECRESCENTE;-0,81;4;ALTO;sem registro no ano de referência | desempenho decrescente
+ALU_000316;Romano Benhur Dos Santos Passos;2022;2022;2024;;2ª A;ATIVO;7,0;7,8;59;80,55;240,0;43;3;72,08;ATENÇÃO;CRESCENTE;2,01;0;BAIXO;
+ALU_000319;Ronald Pereira Vernek;2024;2024;2024;;1ª A;CANCELADO;4,31;5,7;8;67,47;54,0;32;1;47,99;CRÍTICO;SEM HISTÓRICO;;7;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | status cancelado
+ALU_000317;Ronaldo Crispim Santana;2022;2022;2023;;2ª A;ATIVO;6,1;7,0;43;81,69;198,0;16;2;65,16;ATENÇÃO;CRESCENTE;0,79;3;MÉDIO;sem registro no ano de referência
+ALU_000318;Ronaldo Ferreira Procopio;2022;2022;2022;;2ª A;ATIVO;3,44;0,8;27;61,97;247,0;5;1;39,89;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000320;Rosemeiry Boiko Barbosa;2024;2022;2024;1,0;3ª A;ATIVO;8,71;9,0;85;96,26;88,0;51;3;88,9;DESTAQUE;ESTÁVEL;0,0;0;BAIXO;
+ALU_000321;Samuel Da Silva;2024;2022;2024;1,0;3ª A;ATIVO;7,15;7,5;53;91,48;140,0;26;3;75,53;REGULAR;CRESCENTE;0,51;0;BAIXO;
+ALU_000322;Samuel Moellmann De Sousa;2022;2022;2024;;4ª A;ATIVO;7,27;8,0;82;87,69;476,0;48;3;75,7;REGULAR;ESTÁVEL;0,02;0;BAIXO;
+ALU_000323;Sandro Jose Bonette;2022;2022;2023;;4ª A;ATIVO;4,0;4,0;8;50,0;400,0;3;2;42,0;CRÍTICO;CRESCENTE;8,0;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000324;Sara Geovana Da Silva Wolff;2022;2022;2023;;1ª A;ATIVO;1,69;0,0;20;31,42;356,0;7;2;19,8;CRÍTICO;CRESCENTE;0,33;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000325;Sergio Paulo Da Silva Pinheiro Neto;2024;2024;2024;;1ª A;ATIVO;9,09;9,4;34;96,64;24,0;32;1;92,01;DESTAQUE;SEM HISTÓRICO;;0;BAIXO;
+ALU_000326;Sophia Diogenes Araujo;2022;2022;2022;;3ª A;ATIVO;4,0;4,0;1;;;1;1;32,0;CRÍTICO;SEM HISTÓRICO;;5;ALTO;sem registro no ano de referência | média abaixo de 6,0
+ALU_000327;Stefany Lima Do Nascimento;2022;2022;2022;;1ª A;ATIVO;8,45;8,4;4;91,67;6,0;1;1;85,93;REGULAR;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000328;Stefany Lima Do Nascimento Kubo;2024;2022;2024;1,0;3ª A;ATIVO;6,9;7,55;82;78,35;523,0;44;3;70,91;ATENÇÃO;DECRESCENTE;-0,3;1;BAIXO;desempenho decrescente
+ALU_000329;Tainara Anastacio Marcondes;2024;2024;2024;;1ª A;ATIVO;2,98;0,0;32;35,04;452,0;30;1;30,83;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000330;Taisa Ferreira Mayeski;2022;2022;2022;;3ª A;ATIVO;8,0;8,0;1;100,0;0,0;1;1;84,0;REGULAR;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000331;Talita Berbet Marques;2022;2022;2022;;1ª A;ATIVO;0,0;0,0;30;10,04;588,0;5;1;2,01;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000332;Tamara Cristina Macedo;2022;2022;2023;;2ª A;TRANCADO;7,45;7,55;42;90,83;90,0;16;2;77,8;REGULAR;CRESCENTE;0,41;3;MÉDIO;status trancado
+ALU_000333;Tatiane Silveira Pronsate;2022;2022;2022;;2ª A;ATIVO;0,0;0,0;8;0,0;252,0;2;1;0,0;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000334;Thaila Cristine De Souza;2023;2023;2023;;4ª A;ATIVO;7,2;7,2;4;100,0;0,0;2;1;77,6;REGULAR;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000335;Thais Samara Ribeiro Dias;2022;2022;2024;;2ª A;ATIVO;6,81;7,6;60;82,04;270,0;44;3;70,85;ATENÇÃO;CRESCENTE;2,19;0;BAIXO;
+ALU_000336;Thamires Fiorin Roratto;2024;2024;2024;;1ª A;ATIVO;5,06;6,65;34;58,75;332,0;32;1;52,24;CRÍTICO;SEM HISTÓRICO;;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000337;Thiago Henrique Sales;2022;2022;2024;;4ª A;ATIVO;9,04;9,0;79;95,86;82,0;46;3;91,51;DESTAQUE;ESTÁVEL;0,1;0;BAIXO;
+ALU_000338;Thiago Rodrigues Da Silva;2022;2022;2022;;1ª A;CANCELADO;0,0;0,0;10;16,67;182,0;5;1;3,33;CRÍTICO;SEM HISTÓRICO;;7;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | status cancelado
+ALU_000339;Tiago De Paula Schuenck;2024;2022;2024;1,0;3ª A;ATIVO;8,24;8,4;85;92,92;150,0;51;3;84,48;REGULAR;CRESCENTE;0,81;0;BAIXO;
+ALU_000340;Tiago Do Carmo;2023;2023;2023;;1ª A;ATIVO;0,0;0,0;20;11,8;426,0;10;1;2,36;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000341;Vagner Alex Bressan;2022;2022;2024;;2ª A;ATIVO;6,54;7,5;37;78,99;182,0;27;3;68,12;ATENÇÃO;ESTÁVEL;0,01;0;BAIXO;
+ALU_000342;Vagner Ribeiro;2023;2023;2023;;4ª A;TRANCADO;;;0;;;2;1;;SEM DADOS;SEM HISTÓRICO;;3;MÉDIO;status trancado
+ALU_000343;Valdinei Dionizio;2022;2022;2023;;4ª A;ATIVO;7,91;8,55;58;91,9;274,0;22;2;81,62;REGULAR;DECRESCENTE;-1,3;4;ALTO;sem registro no ano de referência | desempenho decrescente
+ALU_000344;Vanessa Batista Da Silva;2022;2022;2023;;4ª A;ATIVO;0,0;0,0;8;0,0;800,0;3;2;0,0;CRÍTICO;ESTÁVEL;0,0;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000345;Vanessa Goes De Lima Matos;2022;2022;2022;;3ª A;ATIVO;8,0;8,0;1;;;1;1;64,0;REGULAR;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000346;Vanessa Gomes Sobrinho;2022;2022;2024;;4ª A;ATIVO;7,94;8,1;79;89,87;199,0;46;3;81,5;REGULAR;CRESCENTE;0,5;0;BAIXO;
+ALU_000347;Vanessa Ribeiro Massaneiro;2022;2022;2023;;4ª A;ATIVO;7,73;7,58;50;97,4;36,0;22;2;81,31;REGULAR;DECRESCENTE;-0,26;4;ALTO;sem registro no ano de referência | desempenho decrescente
+ALU_000348;Vanilda Duminelli;2022;2022;2024;;4ª A;ATIVO;0,0;0,0;12;0,0;1200,0;7;3;0,0;CRÍTICO;ESTÁVEL;0,0;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000349;Veridiana Ferreira Machado;2022;2022;2024;;2ª A;ATIVO;7,18;7,8;63;87,63;166,0;47;3;74,96;REGULAR;CRESCENTE;1,4;0;BAIXO;
+ALU_000350;Victor Hugo Bartholomeu Araujo;2022;2022;2022;;4ª A;ATIVO;7,83;8,4;21;94,24;32,0;2;1;81,47;REGULAR;SEM HISTÓRICO;;3;MÉDIO;sem registro no ano de referência
+ALU_000351;Victor Hugo Gracioli;2022;2022;2023;;1ª A;ATIVO;3,96;4,0;25;58,85;266,0;7;2;43,42;CRÍTICO;CRESCENTE;4,21;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000352;Victor Leonardo Ferraz De Paula;2023;2023;2023;;1ª A;ATIVO;0,12;0,0;32;12,61;610,0;16;1;3,52;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000353;Victor Queiroz Vieira Lima;2022;2022;2024;;1ª A;ATIVO;3,65;3,7;42;57,72;474,0;26;3;40,74;CRÍTICO;DECRESCENTE;-3,12;5;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000354;Vinicio Gabriel Belem Ratuchinski;2022;2022;2024;;4ª A;ATIVO;6,98;8,7;76;78,54;508,0;46;3;71,55;ATENÇÃO;DECRESCENTE;-3,98;1;BAIXO;desempenho decrescente
+ALU_000355;Vinicius Dos Santos;2024;2022;2024;1,0;3ª A;ATIVO;6,47;7,0;75;80,01;399,0;43;3;67,78;ATENÇÃO;DECRESCENTE;-2,99;1;BAIXO;desempenho decrescente
+ALU_000356;Vinicius Emanuel Alves Barreiro;2022;2022;2022;;1ª A;CANCELADO;0,0;0,0;10;16,67;182,0;5;1;3,33;CRÍTICO;SEM HISTÓRICO;;7;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | status cancelado
+ALU_000357;Vinicius Rigo;2022;2022;2023;;1ª A;CANCELADO;2,43;0,0;3;89,0;16,0;15;2;37,27;CRÍTICO;SEM HISTÓRICO;;5;ALTO;média abaixo de 6,0 | status cancelado
+ALU_000359;Vitor Kaua Oliveira De Souza;2022;2022;2023;;1ª A;ATIVO;1,66;0,0;20;21,85;406,0;7;2;17,65;CRÍTICO;DECRESCENTE;-1,75;8;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0 | desempenho decrescente
+ALU_000360;Vitor Luiz Mota De Oliveira;2023;2023;2023;;1ª A;ATIVO;1,87;0,0;32;32,95;454,0;16;1;21,56;CRÍTICO;SEM HISTÓRICO;;7;ALTO;sem registro no ano de referência | frequência abaixo do mínimo | média abaixo de 6,0
+ALU_000358;Vitoria Semiguen Ribeiro;2022;2022;2022;;3ª A;CANCELADO;1,41;0,0;21;31,98;416,0;5;1;17,66;CRÍTICO;SEM HISTÓRICO;;7;ALTO;frequência abaixo do mínimo | média abaixo de 6,0 | status cancelado
+ALU_000361;Welbert Francisco Lima Dos Santos;2022;2022;2024;;4ª A;ATIVO;7,19;7,8;57;88,15;150,0;33;3;75,17;REGULAR;ESTÁVEL;-0,05;0;BAIXO;
+ALU_000362;Wesley Fernando Dionizio De Andrad E;2024;2024;2024;;1ª A;ATIVO;7,97;8,0;32;94,61;40,0;30;1;82,69;REGULAR;SEM HISTÓRICO;;0;BAIXO;
+ALU_000363;William Torres Blanca;2024;2024;2024;;1ª A;ATIVO;6,59;8,5;32;71,46;61184185,0;30;1;66,99;CRÍTICO;SEM HISTÓRICO;;2;MÉDIO;frequência abaixo do mínimo
+ALU_000364;Witoria Fiabani Muller;2022;2022;2024;;2ª A;ATIVO;5,79;7,5;44;68,38;321,0;44;3;59,99;CRÍTICO;CRESCENTE;1,69;4;ALTO;frequência abaixo do mínimo | média abaixo de 6,0
