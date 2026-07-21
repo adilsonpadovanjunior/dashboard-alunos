@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Dashboard acadêmico com indicadores de alunos, turmas e disciplinas."
+  >
+
+  <title>Dashboard Acadêmico</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="app-layout">
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">DA</div>
+
+        <div class="brand-text">
+          <strong>Dashboard</strong>
+          <span>Acadêmico</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-page="visao-geral">
+          <span class="nav-icon">◫</span>
+          Visão geral
+        </button>
+
+        <button class="nav-item" data-page="alunos">
+          <span class="nav-icon">♙</span>
+          Alunos
+        </button>
+
+        <button class="nav-item" data-page="disciplinas">
+          <span class="nav-icon">▤</span>
+          Disciplinas
+        </button>
+
+        <button class="nav-item" data-page="turmas">
+          <span class="nav-icon">▦</span>
+          Turmas
+        </button>
+
+        <button class="nav-item" data-page="rankings">
+          <span class="nav-icon">★</span>
+          Rankings
+        </button>
+
+        <button class="nav-item" data-page="monitoramento">
+          <span class="nav-icon">⚠</span>
+          Monitoramento
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <span>Última atualização</span>
+        <strong id="dataAtualizacao">Carregando...</strong>
+      </div>
+    </aside>
+
+    <main class="main-content">
+
+      <header class="topbar">
+        <div class="topbar-title">
+          <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Abrir menu"
+          >
+            ☰
+          </button>
+
+          <div>
+            <h1 id="pageTitle">Visão geral</h1>
+            <p>Indicadores acadêmicos consolidados</p>
+          </div>
+        </div>
+
+        <div class="topbar-status">
+          <span class="status-dot"></span>
+          Dados atualizados
+        </div>
+      </header>
+
+      <section class="filter-bar">
+        <div class="filter-field">
+          <label for="filtroAno">Ano</label>
+          <select id="filtroAno">
+            <option value="">Todos os anos</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filtroTurma">Turma</label>
+          <select id="filtroTurma">
+            <option value="">Todas as turmas</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filtroDisciplina">Disciplina</label>
+          <select id="filtroDisciplina">
+            <option value="">Todas as disciplinas</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-search">
+          <label for="filtroBusca">Pesquisar aluno</label>
+
+          <input
+            type="search"
+            id="filtroBusca"
+            placeholder="Digite o nome..."
+          >
+        </div>
+
+        <button class="button-secondary" id="limparFiltros">
+          Limpar filtros
+        </button>
+      </section>
+
+      <div id="loadingState" class="loading-state">
+        <div class="loading-spinner"></div>
+        <p>Carregando dados do dashboard...</p>
+      </div>
+
+      <div id="errorState" class="error-state hidden">
+        <strong>Não foi possível carregar os dados.</strong>
+        <p>
+          Verifique se os arquivos JSON estão disponíveis na pasta data.
+        </p>
+      </div>
+
+      <div id="dashboardContent" class="hidden">
+
+        <section class="page-section active" id="page-visao-geral">
+          <div class="kpi-grid">
+            <article class="kpi-card kpi-blue">
+              <div class="kpi-header">
+                <span>Alunos analisados</span>
+                <span class="kpi-icon">♙</span>
+              </div>
+
+              <strong id="kpiAlunos">--</strong>
+              <small>Total histórico</small>
+            </article>
+
+            <article class="kpi-card kpi-green">
+              <div class="kpi-header">
+                <span>Média geral</span>
+                <span class="kpi-icon">↗</span>
+              </div>
+
+              <strong id="kpiMedia">--</strong>
+              <small>Escala de 0 a 10</small>
+            </article>
+
+            <article class="kpi-card kpi-purple">
+              <div class="kpi-header">
+                <span>Frequência média</span>
+                <span class="kpi-icon">✓</span>
+              </div>
+
+              <strong id="kpiFrequencia">--</strong>
+              <small>Percentual geral</small>
+            </article>
+
+            <article class="kpi-card kpi-orange">
+              <div class="kpi-header">
+                <span>Em atenção</span>
+                <span class="kpi-icon">!</span>
+              </div>
+
+              <strong id="kpiAtencao">--</strong>
+              <small>Atenção ou crítico</small>
+            </article>
+          </div>
+
+          <div class="charts-grid">
+            <article class="panel chart-panel-large">
+              <div class="panel-header">
+                <div>
+                  <h2>Evolução acadêmica</h2>
+                  <p>Média geral e frequência por ano</p>
+                </div>
+              </div>
+
+              <div class="chart-container">
+                <canvas id="chartEvolucao"></canvas>
+              </div>
+            </article>
+
+            <article class="panel">
+              <div class="panel-header">
+                <div>
+                  <h2>Desempenho</h2>
+                  <p>Distribuição dos alunos</p>
+                </div>
+              </div>
+
+              <div class="chart-container">
+                <canvas id="chartDesempenho"></canvas>
+              </div>
+            </article>
+          </div>
+
+          <div class="charts-grid">
+            <article class="panel">
+              <div class="panel-header">
+                <div>
+                  <h2>Alunos por turma</h2>
+                  <p>Distribuição no ano selecionado</p>
+                </div>
+              </div>
+
+              <div class="chart-container">
+                <canvas id="chartTurmas"></canvas>
+              </div>
+            </article>
+
+            <article class="panel">
+              <div class="panel-header">
+                <div>
+                  <h2>Situação acadêmica</h2>
+                  <p>Classificação de risco</p>
+                </div>
+              </div>
+
+              <div class="chart-container">
+                <canvas id="chartRisco"></canvas>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-section" id="page-alunos">
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Alunos</h2>
+                <p>Indicadores individuais consolidados</p>
+              </div>
+
+              <span class="result-count" id="totalAlunosTabela">
+                0 registros
+              </span>
+            </div>
+
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Aluno</th>
+                    <th>Turma</th>
+                    <th>Média</th>
+                    <th>Frequência</th>
+                    <th>Tendência</th>
+                    <th>Classificação</th>
+                    <th>Risco</th>
+                  </tr>
+                </thead>
+
+                <tbody id="tabelaAlunos"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section class="page-section" id="page-disciplinas">
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Disciplinas</h2>
+                <p>Médias, frequência e desempenho</p>
+              </div>
+            </div>
+
+            <div class="chart-container chart-container-tall">
+              <canvas id="chartDisciplinas"></canvas>
+            </div>
+
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Disciplina</th>
+                    <th>Ano</th>
+                    <th>Alunos</th>
+                    <th>Média</th>
+                    <th>Frequência</th>
+                    <th>Abaixo de 6</th>
+                  </tr>
+                </thead>
+
+                <tbody id="tabelaDisciplinas"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section class="page-section" id="page-turmas">
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Turmas</h2>
+                <p>Comparação de indicadores acadêmicos</p>
+              </div>
+            </div>
+
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Turma</th>
+                    <th>Ano</th>
+                    <th>Alunos</th>
+                    <th>Média</th>
+                    <th>Frequência</th>
+                    <th>Disciplinas</th>
+                  </tr>
+                </thead>
+
+                <tbody id="tabelaTurmas"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section class="page-section" id="page-rankings">
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Ranking acadêmico</h2>
+                <p>Classificação por índice de mérito</p>
+              </div>
+            </div>
+
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Posição</th>
+                    <th>Aluno</th>
+                    <th>Média</th>
+                    <th>Frequência</th>
+                    <th>Índice</th>
+                    <th>Classificação</th>
+                  </tr>
+                </thead>
+
+                <tbody id="tabelaRanking"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section class="page-section" id="page-monitoramento">
+          <div class="monitoring-grid">
+            <article class="monitor-card monitor-red">
+              <span>Risco alto</span>
+              <strong id="monitorRiscoAlto">--</strong>
+            </article>
+
+            <article class="monitor-card monitor-orange">
+              <span>Baixa frequência</span>
+              <strong id="monitorBaixaFrequencia">--</strong>
+            </article>
+
+            <article class="monitor-card monitor-yellow">
+              <span>Queda de desempenho</span>
+              <strong id="monitorQueda">--</strong>
+            </article>
+
+            <article class="monitor-card monitor-gray">
+              <span>Sem dados suficientes</span>
+              <strong id="monitorSemDados">--</strong>
+            </article>
+          </div>
+
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Alunos que requerem acompanhamento</h2>
+                <p>Motivos e nível de risco acadêmico</p>
+              </div>
+            </div>
+
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Aluno</th>
+                    <th>Turma</th>
+                    <th>Média</th>
+                    <th>Frequência</th>
+                    <th>Risco</th>
+                    <th>Motivos</th>
+                  </tr>
+                </thead>
+
+                <tbody id="tabelaMonitoramento"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/filters.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
