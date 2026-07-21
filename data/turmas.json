@@ -1,0 +1,46 @@
+[
+  {
+    "ano":2026,
+    "turma":"1ª A",
+    "serie_numero":1,
+    "alunos_distintos":80,
+    "media_notas":6.59,
+    "frequencia_media":null,
+    "total_faltas_horas":538,
+    "disciplinas_distintas":7,
+    "registros":174
+  },
+  {
+    "ano":2026,
+    "turma":"2ª A",
+    "serie_numero":2,
+    "alunos_distintos":33,
+    "media_notas":7.88,
+    "frequencia_media":null,
+    "total_faltas_horas":244,
+    "disciplinas_distintas":6,
+    "registros":113
+  },
+  {
+    "ano":2026,
+    "turma":"3ª A",
+    "serie_numero":3,
+    "alunos_distintos":34,
+    "media_notas":6.87,
+    "frequencia_media":null,
+    "total_faltas_horas":992,
+    "disciplinas_distintas":6,
+    "registros":138
+  },
+  {
+    "ano":2026,
+    "turma":"4ª A",
+    "serie_numero":4,
+    "alunos_distintos":12,
+    "media_notas":8.44,
+    "frequencia_media":null,
+    "total_faltas_horas":172,
+    "disciplinas_distintas":4,
+    "registros":45
+  }
+]
