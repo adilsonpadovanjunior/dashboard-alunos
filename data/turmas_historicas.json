@@ -1,0 +1,222 @@
+[
+  {
+    "ano":2022,
+    "turma":"1ª A",
+    "serie_numero":1,
+    "alunos_distintos":135,
+    "media_notas":5.1,
+    "frequencia_media":null,
+    "total_faltas_horas":14562,
+    "disciplinas_distintas":12,
+    "registros":1830
+  },
+  {
+    "ano":2022,
+    "turma":"2ª A",
+    "serie_numero":2,
+    "alunos_distintos":59,
+    "media_notas":4.43,
+    "frequencia_media":null,
+    "total_faltas_horas":4486,
+    "disciplinas_distintas":10,
+    "registros":560
+  },
+  {
+    "ano":2022,
+    "turma":"3ª A",
+    "serie_numero":3,
+    "alunos_distintos":84,
+    "media_notas":7.02,
+    "frequencia_media":null,
+    "total_faltas_horas":3560,
+    "disciplinas_distintas":9,
+    "registros":706
+  },
+  {
+    "ano":2022,
+    "turma":"4ª A",
+    "serie_numero":4,
+    "alunos_distintos":136,
+    "media_notas":6.03,
+    "frequencia_media":null,
+    "total_faltas_horas":12508,
+    "disciplinas_distintas":11,
+    "registros":872
+  },
+  {
+    "ano":2023,
+    "turma":"1ª A",
+    "serie_numero":1,
+    "alunos_distintos":77,
+    "media_notas":4.96,
+    "frequencia_media":null,
+    "total_faltas_horas":9311,
+    "disciplinas_distintas":10,
+    "registros":1038
+  },
+  {
+    "ano":2023,
+    "turma":"2ª A",
+    "serie_numero":2,
+    "alunos_distintos":73,
+    "media_notas":5.93,
+    "frequencia_media":null,
+    "total_faltas_horas":3661,
+    "disciplinas_distintas":10,
+    "registros":606
+  },
+  {
+    "ano":2023,
+    "turma":"3ª A",
+    "serie_numero":3,
+    "alunos_distintos":36,
+    "media_notas":6.46,
+    "frequencia_media":null,
+    "total_faltas_horas":5557,
+    "disciplinas_distintas":9,
+    "registros":738
+  },
+  {
+    "ano":2023,
+    "turma":"4ª A",
+    "serie_numero":4,
+    "alunos_distintos":64,
+    "media_notas":6.46,
+    "frequencia_media":null,
+    "total_faltas_horas":5142,
+    "disciplinas_distintas":10,
+    "registros":622
+  },
+  {
+    "ano":2024,
+    "turma":"1ª A",
+    "serie_numero":1,
+    "alunos_distintos":90,
+    "media_notas":4.22,
+    "frequencia_media":null,
+    "total_faltas_horas":9920,
+    "disciplinas_distintas":9,
+    "registros":904
+  },
+  {
+    "ano":2024,
+    "turma":"2ª A",
+    "serie_numero":2,
+    "alunos_distintos":47,
+    "media_notas":7.2,
+    "frequencia_media":null,
+    "total_faltas_horas":2559,
+    "disciplinas_distintas":10,
+    "registros":516
+  },
+  {
+    "ano":2024,
+    "turma":"3ª A",
+    "serie_numero":3,
+    "alunos_distintos":28,
+    "media_notas":7.47,
+    "frequencia_media":null,
+    "total_faltas_horas":3602,
+    "disciplinas_distintas":9,
+    "registros":639
+  },
+  {
+    "ano":2024,
+    "turma":"4ª A",
+    "serie_numero":4,
+    "alunos_distintos":36,
+    "media_notas":7.48,
+    "frequencia_media":null,
+    "total_faltas_horas":3457,
+    "disciplinas_distintas":11,
+    "registros":603
+  },
+  {
+    "ano":2025,
+    "turma":"1ª A",
+    "serie_numero":1,
+    "alunos_distintos":79,
+    "media_notas":4.57,
+    "frequencia_media":null,
+    "total_faltas_horas":11105,
+    "disciplinas_distintas":9,
+    "registros":1188
+  },
+  {
+    "ano":2025,
+    "turma":"2ª A",
+    "serie_numero":2,
+    "alunos_distintos":51,
+    "media_notas":7.31,
+    "frequencia_media":null,
+    "total_faltas_horas":1780,
+    "disciplinas_distintas":9,
+    "registros":376
+  },
+  {
+    "ano":2025,
+    "turma":"3ª A",
+    "serie_numero":3,
+    "alunos_distintos":55,
+    "media_notas":6.51,
+    "frequencia_media":null,
+    "total_faltas_horas":4402,
+    "disciplinas_distintas":9,
+    "registros":573
+  },
+  {
+    "ano":2025,
+    "turma":"4ª A",
+    "serie_numero":4,
+    "alunos_distintos":34,
+    "media_notas":7.86,
+    "frequencia_media":null,
+    "total_faltas_horas":2371,
+    "disciplinas_distintas":9,
+    "registros":556
+  },
+  {
+    "ano":2026,
+    "turma":"1ª A",
+    "serie_numero":1,
+    "alunos_distintos":87,
+    "media_notas":5.09,
+    "frequencia_media":null,
+    "total_faltas_horas":1022,
+    "disciplinas_distintas":7,
+    "registros":210
+  },
+  {
+    "ano":2026,
+    "turma":"2ª A",
+    "serie_numero":2,
+    "alunos_distintos":35,
+    "media_notas":7.55,
+    "frequencia_media":null,
+    "total_faltas_horas":329,
+    "disciplinas_distintas":6,
+    "registros":118
+  },
+  {
+    "ano":2026,
+    "turma":"3ª A",
+    "serie_numero":3,
+    "alunos_distintos":34,
+    "media_notas":6.87,
+    "frequencia_media":null,
+    "total_faltas_horas":992,
+    "disciplinas_distintas":6,
+    "registros":138
+  },
+  {
+    "ano":2026,
+    "turma":"4ª A",
+    "serie_numero":4,
+    "alunos_distintos":12,
+    "media_notas":8.44,
+    "frequencia_media":null,
+    "total_faltas_horas":172,
+    "disciplinas_distintas":4,
+    "registros":45
+  }
+]
